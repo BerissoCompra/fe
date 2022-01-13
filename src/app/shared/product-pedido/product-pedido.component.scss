@@ -1,0 +1,66 @@
+@import '../../../assets/index.scss';
+button{
+  z-index: 500;
+  border-style: none;
+  outline: none;
+  background-color: transparent;
+  .desactivo{
+    opacity: 0.5 !important;
+  }
+  .card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 550px;
+    max-width: 550px;
+    height: 80px;
+    overflow: hidden;
+    padding: 0;
+    background-color: $white;
+    cursor: pointer;
+    .info-container{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: start;
+      overflow: hidden;
+      width: 60%;
+      .visible{
+        z-index: 1000;
+        color: $dark;
+        margin: 0;
+      }
+      .title{
+        font-size: 16px !important;
+        text-align: start;
+        width: 350px !important;
+      }
+      .subtitle{
+        font-size: 12px !important;
+        max-width: 350px;
+      }
+    }
+    .background{
+      width: 20%;
+      min-width: 20%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .title{
+      font-size: 16px;
+      z-index: 10;
+      color: $dark;
+      width: 100px;
+      right: 0;
+    }
+    .descuento{
+      color: $base_color;
+
+      span{
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+

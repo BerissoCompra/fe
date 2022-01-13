@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import './assets/index.scss';
+@include mat-core();
+
+$my-app-primary: mat-palette($paleta-primaria, 500);
+$my-app-accent:  mat-palette($paleta-secundaria, 500);
+$my-app-warn:    mat-palette($paleta-red, 500);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+
+
+body{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-default{
+  background-color: $base_color;
+  outline: none;
+  width: 150px;
+  height: 30px;
+  border-style: none;
+  border-radius: 3px;
+  color: #fff;
+}
+.btn-default:hover{
+  cursor: pointer;
+  background-color: $base_color;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $base_color !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

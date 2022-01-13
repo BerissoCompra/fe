@@ -1,0 +1,7 @@
+<form [formGroup]="form" (ngSubmit)="rechazarPedido(model)" class="form-container">
+  <p class="adv"><span>Advertencia:</span> Si bien la aplicación no realizará modificaciones en su calificación, rechazar un pedido puede significar una calificación negativa por parte del usuario comprador, le sugerimos no utilizar este tipo de acciones frecuentemente.</p>
+  <formly-form class="formNegocio" [form]="form" [fields]="fields" [model]="model"></formly-form>
+  <div class="button-container">
+    <button type="submit" class="btn btn-default">Rechazar Pedido</button>
+  </div>
+</form>

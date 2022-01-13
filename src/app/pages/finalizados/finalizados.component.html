@@ -1,0 +1,6 @@
+<app-header title="Finalizados"></app-header>
+<section class="pedidos-container">
+  <ul *ngFor="let pedido of pedidos; index as i">
+    <li><pedido [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+  </ul>
+</section>

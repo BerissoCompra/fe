@@ -1,0 +1,65 @@
+@import '../../../assets/index.scss';
+button{
+  z-index: 500;
+  border-style: none;
+  outline: none;
+  background-color: transparent;
+  width: 70%;
+  .desactivo{
+    opacity: 0.5 !important;
+  }
+  .card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 280px;
+    overflow: hidden;
+    padding: 0;
+    padding-bottom: 15px;
+    background-color: $white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    .info-container{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .visible{
+        z-index: 1000;
+        color: $dark;
+        margin: 0;
+      }
+      .title{
+        font-size: 16px !important;
+        text-align: center;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .subtitle{
+        font-size: 12px !important;
+      }
+      .envio{
+        background-color: $green;
+        color: $white;
+      }
+      .retira{
+        background-color: $red;
+        color: $white;
+      }
+    }
+    .info-body{
+      margin-top: 5px;
+      .title{
+        font-size: 18px;
+        z-index: 10;
+        color: $dark;
+        width: 100px;
+        right: 0;
+      }
+      .subtitle{
+        font-size: 12px !important;
+      }
+    }
+
+  }
+}

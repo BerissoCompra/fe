@@ -1,0 +1,14 @@
+@import '../../../assets/index.scss';
+
+.form-container{
+  width: 700px;
+  .adv{
+    background-color: $warning;
+    padding: 10px;
+    border-radius: 5px;
+    color: $dark;
+    span{
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@import '../../../assets/index.scss';
+
+.sidebarContainer{
+  position: fixed;
+  margin: 0;
+  height: 100vh;
+  background-color: $white;
+  width: 130px;
+  box-shadow: 1px 0px 1px 2px rgba(226, 226, 226, 0.432);
+  z-index: 1000;
+  .menu{
+    margin-top: 150px;
+    list-style: none;
+    height: 45%;
+    .menu-item{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $white;
+      height: 50px;
+      width: 50px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      transition: 0.2s;
+      &:hover{
+        cursor: pointer;
+      }
+      .mat-icon{
+        color:  $dark-gray;
+      }
+      p{
+        margin: 0;
+        padding-left: 10px;
+        width: 80%;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: $dark;
+        font-weight: 500;
+      }
+
+    }
+    .active{
+      background-color: $base-color;
+      p{
+        color: $white;
+      }
+      .mat-icon{
+        color: $white;
+      }
+    }
+  }
+  .btn-bottom-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .mat-mini-fab.mat-accent{
+      background-color: $white;
+      color:  $base_color;
+      transition: 0.2s;
+      &:hover{
+        background-color: rgb(235, 235, 235);
+      }
+    }
+    .btn-cerrarSesion{
+      margin-top: 10px;
+    }
+  }
+
+}

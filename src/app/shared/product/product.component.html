@@ -1,0 +1,14 @@
+<button (click)="viewProduct()" *ngIf="producto">
+<div class="card" [ngClass]="producto.activo ? '' : 'desactivo'">
+  <img src="{{producto.imagen ? producto.imagen : defaultImage}}" alt="" class="background">
+  <mat-card-header class="info-container">
+    <h3 class="visible title">{{producto.nombre}}</h3>
+    <p class="visible subtitle">{{producto.descripcion}}</p>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngIf="producto.precio > 0 && producto.descuento <= 0" class="title">{{producto.precio | currency}}</p>
+    <p *ngIf="producto.descuento > 0" class="title">{{getDescuento() | currency}}</p>
+    <p *ngIf="producto.descuento > 0" class="descuento">{{producto.descuento}}% <span>{{producto.precio | currency}}</span> </p>
+  </mat-card-content>
+</div>
+</button>

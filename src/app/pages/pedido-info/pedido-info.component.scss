@@ -1,0 +1,51 @@
+@import '../../../assets/index.scss';
+
+.container{
+  max-height: 80vh;
+  max-width: 50vw;
+  h1{
+    font-size: 20px;
+  }
+  .usuario{
+    h1{
+      margin: 0px;
+    }
+    p{
+      margin: 0px;
+      color: $base-color;
+      span{
+        font-weight: 400;
+        color: $dark;
+      }
+    }
+  }
+  .productos{
+    max-height: 500px;
+    overflow-y: scroll;
+    .product-list{
+      list-style: none;
+    }
+    .total{
+      font-size: 20px;
+      span{
+        color: $base-color;
+      }
+    }
+  }
+  .detalle{
+    p{
+      height: 100px;
+    }
+  }
+  .seguimiento{
+    .seguimientos{
+      display: flex;
+      justify-content: space-around;
+    }
+
+  }
+  .button-container{
+    margin-top: 50px;
+    padding-bottom: 50px;
+  }
+}

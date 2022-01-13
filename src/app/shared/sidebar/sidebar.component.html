@@ -1,0 +1,28 @@
+<mat-drawer-container class="">
+  <mat-drawer-content class="sidebarContainer">
+    <ul class="menu">
+      <li class="menu-item" [routerLink]="['inicio']" routerLinkActive="active">
+        <mat-icon matTooltip="Inicio">home</mat-icon>
+      </li>
+      <li class="menu-item" [routerLink]="['catalogo']" routerLinkActive="active">
+        <mat-icon matTooltip="Catálogo">view_quilt</mat-icon>
+      </li>
+      <li class="menu-item"  [routerLink]="['pedidos']" [queryParams]="{pedido: 'nuevo', title: 'Nuevos Pedidos'}"  routerLinkActive="active">
+        <mat-icon matTooltip="Pedidos Nuevos">notifications</mat-icon>
+      </li>
+      <li class="menu-item"  [routerLink]="['curso']"  [queryParams]="{pedido: 'enCurso', title: 'Pedidos en curso'}"  routerLinkActive="active">
+        <mat-icon matTooltip="Pedidos en curso">build</mat-icon >
+      </li>
+      <li class="menu-item" [routerLink]="['finalizados']"  [queryParams]="{pedido: 'finalizados', title: 'Pedidos finalizados' }" routerLinkActive="active">
+        <mat-icon matTooltip="Pedidos Finalizados">check_circle</mat-icon>
+      </li>
+      <li class="menu-item" [routerLink]="['enviados']"  [queryParams]="{pedido: 'enviados' , title: 'Pedidos enviados'}" routerLinkActive="active">
+        <mat-icon matTooltip="Pedidos Enviados">local_shipping</mat-icon>
+      </li>
+      <li class="menu-item" [routerLink]="['configuracion']"  routerLinkActive="active">
+        <mat-icon matTooltip="Configuración" >settings</mat-icon>
+      </li>
+    </ul>
+  </mat-drawer-content>
+</mat-drawer-container>
+

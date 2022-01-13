@@ -1,0 +1,37 @@
+$base-color: #253aac;
+$base-color-light: #f1f1f1;
+$secondary: #4359d4;
+$white: #fff;
+$gray: rgb(231, 231, 231);
+$medium-gray: rgb(202, 202, 202);
+$dark-gray: rgb(158, 158, 158);
+$dark: #333;
+$red: rgb(241, 59, 59);
+$green: rgb(59, 241, 74);
+$warning:  rgb(241, 147, 59);
+
+
+$paleta-red: (
+    500 : $red,
+    contrast: (
+        A700: white,
+    )
+);
+
+$paleta-primaria: (
+    500 : $base_color,
+    contrast: (
+      A700 : #ffffff,
+    )
+);
+
+$paleta-secundaria: (
+    500:  $secondary,
+    contrast: (
+        A700: white,
+    )
+);
+
+
+//#9E3CEB
+//#632592

@@ -1,0 +1,19 @@
+<button *ngIf="pedido" (click)="viewPedido()">
+  <div class="card">
+    <div class="info-container">
+      <h3 class="visible title">Pedido N° {{posicion}}</h3>
+      <h3 class="visible subtitle">Cod. #{{pedido.idPedido}}</h3>
+      <p class="subtitle" *ngIf="pedido.codigoEntrega && !pedido.retira"><b>Cod. Entrega: {{pedido.codigoEntrega}}</b></p>
+      <p class="subtitle" [ngClass]="pedido.retira ? 'retira' : 'envio'"><b>Enviar: {{!pedido.retira ? 'Si' : 'No'}}</b></p>
+      <p class="subtitle"><b>{{pedido.createdAt}}</b></p>
+    </div>
+    <div class="info-body">
+      <p class="visible subtitle">ITEMS: {{pedido.items}}</p>
+      <p class="subtitle">Método de pago: {{pedido.pagoDigital ? 'Digital' : 'Efectivo'}}</p>
+      <p *ngIf="pedido.pagoEfectivo" class="subtitle">Abona con: {{pedido.pagaCon | currency}}</p>
+      <p *ngIf="pedido.pagoEfectivo" class="subtitle">Vuelto: {{(pedido.pagaCon - pedido.total) | currency}}</p>
+      <p class="subtitle" *ngIf="!pedido.retira"><b>Dirección: {{pedido.direccion}} {{pedido.numDep}} | {{pedido.direccionInfo}}</b></p>
+      <p class="subtitle"><b>Total: {{pedido.total | currency}}</b></p>
+    </div>
+  </div>
+  </button>

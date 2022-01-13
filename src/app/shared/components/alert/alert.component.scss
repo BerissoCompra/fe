@@ -1,0 +1,16 @@
+@import '../../../../assets/index.scss';
+
+
+.container{
+  h1{
+    text-align: center;
+    color: $white;
+    border-radius: 5px;
+  }
+  .alert{
+    background-color: $red;
+  }
+  .warning{
+    background-color: $base-color;
+  }
+}
