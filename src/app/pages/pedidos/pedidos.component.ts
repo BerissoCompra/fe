@@ -33,7 +33,7 @@ export class PedidosComponent implements OnInit {
     })
     this.comercioService.obtenerComercio()
     .subscribe((res)=>{
-      this.cookiesServices.set('comercioId', res._id)
+      localStorage.setItem('comercioId', res._id)
       let estado = 0;
       if(this.tipoPedido === 'nuevo'){
         estado = SeguimientoEnum.ESPERANDO_APROBACION;

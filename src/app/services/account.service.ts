@@ -32,6 +32,7 @@ export class AccountService {
   }
 
   cerrarSesion(){
+    localStorage.removeItem('comercioId')
     localStorage.removeItem('token');
     this.router.navigate(['/']);
   }

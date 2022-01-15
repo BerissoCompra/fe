@@ -36,7 +36,6 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
-import { FinalizadosComponent } from './pages/finalizados/finalizados.component';
 import { ConfiguracionComponent } from './pages/configuracion/configuracion.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ProductComponent } from './shared/product/product.component';
@@ -47,7 +46,6 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { PedidoComponent } from './shared/pedido/pedido.component';
 import { PedidoInfoComponent } from './pages/pedido-info/pedido-info.component';
-import { CursoComponent } from './pages/curso/curso.component';
 import { RechazarPedidoComponent } from './pages/rechazar-pedido/rechazar-pedido.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -66,7 +64,6 @@ import { CookieService } from 'ngx-cookie-service';
     HomeComponent,
     CatalogoComponent,
     PedidosComponent,
-    FinalizadosComponent,
     ConfiguracionComponent,
     HeaderComponent,
     ProductComponent,
@@ -77,7 +74,6 @@ import { CookieService } from 'ngx-cookie-service';
     AlertComponent,
     PedidoComponent,
     PedidoInfoComponent,
-    CursoComponent,
     RechazarPedidoComponent,
     ProductPedidoComponent,
 
@@ -112,6 +108,8 @@ import { CookieService } from 'ngx-cookie-service';
     MatTooltipModule,
     MatBadgeModule,
     ToastrModule.forRoot(),
+
+
 
   ],
   providers: [

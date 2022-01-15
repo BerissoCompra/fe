@@ -16,7 +16,7 @@ export class SocketWebService extends Socket  {
       url: `${environment.beUrl}`,
       options: {
         query:{
-          comercioId: cookieService.get('comercioId'),
+          comercioId: localStorage.getItem('comercioId'),
         },
         transports : ['websocket']
       }
