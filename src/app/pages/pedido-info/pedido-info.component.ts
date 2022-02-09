@@ -12,6 +12,7 @@ import { RechazarPedidoComponent } from '../rechazar-pedido/rechazar-pedido.comp
 import { SocketWebService } from 'src/app/services/socket-web.service';
 
 export interface DialogData {
+  comercioId: string;
   pedido: Pedido;
   productos: Product[],
   dialog: MatDialog;
@@ -27,6 +28,7 @@ export class PedidoInfoComponent implements OnInit {
   pedidoSeleccionado: any;
   productosPedido: any[];
   usuarioPedido: Usuario;
+  comercioId: string;
 
   constructor(private sanitizer: DomSanitizer,  private socketService: SocketWebService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService, public dialog: MatDialog) {
 
@@ -35,6 +37,7 @@ export class PedidoInfoComponent implements OnInit {
   ngOnInit(): void {
     this.pedidoSeleccionado = this.data.pedido;
     this.productosPedido = this.data.productos;
+    this.comercioId = this.data.comercioId;
   }
 
   aceptarPedido(){
@@ -54,7 +57,20 @@ export class PedidoInfoComponent implements OnInit {
 
     })
   }
-
+  calcularSeguimiento(){
+    if(this.pedidoSeleccionado.estado >= 1){
+      if(this.pedidoSeleccionado.estado >= 3){
+        if(this.pedidoSeleccionado.estado >= 5){
+          return 100;
+        }
+        return 66.66666;
+      }
+      return 33.33333;
+    }
+    else{
+      return 0;
+    }
+  }
   pedidoEnviado(){
     this.pedidoSeleccionado.estado = SeguimientoEnum.ENVIADO;
     this.comercioService.actualizarPedido(this.pedidoSeleccionado)
@@ -72,6 +88,10 @@ export class PedidoInfoComponent implements OnInit {
       this.socketService.emitEvent({text: 'actualizado'});
       this.data.dialog.closeAll();
       this.toastr.success('Pedido Finalizado')
+      this.comercioService.obtenerComercio()
+      .subscribe((comercio)=>{
+        this.comercioService.registrarVenta(comercio._id, this.pedidoSeleccionado).subscribe()
+      })
     })
   }
 

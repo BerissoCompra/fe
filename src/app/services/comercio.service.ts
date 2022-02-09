@@ -10,6 +10,7 @@ import { Pedido } from '../models/pedido';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { GenericService } from './generic.service';
+import { UserReg, Usuario } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -37,30 +38,49 @@ export class ComercioService {
   getPedidos(id: string, estado: number): Observable<any>{
     return this.genericService.get(`${environment.urlAPI}/pedidos/comercio/${id}/${estado}`);
   }
-
+  eliminarComercio(comercioId: string){
+    return this.genericService.delete(`${environment.urlAPI}/comercios/${comercioId}`)
+  }
+  registrarVenta(comercioId: string, pedido: Pedido): Observable<any>{
+    return this.genericService.put(`${environment.urlAPI}/comercios/${comercioId}/registrarventa`, pedido)
+  }
+  registrarPago(comercioId: string, total): Observable<any>{
+    return this.genericService.put(`${environment.urlAPI}/comercios/${comercioId}/registrarpago`, {total})
+  }
+  getComercios(): Observable<any>{
+    return this.genericService.get(`${environment.urlAPI}/comercios`);
+  }
+  activarComercio(comercioId: string): Observable<any>{
+    return this.genericService.put(`${environment.urlAPI}/comercios/${comercioId}/activar`, {})
+  }
+  desactivarComercio(comercioId: string): Observable<any>{
+    return this.genericService.put(`${environment.urlAPI}/comercios/${comercioId}/desactivar`, {})
+  }
   actualizarPedido(pedido: any){
     return this.genericService.put(`${environment.urlAPI}/pedidos/${pedido._id}`, pedido)
   }
 
-  crearComercio(usuario){
+  crearComercio(usuario: Usuario, usuarioId: string){
+    const nombre = usuario?.nombreElegido  ? usuario.nombreElegido : usuario.nombre
     const comercio: Comercio = {
-      nombre: `Comercio de ${usuario.nombre}`,
+      nombre: `Comercio de ${nombre}`,
       categoria: '',
-      usuarioId: usuario._id,
+      usuarioId: usuarioId,
       puntuacion: 0,
-      responsable: usuario.nombre,
-      descripcion: '',
+      responsable: `${usuario.apellido}, ${usuario.nombre}`,
+      descripcion: '-',
       costoEnvio: 0,
       retiro: false,
       pagoDigital: false,
       pagoEfectivo: false,
-      horarios: '',
-      direccion: '',
+      horarios: '-',
+      direccion: '-',
       imagen: '',
-      envio: '',
+      envio: '-',
       abierto: false,
       dias: [],
-      telefono: '',
+      telefono: '-',
+      activado: false,
     }
     return this.genericService.post(`${environment.urlAPI}/comercios/new`, comercio)
   }
@@ -72,26 +92,18 @@ export class ComercioService {
   actualizarComercio(comercio: Comercio){
     return new Promise((resolve, rejeact) =>{
       if(comercio.imagen?.name){
-        const filePath = `imagenesProductos/comercio_${comercio._id}`;
-        const task = this.storage.upload(filePath, comercio.imagen)
-        if(comercio.envio === TipoEnvio.GRATIS){
-          comercio.costoEnvio = 0;
-        }
-        task.snapshotChanges()
-            .pipe(finalize(()=>{
-              this.storage.ref(filePath)
-              .getDownloadURL().subscribe((resImg)=>{
-                if(resImg){
-                  comercio.imagen = resImg;
-                  this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, comercio)
-                  .subscribe((res)=>{
-                    this.changePedidosCount(1);
-                    resolve(true)
-                  })
+        const fd = new FormData();
+        fd.append('file', comercio.imagen);
+        this.genericService.post(`${environment.urlAPI}/images/upload`, fd)
+        .subscribe((res: any)=>{
+          comercio.imagen = environment.beUrl + res.path.replace('\\', '/');
+          comercio.imagenPath = res.path;
+          this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, comercio)
+          .subscribe((res)=>{
+            resolve(true)
+          })
+        })
 
-                }
-              })
-        })).subscribe()
       }
       else{
         this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, comercio)

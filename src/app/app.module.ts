@@ -11,8 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 import { ToastrModule } from 'ngx-toastr';
 
 //Materials
@@ -54,6 +52,14 @@ import { ComercioService } from './services/comercio.service';
 import { AccountService } from './services/account.service';
 import { ProductPedidoComponent } from './shared/product-pedido/product-pedido.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AdministradorComponent } from './pages/administrador/administrador.component';
+import { VerifyComponent } from './pages/verify/verify.component';
+import { RegisterComponent } from './pages/login/components/register/register.component';
+import { RecuperarClaveComponent } from './pages/login/components/recuperar-clave/recuperar-clave.component';
+import { IniciarComponent } from './pages/login/components/iniciar/iniciar.component';
+import { GridComponent } from './shared/components/grid/grid.component';
+import { EstadisticaCardComponent } from './shared/components/estadistica-card/estadistica-card.component';
+import { ComercioViewComponent } from './pages/comercio-view/comercio-view.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +82,14 @@ import { CookieService } from 'ngx-cookie-service';
     PedidoInfoComponent,
     RechazarPedidoComponent,
     ProductPedidoComponent,
+    AdministradorComponent,
+    VerifyComponent,
+    RegisterComponent,
+    RecuperarClaveComponent,
+    IniciarComponent,
+    GridComponent,
+    EstadisticaCardComponent,
+    ComercioViewComponent,
 
   ],
   imports: [

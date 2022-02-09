@@ -1,22 +1,14 @@
 @import '../../../assets/index.scss';
 
 .container{
-  margin-top: 50px;
   .title-container{
     h2{
       width: 100%;
       font-size: 30;
       text-transform: uppercase;
-      margin-bottom: 0;
-      color: $dark-gray;
-    }
-    .line{
-      height: 1px;
-      width: 100%;
-      background-color: $dark-gray;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      border-radius: 2px;
+      margin-bottom: 20;
+      margin-top: 0px;
+      color: $dark;
     }
   }
 

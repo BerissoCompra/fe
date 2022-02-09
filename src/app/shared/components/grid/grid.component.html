@@ -1,0 +1,41 @@
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Fecha Registro</th>
+    <th>Activo</th>
+    <th>Ventas C/</th>
+    <th>Ventas $</th>
+    <th>Último Pago</th>
+    <th>Deuda</th>
+    <th>Deuda Comisión</th>
+    <th>Vencimiento Pago</th>
+    <th>Acciones</th>
+  </tr>
+  <tr *ngFor="let comercio of comercios">
+    <td>{{comercio?.nombre}}</td> <!-- Nombre de comercio  -->
+    <td>{{comercio?.createdAt | date:'dd/MM HH:mm:ss' : '-0300'}}</td> <!-- Fecha Registro -->
+    <td>{{comercio?.activado ? 'Si' : 'No'}}</td> <!-- Activo -->
+    <td>{{comercio?.estadisticas?.ventas ? comercio?.estadisticas?.ventas : 0}}</td> <!-- Ventas Cantidad -->
+    <td>{{comercio?.estadisticas?.ingresosTotales ? (comercio?.estadisticas?.ingresosTotales | currency) : (0 | currency)}}</td> <!-- Ventas ingresosTotales -->
+    <td>{{comercio?.estadisticas?.ultimoPago ? (comercio?.estadisticas?.ultimoPago | date:'dd/MM HH:mm:ss' : '-0300') : '-'}}</td> <!-- Fecha ultimo pago -->
+    <td>{{comercio?.estadisticas?.deuda  ? ((comercio?.estadisticas.deuda) | currency) : 0 | currency}}</td> <!-- Deuda -->
+    <td>{{comercio?.estadisticas?.deuda  ? ((comercio?.estadisticas.deuda) * 0.05 | currency) : 0 | currency}}</td> <!-- Deuda Porcentual -->
+    <td>{{comercio?.estadisticas?.proximoPago ? (comercio?.estadisticas?.proximoPago | date:'dd/MM HH:mm:ss' : '-0300') : '-'}}</td> <!-- Fecha vencimiento -->
+    <td> <!-- Acciones -->
+      <div class="acciones-container">
+        <div ngClass="button green" matTooltip="Activar Comercio" *ngIf="!comercio.activado" (click)="activarComercio(comercio._id, comercio.activado)" class="button" mat-mini-fab color="accent">
+          <mat-icon  class="material-icons-outlined">done</mat-icon>
+        </div> <!-- Activar -->
+        <div ngClass="button red" matTooltip="Desactivar Comercio" *ngIf="comercio.activado" (click)="activarComercio(comercio._id, comercio.activado)" class="button" mat-mini-fab color="accent">
+          <mat-icon  class="material-icons-outlined">unpublished</mat-icon>
+        </div> <!-- Desactivar -->
+        <div matTooltip="Visualizar" (click)="viewComercio(comercio)" class="button base" mat-mini-fab color="accent">
+          <mat-icon  class="material-icons-outlined">visibility</mat-icon>
+        </div> <!-- Ver -->
+        <div matTooltip="Registrar pago" (click)="registrarPago(comercio._id, comercio?.estadisticas?.deuda)" class="button green" mat-mini-fab>
+          <mat-icon  class="material-icons-outlined">attach_money</mat-icon>
+        </div> <!-- Registrar Pago -->
+      </div>
+    </td>
+  </tr>
+</table>

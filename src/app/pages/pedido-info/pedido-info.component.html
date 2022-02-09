@@ -18,11 +18,11 @@
   <div class="seguimiento">
     <h1>Seguimiento</h1>
     <div class="seguimientos">
-      <p>Aceptado</p>
-      <p>En Curso</p>
-      <p>Enviado</p>
+      <p>Recibido</p>
+      <p>En curso</p>
+      <p>Finalizado</p>
     </div>
-    <mat-progress-bar mode="determinate" [value]="pedidoSeleccionado.estado"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="calcularSeguimiento()"></mat-progress-bar>
   </div>
   <div class="button-container">
     <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)="aceptarPedido()" class="btn btn-default">Aceptar Pedido</button>

@@ -3,7 +3,7 @@
     <img src="{{producto.producto.imagen ? producto.producto.imagen : defaultImage}}" alt="" class="background">
     <mat-card-header class="info-container">
       <h3 class="visible title">{{producto.producto.nombre}}</h3>
-      <p class="visible subtitle">{{producto.aclaracion}}</p>
+      <p class="visible subtitle">{{producto.aclaracion ? producto.aclaracion : 'Sin detalles'}}</p>
     </mat-card-header>
     <mat-card-content>
       <p *ngIf="producto.precioTotal > 0" class="title">{{(producto.precioTotal) | currency}}</p>

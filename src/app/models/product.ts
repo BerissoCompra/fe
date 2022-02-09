@@ -7,6 +7,7 @@ export interface Product {
   descuento?: number;
   categoria: string;
   imagen?: string | any;
+  imagenPath?: string | any;
   activo: boolean;
 }
 

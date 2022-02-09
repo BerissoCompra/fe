@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { CatalogoComponent } from '../catalogo/catalogo.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { calcularDescuento } from 'src/app/services/utils/calculos';
 
 export interface DialogData {
   comercioId: string;
@@ -41,7 +42,7 @@ export class NuevoComponent implements OnInit {
     descripcion:'',
     precio: 0
   };
-
+  file: File;
   imagenPrevisualizacion: string = 'https://www.directorioindustrialfarmaceutico.com/images/logos/sin-logo.jpg';
   archivo;
   constructor(private sanitizer: DomSanitizer,
@@ -167,6 +168,8 @@ export class NuevoComponent implements OnInit {
     this.imagenesService.comprimirImagen(event.target.files[0])
     .then((res)=>{
       this.productoModel.imagen = res;
+      this.file = event.target.files[0];
+
       this.extraerBase64(this.productoModel.imagen).then((imagen: any)=>{
         this.imagenPrevisualizacion = imagen.base;
       })
@@ -202,6 +205,10 @@ export class NuevoComponent implements OnInit {
     this.loading = true;
     if(this.data.action === 'nuevo'){
       product.comercioId = this.data.comercioId;
+      if(product.descuento > 0){
+        product.precio = calcularDescuento(product.precio, product.descuento);
+      }
+      product.imagen = this.file;
       this.catalogoService.addProducto(product, this.data.comercioId)
       .then((res)=>{
         this.loading = false;
@@ -214,6 +221,10 @@ export class NuevoComponent implements OnInit {
       })
     }
     else if(this.data.action === 'editar'){
+      if(product.descuento > 0){
+        product.precio = calcularDescuento(product.precio, product.descuento);
+      }
+      product.imagen = this.file;
       this.catalogoService.actualizarProducto(product)
       .then((res)=>{
         this.loading = false;

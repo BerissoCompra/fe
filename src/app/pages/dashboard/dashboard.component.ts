@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Comercio } from 'src/app/models/comercio';
 import { AccountService } from 'src/app/services/account.service';
 import { ComercioService } from 'src/app/services/comercio.service';
@@ -12,50 +13,9 @@ import { ComercioService } from 'src/app/services/comercio.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private comercioService: ComercioService ,private router: Router) { }
-
-  showFiller = false;
-  comercio: Comercio;
-  pedidosCount: number;
+  constructor() { }
 
   ngOnInit(): void {
-    this.comercioService.obtenerComercio()
-    .subscribe((res)=>{
-      this.comercioService.changeComercio(res)
-      this.comercioService.customComercio.subscribe((com)=>{
-        this.comercioService.comercio = com;
-        this.comercio = this.comercioService.comercio;
-      })
-    })
-  }
-
-  updateComercio(){
-    this.comercioService.obtenerComercio().subscribe((res :any)=>{
-      this.comercio = res;
-    })
-  }
-
-  cerrarAbrir(){
-    if(this.comercio.abierto){
-      this.comercioService.actualizarComercio({
-        ...this.comercio,
-        abierto: false,
-      }).then((res)=>{
-        this.updateComercio();
-      })
-    }
-    else{
-      this.comercioService.actualizarComercio({
-        ...this.comercio,
-        abierto: true,
-      }).then((res)=>{
-        this.updateComercio();
-      })
-    }
-  }
-
-  cerrarSesion(){
-    this.accountService.cerrarSesion();
   }
 
 

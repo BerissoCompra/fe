@@ -26,26 +26,16 @@ export class CatalogoService {
     return new Promise((resolve, rejeact)=>{
       try {
         if(producto.imagen?.name){
-          const filePath = `imagenesProductos/product_${producto._id}`;
-          const task = this.storage.upload(filePath, producto.imagen);
-          task.snapshotChanges()
-          .pipe(finalize(()=>{
-          this.storage.ref(filePath)
-          .getDownloadURL().subscribe((resImg)=>{
-            if(resImg){
-              producto.imagen = resImg;
-              this.genericService.post(`${environment.urlAPI}/catalogo/nuevo/${comercioId}`, producto)
+          const fd = new FormData();
+          fd.append('file', producto.imagen)
+          this.genericService.post(`${environment.urlAPI}/images/upload`, fd)
+          .subscribe((res: any)=>{
+            producto.imagenPath = res.path;
+            producto.imagen = environment.beUrl + res.path.replace('\\', '/');
+            this.genericService.post(`${environment.urlAPI}/catalogo/productos/nuevo`, {producto})
               .subscribe((res)=>{
                 resolve(true);
-              })
-            }
-          })
-          })).subscribe()
-        }
-        else{
-          this.genericService.post(`${environment.urlAPI}/catalogo/nuevo/${comercioId}`, producto)
-          .subscribe((res)=>{
-            resolve(true);
+            })
           })
         }
       } catch (error) {
@@ -57,22 +47,10 @@ export class CatalogoService {
   eliminarProducto(producto: Product): Promise<any>{
     return new Promise((resolve, rejeact)=>{
       try {
-        if(producto.imagen){
-          const filePath = `imagenesProductos/product_${producto._id}`;
-          const task = this.storage.ref(filePath).delete()
-          task.subscribe(()=>{
-            this.genericService.delete(`${environment.urlAPI}/catalogo/productos/${producto._id}`)
-            .subscribe((ok)=>{
-              resolve(true)
-            })
-          });
-        }
-        else{
           this.genericService.delete(`${environment.urlAPI}/catalogo/productos/${producto._id}`)
           .subscribe((ok)=>{
             resolve(true)
           })
-        }
       } catch (error) {
         rejeact(error)
       }
@@ -83,30 +61,21 @@ export class CatalogoService {
     return new Promise((resolve, rejeact)=>{
       try {
         if(producto.imagen?.name){
-          const filePath = `imagenesProductos/product_${producto._id}`;
-          const task = this.storage.upload(filePath, producto.imagen)
-          task.snapshotChanges()
-          .pipe(finalize(()=>{
-          this.storage.ref(filePath)
-          .getDownloadURL().subscribe((resImg)=>{
-            if(resImg){
-              producto.imagen = resImg;
-              this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, producto)
+          const fd = new FormData();
+          fd.append('file', producto.imagen)
+          this.genericService.post(`${environment.urlAPI}/images/upload`, fd)
+          .subscribe((res: any)=>{
+            producto.imagenPath = res.path;
+            producto.imagen = environment.beUrl + res.path.replace('\\', '/');
+            this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, {producto})
               .subscribe((res)=>{
                 resolve(true);
-              })
-            }
-          })
-          })).subscribe()
-        }
-        else{
-          this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, producto)
-          .subscribe((res)=>{
-            resolve(true);
+            })
           })
         }
-      } catch (error) {
-          rejeact(error)
+      }
+      catch (error) {
+        rejeact(error)
       }
     })
   }
@@ -118,6 +87,7 @@ export class CatalogoService {
     }
     return this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, body)
   }
+
   desactivarProducto(producto: Product){
     const body = {
       id: producto._id,
@@ -125,73 +95,5 @@ export class CatalogoService {
     }
     return this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, body)
   }
-
-  // async updateProducto(producto: Product): Promise<any>{
-  //   this.auth.user
-  //   .subscribe((res)=>{
-  //     if(producto.imagen?.name){
-  //       const filePath = `imagenesProductos/product_${producto.id}`;
-  //       const task = this.storage.upload(filePath, producto.imagen)
-  //       task.snapshotChanges()
-  //       .pipe(finalize(()=>{
-  //         this.storage.ref(filePath)
-  //         .getDownloadURL().subscribe((resImg)=>{
-  //           if(resImg){
-  //             producto.imagen = resImg;
-  //             this.firestore.collection('comerciantes').doc(producto.comercioId).collection('catalogo').doc(producto.id).update(producto)
-  //           }
-  //         })
-  //       })).subscribe()
-  //     }
-  //     else{
-  //         this.firestore.collection('comerciantes').doc(producto.comercioId).collection('catalogo').doc(producto.id).update(producto)
-  //     }
-
-  //   })
-  // // }
-
-  // async deleteProducto(producto: Product): Promise<any>{
-  //   return new Promise((resolve, rejeact)=>{
-  //     try {
-  //       this.firestore.collection('comerciantes').doc(producto.comercioId).collection('catalogo').doc(producto.id).delete()
-  //       .finally(()=>{
-  //         const filePath = `imagenesProductos/product_${producto.id}`;
-  //         const ref = this.storage.ref(filePath).delete();
-  //         location.reload();
-  //         resolve(true)
-  //       })
-
-  //     } catch (error) {
-
-  //     }
-  //   })
-  // }
-
-  // async desactivarProducto(producto: Product): Promise<any>{
-  //   return new Promise((resolve, rejeact)=>{
-  //     try {
-  //       this.firestore.collection('comerciantes').doc(producto.comercioId).collection('catalogo').doc(producto.id).update({
-  //         ...producto,
-  //         activo: false
-  //       })
-  //       resolve(true);
-  //     } catch (error) {
-
-  //     }
-  //   })
-  // }
-  // async activarProducto(producto: Product): Promise<any>{
-  //   return new Promise((resolve, rejeact)=>{
-  //     try {
-  //       this.firestore.collection('comerciantes').doc(producto.comercioId).collection('catalogo').doc(producto.id).update({
-  //         ...producto,
-  //         activo: true
-  //       })
-  //       resolve(true);
-  //     } catch (error) {
-
-  //     }
-  //   })
-  // }
 
 }

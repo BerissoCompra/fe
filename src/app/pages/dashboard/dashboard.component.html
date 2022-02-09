@@ -1,18 +1,4 @@
 <main>
-  <mat-toolbar class="toolbar">
-    <div class="contenedor-imagen">
-      <div class="info-user-container">
-        <div class="info-user-img" [ngClass]="comercio?.abierto ? 'userAbierto' : 'userCerrado' "><img [src]="comercio?.imagen" alt=""></div>
-      </div>
-    </div>
-    <p>{{comercio?.nombre}}</p>
-    <div class="buttons">
-      <div class="openClose" (click)="cerrarAbrir()"><p *ngIf="!comercio?.abierto" class="close">Cerrado</p><p *ngIf="comercio?.abierto" class="open">Abierto</p></div>
-      <button mat-mini-fab class="btn-cerrarSesion" type="button" (click)="cerrarSesion()">
-        <mat-icon class="icon">logout</mat-icon>
-      </button>
-    </div>
-  </mat-toolbar>
   <sidebar class="sidebar"></sidebar>
   <section>
     <router-outlet></router-outlet>

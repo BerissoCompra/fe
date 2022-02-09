@@ -4,22 +4,38 @@ export interface UserLogin {
 }
 
 export interface UserReg{
+  nombre: string;
+  nombreElegido: string;
+  apellido: string;
+
   email: string;
   password: string;
-  nombre: string;
+  repassword: string;
+  emailActivado: boolean;
+  terminos: boolean;
 }
 
 
 export interface UserLoginRegister {
+  nombre: string;
+  nombreElegido: string;
+  apellido: string;
+
   email: string;
   password: string;
-  repassword: string;
-  nombre: string;
+  emailActivado: boolean;
   terminos: boolean;
 }
 
 export interface Usuario{
-  id: string,
-  nombre: string,
-  apellido: string,
+  _id?: string,
+  nombre: string;
+  nombreElegido: string;
+  apellido: string;
+
+  email: string;
+  password: string;
+  repassword: string;
+  emailActivado: boolean;
+  terminos: boolean;
 }

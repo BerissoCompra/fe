@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
-  urlAPI: 'http://localhost:3000/api',
-  beUrl: 'http://localhost:3000',
+  urlAPI: 'http://192.168.0.229:3000/api',
+  beUrl: 'http://192.168.0.229:3000/',
+
+
+  // urlAPI: 'http://ec2-44-201-231-118.compute-1.amazonaws.com:3000/api',
+  // beUrl: 'http://ec2-44-201-231-118.compute-1.amazonaws.com:3000',
+
   firebase: {
     apiKey: "AIzaSyAl0OAwPbUHopfVYFKhXhg8IoKLFtCIXAA",
     authDomain: "berissocompra-b103e.firebaseapp.com",

@@ -1,0 +1,52 @@
+@import '../../../../assets/index.scss';
+
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  mat-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #fff;
+    font-size: 14px;;
+  }
+
+  &.base{
+    background-color: $base-color;
+  }
+
+  &.green{
+    background-color: $green;
+  }
+
+  &.red{
+    background-color: $red;
+  }
+}
+table{
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 10px;
+  .acciones-container{
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+  }
+  td{
+    padding-right: 20px;
+    text-align: center;
+    color: #333;
+  }
+  th{
+    padding-right: 20px;
+  }
+}

@@ -1,6 +1,6 @@
 @import '../../../assets/index.scss';
 button{
-  z-index: 500;
+  z-index: 400;
   border-style: none;
   outline: none;
   background-color: transparent;
@@ -12,21 +12,35 @@ button{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 250px;
+    width: 280px;
     height: 280px;
     overflow: hidden;
     padding: 0;
     padding-bottom: 15px;
-    background-color: $white;
+    background-color: rgba(0, 0, 0, 0.699);
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     cursor: pointer;
     .info-container{
       display: flex;
       flex-direction: column;
       width: 100%;
+      .codigos{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        p{
+          z-index: 400;
+          color: $white;
+          margin: 0;
+        }
+      }
       .visible{
-        z-index: 1000;
-        color: $dark;
+        z-index: 400;
+        color: $white;
         margin: 0;
       }
       .title{
@@ -34,9 +48,11 @@ button{
         text-align: center;
         width: 100%;
         margin-top: 10px;
+        color: $white;
       }
       .subtitle{
         font-size: 12px !important;
+        color: $white;
       }
       .envio{
         background-color: $green;
@@ -52,11 +68,12 @@ button{
       .title{
         font-size: 18px;
         z-index: 10;
-        color: $dark;
         width: 100px;
         right: 0;
+        color: $white;
       }
       .subtitle{
+        color: $white;
         font-size: 12px !important;
       }
     }

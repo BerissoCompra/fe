@@ -16,7 +16,7 @@ export class PedidosComponent implements OnInit {
   public pedidos: Pedido[] = [];
   public tipoPedido: string;
   public title: string = '';
-  constructor(private comercioService: ComercioService, private socketService: SocketWebService, private cookiesServices: CookieService, private _activateRouter: ActivatedRoute) {
+  constructor(private comercioService: ComercioService, private cookiesService: CookieService ,private socketService: SocketWebService, private cookiesServices: CookieService, private _activateRouter: ActivatedRoute) {
     this.socketService.outEven.subscribe((res)=>{
       this.updateComercio();
     })
@@ -27,31 +27,32 @@ export class PedidosComponent implements OnInit {
   }
 
   async updateComercio(){
-    const param = await this._activateRouter.queryParams.subscribe((param: {pedido?: string, title?: string}) => {
+    const param = await this._activateRouter.params.subscribe((param: {pedido?: string, title?: string}) => {
       this.tipoPedido = param.pedido;
-      this.title =param.title
-    })
-    this.comercioService.obtenerComercio()
-    .subscribe((res)=>{
-      localStorage.setItem('comercioId', res._id)
-      let estado = 0;
-      if(this.tipoPedido === 'nuevo'){
-        estado = SeguimientoEnum.ESPERANDO_APROBACION;
-      }
-      if(this.tipoPedido === 'enCurso'){
-        estado = SeguimientoEnum.EN_CURSO;
-      }
-      if(this.tipoPedido === 'finalizados'){
-        estado = SeguimientoEnum.FINALIZADO;
-      }
-      if(this.tipoPedido === 'enviados'){
-        estado = SeguimientoEnum.ENVIADO;
-      }
-      this.comercioService.getPedidos(res._id, estado)
+      this.title = param.pedido;
+      this.comercioService.obtenerComercio()
       .subscribe((res)=>{
-        this.pedidos = res;
+        this.cookiesService.set('comercioId', res._id);
+        let estado = 0;
+        if(this.tipoPedido === 'pedidos'){
+          estado = SeguimientoEnum.ESPERANDO_APROBACION;
+        }
+        if(this.tipoPedido === 'curso'){
+          estado = SeguimientoEnum.EN_CURSO;
+        }
+        if(this.tipoPedido === 'finalizados'){
+          estado = SeguimientoEnum.FINALIZADO;
+        }
+        if(this.tipoPedido === 'enviados'){
+          estado = SeguimientoEnum.ENVIADO;
+        }
+        this.comercioService.getPedidos(res._id, estado)
+        .subscribe((res)=>{
+          this.pedidos = res;
+        })
       })
     })
+
   }
 
 }

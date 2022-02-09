@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private accountService: AccountService, private comercioService: ComercioService ,private router: Router) { }
   comercio: Comercio;
+  fechaHoy: Date = new Date();
   ngOnInit(): void {
     this.comercioService.obtenerComercio()
     .subscribe((res)=>{

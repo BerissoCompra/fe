@@ -7,8 +7,8 @@
   </mat-card-header>
   <mat-card-content>
     <p *ngIf="producto.precio > 0 && producto.descuento <= 0" class="title">{{producto.precio | currency}}</p>
-    <p *ngIf="producto.descuento > 0" class="title">{{getDescuento() | currency}}</p>
-    <p *ngIf="producto.descuento > 0" class="descuento">{{producto.descuento}}% <span>{{producto.precio | currency}}</span> </p>
+    <p *ngIf="producto.descuento > 0" class="title">{{producto.precio | currency}}</p>
+    <p *ngIf="producto.descuento > 0" class="descuento">{{producto.descuento}}% <span>{{getPrecioViejo() | currency}}</span> </p>
   </mat-card-content>
 </div>
 </button>

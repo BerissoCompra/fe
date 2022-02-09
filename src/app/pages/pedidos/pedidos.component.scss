@@ -1,5 +1,7 @@
 .pedidos-container{
   display: flex;
+  width: 100%;
+  flex-wrap: wrap;
   ul{
     list-style: none;
   }

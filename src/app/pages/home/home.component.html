@@ -1,1 +1,51 @@
-<app-header title="Inicio"></app-header>
+<app-header title="Mi comercio"></app-header>
+<section class="estadisticas">
+  <app-estadistica-card
+  class="card"
+  [valor]="comercio?.activado ? 'Activado' : 'En revisión'"
+  descripcion="Estado"
+  [color]="comercio?.activado ? 'green': 'red'"
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="card"
+  [valor]="comercio?.estrellas ? comercio.estrellas : 0 "
+  color="yellow"
+  descripcion="Estrellas"
+  ></app-estadistica-card>
+  <app-estadistica-card
+    class="card"
+    [valor]="comercio?.estadisticas?.ventas ? comercio?.estadisticas?.ventas : 0"
+    descripcion="Ventas"
+    color=""
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="card w-500"
+  [valor]="comercio?.estadisticas?.ingresosTotales ? (comercio?.estadisticas?.ingresosTotales | currency) : 0 | currency"
+  descripcion="Total Ingresos"
+  color=""
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="card w-500"
+  [valor]="comercio?.estadisticas?.deuda ? (comercio?.estadisticas?.deuda | currency) : 0 | currency"
+  descripcion="Ingresos desde el último pago"
+  [color]=""
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="card w-300"
+  [valor]="comercio?.estadisticas?.ultimoPago ? (comercio?.estadisticas?.ultimoPago  | date:'dd/MM' : '-0300') : '-'"
+  descripcion="Último pago"
+  color="green"
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="card w-300"
+  [valor]="comercio?.estadisticas?.proximoPago ? (comercio?.estadisticas?.proximoPago  | date:'dd/MM' : '-0300') : '-'"
+  descripcion="Fecha de vencimiento de pago"
+  [color]="(comercio?.estadisticas?.proximoPago | date) > (fechaHoy | date) ? 'red': 'green'"
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="card"
+  [valor]="comercio?.estadisticas?.deuda ? (comercio?.estadisticas?.deuda * 0.05 | currency) : 0 | currency"
+  descripcion="Debe abonar"
+  [color]="comercio?.estadisticas?.deuda > 0 ? 'red' : 'green' "
+  ></app-estadistica-card>
+</section>

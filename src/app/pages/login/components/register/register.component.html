@@ -1,0 +1,17 @@
+<div class="container">
+  <h2 class="title">Registro de Comercio | Formulario Responsable</h2>
+  <p class="login-detalle-text">Rellena el formulario con los datos principales del RESPONSABLE. Una vez registrado podrá configurar el comercio desde el panel de control</p>
+  <p class="info-text">Mas información</p>
+  <form [formGroup]="form" (ngSubmit)="registrar(userRegister)" class="form-container">
+    <div class="err" *ngIf="errorReg">{{errorReg}}</div>
+      <formly-form [form]="form" [fields]="fieldsRegister" [model]="userRegister"></formly-form>
+      <input type="checkbox" (change)="clickTerminos($event)" class="teryCon"/><label class="teryCon-lab">Acepto los <span (click)="openTerminos()">Términos y Condiciones</span></label>
+      <div class="button-container">
+        <button type="submit" class="btn btn-default" style="width: 100%;">Registrarse</button>
+      </div>
+      <div class="options-container">
+        <p>Ya tienes una cuenta? <span [routerLink]="''" class="option-click">Iniciar Sesión</span></p>
+      </div>
+  </form>
+</div>
+

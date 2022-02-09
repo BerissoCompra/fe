@@ -25,11 +25,13 @@ export class ConfiguracionComponent implements OnInit {
   fieldsConfiguracionNegocio: FormlyFieldConfig[] = ConfiguracionNegocioFormConfig();
   dias = Dias;
   diasSeleccionados: any[] = [];
+  file: File;
   constructor(private sanitizer: DomSanitizer,private accountService: AccountService,public dialog: MatDialog ,private comercioService: ComercioService, private toastr: ToastrService, private imagenesService: ImagenesService) {
 
   }
 
   ngOnInit(): void {
+
     this.updateComercio();
   }
 
@@ -75,6 +77,7 @@ export class ConfiguracionComponent implements OnInit {
       this.imagenesService.comprimirImagen(event.target.files[0])
       .then((res)=>{
         this.comercioModel.imagen = res;
+        this.file = event.target.files[0];
         this.extraerBase64(this.comercioModel.imagen).then((imagen: any)=>{
           this.imagenPrevisualizacion = imagen.base;
           this.loading = false;
@@ -134,6 +137,7 @@ export class ConfiguracionComponent implements OnInit {
   submitFn(configuracion: Comercio){
     if(this.validarForm(configuracion)){
       this.loading = true;
+      configuracion.imagen = this.file;
       this.comercioService.actualizarComercio(configuracion)
       .then((res)=>{
         this.loading = false;

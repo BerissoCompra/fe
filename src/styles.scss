@@ -16,6 +16,17 @@ body{
     padding: 0 !important;
 }
 
+button:disabled{
+  background-color: rgb(173, 173, 173);
+  opacity: 0.7;
+  cursor: default !important;
+  &:hover{
+    background-color: rgb(173, 173, 173);
+    opacity: 0.7;
+    cursor: default !important;
+  }
+}
+
 .button-container{
   display: flex;
   justify-content: space-between;
@@ -30,11 +41,23 @@ body{
   border-radius: 3px;
   color: #fff;
 }
+.btn-default.warn{
+  background-color: $red;
+}
+.btn-default.warn:hover{
+  background-color: $red;
+}
 .btn-default:hover{
   cursor: pointer;
   background-color: $base_color;
 }
-
+.header-form p{
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: $base-color;
+  text-transform: uppercase;
+}
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: $base_color !important;
 }

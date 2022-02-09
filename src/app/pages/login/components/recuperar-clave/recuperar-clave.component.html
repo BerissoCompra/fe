@@ -1,0 +1,33 @@
+<div class="container">
+      <div class="login-container" *ngIf="pantallaRecuperar">
+      <h2 class="title">Cambiar Contraseña</h2>
+      <form [formGroup]="form" class="form-container">
+        <div class="err" *ngIf="errorReg">{{errorReg}}</div>
+        <div class="submit" *ngIf="submitReg">{{submitReg}}</div>
+          <formly-form [form]="form" [fields]="fieldsRecuperar" [model]="emailRecuperacion"></formly-form>
+          <div class="button-container">
+            <button type="button" class="btn btn-default" (click)="recuperarClave()" [disabled]="!puedeRecuperar">{{recuperarTexto}}</button>
+          </div>
+          <div style="margin-top: 30px;">
+            <formly-form [form]="form" [fields]="fieldsCodigo" [model]="codigoRecuperacion"></formly-form>
+            <div class="button-container">
+              <button type="button" class="btn btn-default" style="width: 100%;" (click)="verificarCodigo()">Confirmar Código</button>
+            </div>
+            <div class="button-container">
+              <button class="btn btn-default warn" [routerLink]="''" style="width: 100%; margin-top: 10px;">Volver</button>
+            </div>
+          </div>
+      </form>
+    </div>
+    <div class="login-container" *ngIf="editarPass">
+      <h2 class="title">Cambiar Contraseña</h2>
+      <form [formGroup]="form" class="form-container">
+        <div class="err" *ngIf="errorReg">{{errorReg}}</div>
+        <div class="submit" *ngIf="submitReg">{{submitReg}}</div>
+        <formly-form [form]="form" [fields]="nuevaPasswordFields" [model]="nuevaPassword"></formly-form>
+        <div class="button-container">
+          <button class="btn btn-default" (click)="actualizarPassword()" style="width: 100%; margin-top: 10px;">Cambiar Contraseña</button>
+        </div>
+      </form>
+    </div>
+</div>

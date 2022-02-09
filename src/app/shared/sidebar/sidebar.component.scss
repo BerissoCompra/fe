@@ -1,70 +1,144 @@
 @import '../../../assets/index.scss';
 
-.sidebarContainer{
-  position: fixed;
-  margin: 0;
-  height: 100vh;
-  background-color: $white;
-  width: 130px;
-  box-shadow: 1px 0px 1px 2px rgba(226, 226, 226, 0.432);
-  z-index: 1000;
-  .menu{
-    margin-top: 150px;
-    list-style: none;
-    height: 45%;
-    .menu-item{
+
+.contenedor{
+    width: 95px;
+  .sidebarContainer{
+    position: fixed;
+    margin: 0;
+    height: 100vh;
+    background-color: $white;
+    width: 95px;
+    box-shadow: 1px 0px 1px 2px rgba(226, 226, 226, 0.432);
+    overflow: hidden;
+    z-index: 1;
+    .header{
+      position: relative;
+      width: 100%;
+      height: 20%;
+      overflow: hidden;
+      z-index: 0;
+      .user{
+        width: 100%;
+        height: 100%;
+        p{
+          margin-top: 10px;
+          text-align: center;
+          color: $dark;
+          max-width: 95%;
+          max-height: 30%;
+          overflow: hidden;
+        }
+        .contenedor-imagen{
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          .info-user-container{
+            height: 100%;
+            .info-user-img{
+              position: relative;
+              overflow: hidden;
+              width: 50px;
+              height: 50px;
+              border-radius:  10px;
+              border: 3px solid $white;
+              box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+              z-index: -1;
+              img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+
+            }
+            .userAbierto{
+              border: 3px solid $green;
+            }
+            .userCerrado{
+              border: 3px solid $red;
+            }
+
+          }
+        }
+
+      }
+    }
+
+    .menu{
+      list-style: none;
+      height: 90%;
+      padding: 0;
       display: flex;
       align-items: center;
+      flex-direction: column;
+      .menu-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $white;
+        height: 45px;
+        width: 45px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        transition: 0.2s;
+        &:hover{
+          cursor: pointer;
+          background-color: $gray;
+        }
+        .mat-icon{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color:  $dark-gray;
+          font-size: 22px;
+          font-weight: 300;
+        }
+        p{
+          margin: 0;
+          padding-left: 10px;
+          width: 80%;
+          text-transform: uppercase;
+          font-size: 12px;
+          letter-spacing: 1px;
+          color: $dark;
+          font-weight: 500;
+        }
+        &.logout{
+          position: absolute;
+          bottom: 20px;
+        }
+      }
+      .active{
+        background-color: $base-color;
+        p{
+          color: $white;
+        }
+        .mat-icon{
+          color: $white;
+        }
+      }
+    }
+    .btn-bottom-container{
+      width: 100%;
+      display: flex;
       justify-content: center;
-      background-color: $white;
-      height: 50px;
-      width: 50px;
-      margin-bottom: 10px;
-      border-radius: 50%;
-      transition: 0.2s;
-      &:hover{
-        cursor: pointer;
+      .mat-mini-fab.mat-accent{
+        background-color: $white;
+        color:  $base_color;
+        transition: 0.2s;
+        &:hover{
+          background-color: rgb(235, 235, 235);
+        }
       }
-      .mat-icon{
-        color:  $dark-gray;
+      .btn-cerrarSesion{
+        margin-top: 10px;
       }
-      p{
-        margin: 0;
-        padding-left: 10px;
-        width: 80%;
-        text-transform: uppercase;
-        font-size: 12px;
-        letter-spacing: 1px;
-        color: $dark;
-        font-weight: 500;
-      }
+    }
 
-    }
-    .active{
-      background-color: $base-color;
-      p{
-        color: $white;
-      }
-      .mat-icon{
-        color: $white;
-      }
-    }
   }
-  .btn-bottom-container{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .mat-mini-fab.mat-accent{
-      background-color: $white;
-      color:  $base_color;
-      transition: 0.2s;
-      &:hover{
-        background-color: rgb(235, 235, 235);
-      }
-    }
-    .btn-cerrarSesion{
-      margin-top: 10px;
-    }
-  }
+
+
 
 }

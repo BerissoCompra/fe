@@ -1,26 +1,45 @@
-<mat-drawer-container class="">
+<mat-drawer-container class="contenedor">
   <mat-drawer-content class="sidebarContainer">
+    <div class="header">
+      <div class="user">
+        <div class="contenedor-imagen">
+          <div class="info-user-container"  (click)="cerrarAbrir()" >
+            <div class="info-user-img" [ngClass]="comercio?.abierto ? 'userAbierto' : 'userCerrado' "><img [src]="comercio?.imagen ? comercio?.imagen : imagenDefault" alt=""></div>
+          </div>
+        </div>
+        <p>{{comercio?.nombre}}</p>
+      </div>
+      <div class="arrow">
+        <mat-icon class="icon">chevron_right</mat-icon>
+      </div>
+    </div>
     <ul class="menu">
       <li class="menu-item" [routerLink]="['inicio']" routerLinkActive="active">
-        <mat-icon matTooltip="Inicio">home</mat-icon>
+        <mat-icon matTooltip="Mi comercio">auto_graph</mat-icon>
       </li>
       <li class="menu-item" [routerLink]="['catalogo']" routerLinkActive="active">
-        <mat-icon matTooltip="Catálogo">view_quilt</mat-icon>
+        <mat-icon class="material-icons-outlined" matTooltip="Catálogo">view_quilt</mat-icon>
       </li>
-      <li class="menu-item"  [routerLink]="['pedidos']" [queryParams]="{pedido: 'nuevo', title: 'Nuevos Pedidos'}"  routerLinkActive="active">
-        <mat-icon matTooltip="Pedidos Nuevos">notifications</mat-icon>
+      <li class="menu-item" [routerLink]="['pedidos']"  routerLinkActive="active">
+        <mat-icon class="material-icons-outlined" matTooltip="Pedidos Nuevos">notifications</mat-icon>
       </li>
-      <li class="menu-item"  [routerLink]="['curso']"  [queryParams]="{pedido: 'enCurso', title: 'Pedidos en curso'}"  routerLinkActive="active">
-        <mat-icon matTooltip="Pedidos en curso">build</mat-icon >
+      <li class="menu-item"  [routerLink]="['curso']" routerLinkActive="active">
+        <mat-icon class="material-icons-outlined" matTooltip="Pedidos en curso">hourglass_empty</mat-icon >
       </li>
-      <li class="menu-item" [routerLink]="['finalizados']"  [queryParams]="{pedido: 'finalizados', title: 'Pedidos finalizados' }" routerLinkActive="active">
-        <mat-icon matTooltip="Pedidos Finalizados">check_circle</mat-icon>
+      <li class="menu-item" [routerLink]="['finalizados']" routerLinkActive="active">
+        <mat-icon class="material-icons-outlined" matTooltip="Pedidos Finalizados">check_circle</mat-icon>
       </li>
-      <li class="menu-item" [routerLink]="['enviados']"  [queryParams]="{pedido: 'enviados' , title: 'Pedidos enviados'}" routerLinkActive="active">
-        <mat-icon matTooltip="Pedidos Enviados">local_shipping</mat-icon>
+      <li class="menu-item" [routerLink]="['enviados']"  routerLinkActive="active">
+        <mat-icon class="material-icons-outlined" matTooltip="Pedidos Enviados">local_shipping</mat-icon>
       </li>
       <li class="menu-item" [routerLink]="['configuracion']"  routerLinkActive="active">
-        <mat-icon matTooltip="Configuración" >settings</mat-icon>
+        <mat-icon class="material-icons-outlined" matTooltip="Configuración" >settings</mat-icon>
+      </li>
+      <li class="menu-item" [routerLink]="['administrador']"  routerLinkActive="active">
+        <mat-icon matTooltip="Administrador" >settings</mat-icon>
+      </li>
+      <li class="menu-item logout" (click)="cerrarSesion()"  routerLinkActive="active">
+        <mat-icon matTooltip="Cerrar Sesión" >logout</mat-icon>
       </li>
     </ul>
   </mat-drawer-content>

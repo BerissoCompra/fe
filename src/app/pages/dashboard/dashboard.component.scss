@@ -3,12 +3,11 @@
 main{
   display: flex;
   z-index: -1;
-
   .toolbar{
     width: 100vw;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 500;
     background-color: $base-color !important;
     box-shadow: 1px 0px 1px 2px rgba(226, 226, 226, 0.432);
     justify-content: space-between;
@@ -61,39 +60,7 @@ main{
       text-align: center;
       color: $white;
     }
-    .contenedor-imagen{
-      margin-top: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 130px;
-      .info-user-container{
-        height: 100%;
-        .info-user-img{
-          position: relative;
-          overflow: hidden;
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-          border: 3px solid $white;
-          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-          z-index: -1;
-          img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
 
-        }
-        .userAbierto{
-          border: 3px solid $green;
-        }
-        .userCerrado{
-          border: 3px solid $red;
-        }
-
-      }
-    }
     .btn-cerrarSesion{
       background-color: $white;
       box-shadow: none;
@@ -103,7 +70,6 @@ main{
     }
 
   }
-
   .sidebar{
     z-index: 0;
   }
@@ -111,7 +77,7 @@ main{
     width: 100%;
     min-height: 100vh;
     padding: 20px;
-    padding-left: 150px;
+    padding-left: 20px;
     background-color: $gray;
     background-repeat: repeat;
     background-size: contain;

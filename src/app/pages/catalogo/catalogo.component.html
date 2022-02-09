@@ -4,8 +4,8 @@
     <mat-icon matTooltip="Añadir nuevo prducto">add</mat-icon>
   </button>
   <div class="categorias-container" >
-    <button class="cat-button" [ngClass]="categoria.activo ? 'activo' : ''" (click)="filtrar(categoria.id, categoria.valor)" *ngFor="let categoria of categoriasComercio">
-      <mat-icon [matTooltip]="categoria.descripcion">{{categoria.icono}}</mat-icon>
+    <button class="cat-button" [ngClass]="categoria?.activo ? 'activo' : ''" (click)="filtrar(categoria.id, categoria.valor)" *ngFor="let categoria of categoriasComercio">
+      <mat-icon [matTooltip]="categoria?.descripcion">{{categoria?.icono}}</mat-icon>
     </button>
   </div>
 </div>
