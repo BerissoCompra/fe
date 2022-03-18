@@ -1,63 +1,38 @@
 @import '../../../assets/index.scss';
 .form-container{
-  display: flex;
-  flex-direction: column;
-  background-color: $white;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin-bottom: 50px;
-  width: 70%;
-  border-radius: 10px;
-  margin: 0 auto;
-  margin-top: 50px;
-  box-shadow: 0px 0px 2px 1px rgba(184, 184, 184, 0.568);
-  h1{
-    text-align: center;
-    margin-bottom: 25px;
-  }
   .forms-container{
-    display: flex;
-    flex-direction: column;
+    padding: 50px;
+  }
+  margin-bottom: 50px;
+}
+
+.formulario-base{
+  .diasSelector{
+    text-align: center;
     margin: 0 auto;
-    .form{
-      width: 300px;
-      width: 400px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    .mat-button-toggle-group-appearance-standard{
+      border-radius: 8px;
     }
-    .formNegocio{
-      width: 400px;
+    .mat-button-toggle{
+      background-color: $dark;
+      color: $red;
+      font-weight: bold;
+      width: 80px;
     }
-  }
-}
-.contenedor-formularios{
-  display: flex;
-  flex-direction: column;
-  .formulario-base{
-    display: flex;
-    flex-direction: column;
-    .diasSelector{
-      text-align: center;
-      margin: 0 auto;
-      margin-bottom: 50px;
-      .mat-button-toggle-group-appearance-standard{
-        border-radius: 8px;
-      }
-      .mat-button-toggle{
-        background-color: $dark;
-        color: $red;
-        font-weight: bold;
-        width: 80px;
-      }
-      .mat-button-toggle-checked{
-        color: $green !important;
-      }
+    .mat-button-toggle-checked{
+      color: $green !important;
     }
   }
 }
+
 
 .add-image{
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  align-items: center;
   .previewImg{
     margin-top: 20px;
     width: 250px;

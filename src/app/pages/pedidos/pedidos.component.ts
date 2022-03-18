@@ -32,6 +32,7 @@ export class PedidosComponent implements OnInit {
       this.title = param.pedido;
       this.comercioService.obtenerComercio()
       .subscribe((res)=>{
+        this.comercioService.actualizarInfoComercio(res)
         this.cookiesService.set('comercioId', res._id);
         let estado = 0;
         if(this.tipoPedido === 'pedidos'){

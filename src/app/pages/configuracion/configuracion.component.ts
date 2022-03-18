@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -12,6 +12,8 @@ import { TipoEnvio } from 'src/app/models/enums/tipo-envio';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { ConfiguracionNegocioFormConfig } from 'src/app/models/configuracion/configuracion-form-config';
 import { Dias } from 'src/app/models/dias';
+import { catchError } from 'rxjs';
+import { AlertsService } from 'src/app/services/alerts-services.service';
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.component.html',
@@ -26,29 +28,37 @@ export class ConfiguracionComponent implements OnInit {
   dias = Dias;
   diasSeleccionados: any[] = [];
   file: File;
-  constructor(private sanitizer: DomSanitizer,private accountService: AccountService,public dialog: MatDialog ,private comercioService: ComercioService, private toastr: ToastrService, private imagenesService: ImagenesService) {
+  @Output() newItemEvent = new EventEmitter<string>();
+
+  constructor(private alertService: AlertsService, private sanitizer: DomSanitizer,private accountService: AccountService,public dialog: MatDialog ,private comercioService: ComercioService, private toastr: ToastrService, private imagenesService: ImagenesService) {
 
   }
 
   ngOnInit(): void {
-
-    this.updateComercio();
+    console.log(this.comercioService.comercio)
+    this.updateComercio()
   }
 
-  updateComercio(){
-    this.comercioService.obtenerComercio()
-    .subscribe((res: any)=>{
-      this.comercioModel = res;
-      this.changeComercio(res);
-      this.comercioService.comercio = res;
+  async updateComercio(){
+    if(this.comercioService.comercio){
+      this.comercioModel = this.comercioService.comercio;
+      this.comercioService.actualizarInfoComercio(this.comercioModel)
       if(this.comercioModel?.imagen){
         this.imagenPrevisualizacion = this.comercioModel?.imagen;
       }
-    })
-  }
+      return;
+    }
+    else{
+      this.comercioService.obtenerComercio()
+      .subscribe((res: any)=>{
+        this.comercioModel = res;
+        this.comercioService.actualizarInfoComercio(this.comercioModel)
+        if(this.comercioModel?.imagen){
+          this.imagenPrevisualizacion = this.comercioModel?.imagen;
+        }
+      })
+    }
 
-  changeComercio(comercio) {
-    this.comercioService.changeComercio(comercio);
   }
 
   selectDia($event){
@@ -77,7 +87,7 @@ export class ConfiguracionComponent implements OnInit {
       this.imagenesService.comprimirImagen(event.target.files[0])
       .then((res)=>{
         this.comercioModel.imagen = res;
-        this.file = event.target.files[0];
+        this.file = new File([res], event.target.files[0].name);
         this.extraerBase64(this.comercioModel.imagen).then((imagen: any)=>{
           this.imagenPrevisualizacion = imagen.base;
           this.loading = false;
@@ -85,12 +95,11 @@ export class ConfiguracionComponent implements OnInit {
       })
       .catch((error)=>{
         console.error(error)
+        this.alertService.error('Error al procesar la imágen')
       })
     }
     else{
-      this.toastr.error('El archivo subido no tiene el formato de imagen (.jgp / .jpeg / .png)', '', {
-        positionClass: 'toast-bottom-right'
-      })
+      this.alertService.error('El archivo subido no tiene el formato de imagen (.jgp / .jpeg / .png)')
       this.loading = false;
     }
 
@@ -142,17 +151,14 @@ export class ConfiguracionComponent implements OnInit {
       .then((res)=>{
         this.loading = false;
         this.updateComercio();
-        this.toastr.success('Actualizado correctamente', '', {
-          progressBar: true,
-          timeOut: 2000,
-          positionClass: 'toast-bottom-right'
-        })
+        this.alertService.ok('Actualizado Correctamente')
+      }).catch((err)=>{
+        const error = err.error.msg;
+        this.alertService.error(error)
       })
     }
     else{
-      this.toastr.error('Debe completar todos los campos requeridos', '', {
-        positionClass: 'toast-bottom-right'
-      })
+      this.alertService.error('Debe completar todos los campos requeridos')
     }
   }
 

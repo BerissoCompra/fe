@@ -24,18 +24,6 @@ export class ProductComponent implements OnInit {
 
   }
 
-  viewProduct(){
-    if(this.seccionCatalogo){
-      this.dialog.open(NuevoComponent, {
-        data: {
-          action: 'editar',
-          dialog: this.dialog,
-          content: this.producto,
-        },
-      });
-    }
-  }
-
   getPrecioViejo(): number{
     let total = 0;
     const precio = this.producto.precio;

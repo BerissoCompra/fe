@@ -3,7 +3,7 @@ import { FieldType } from '@ngx-formly/core';
 
 @Component({
   template: `
-    <input matNativeControl  type="file" [formControl]="formControl" [formlyAttributes]="field">
+    <input type="file">
   `,
 })
 export class FormlyFieldFile extends FieldType {

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { AdministradorComponent } from './pages/administrador/administrador.component';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { ConfiguracionComponent } from './pages/configuracion/configuracion.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -30,12 +29,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-      { path: 'inicio', component: HomeComponent },
+      { path: 'inicio', component: HomeComponent},
       { path: 'catalogo', component: CatalogoComponent},
       { path: 'nuevo', component: NuevoComponent},
-      { path: 'configuracion', component: ConfiguracionComponent },
-      { path: 'administrador', component: AdministradorComponent },
-      { path: ':pedido', component: PedidosComponent },
+      { path: 'configuracion', component: ConfiguracionComponent},
+      { path: ':pedido', component: PedidosComponent},
       // { path: 'finalizados', component: PedidosComponent },
       // { path: 'enviados', component: PedidosComponent },
     ]

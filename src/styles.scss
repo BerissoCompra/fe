@@ -40,6 +40,7 @@ button:disabled{
   border-style: none;
   border-radius: 3px;
   color: #fff;
+  font-size: 16px;
 }
 .btn-default.warn{
   background-color: $red;
@@ -60,6 +61,10 @@ button:disabled{
 }
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: $base_color !important;
+}
+.aclaracion{
+  font-size: 14px;
+  color: $dark-gray;
 }
 
 html, body { height: 100%; }

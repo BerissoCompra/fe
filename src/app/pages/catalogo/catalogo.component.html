@@ -1,6 +1,6 @@
 <app-header title="{{title}}"></app-header>
 <div class="button-container">
-  <button class="btn btn-default" (click)="crearNuevo()">
+  <button class="btn btn-primary" (click)="crearNuevo()">
     <mat-icon matTooltip="Añadir nuevo prducto">add</mat-icon>
   </button>
   <div class="categorias-container" >
@@ -10,5 +10,5 @@
   </div>
 </div>
 <section class="catalogo-container">
-    <div *ngFor="let item of productosFiltrados"><product [producto]='item' [seccionCatalogo]='true'></product></div>
+    <div *ngFor="let item of productosFiltrados"><product (click)="viewProduct(item)" [producto]='item' [seccionCatalogo]='true'></product></div>
 </section>

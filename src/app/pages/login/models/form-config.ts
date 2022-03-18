@@ -55,7 +55,7 @@ export const fieldsRegister: FormlyFieldConfig[] = [
     type: 'input',
     className: 'field-form',
     templateOptions: {
-      label: 'Nombres elegidos',
+      label: '¿Como quieres que te llamemos? (Nombre elegido)',
       placeholder: '',
       required: false,
     },
@@ -96,6 +96,67 @@ export const fieldsRegister: FormlyFieldConfig[] = [
     }
   },
 ];
+
+export const fieldsComercio:  FormlyFieldConfig[] = [
+    {
+      template: `<p>Datos Comercio</p>`,
+      className: 'header-form'
+    },
+    {
+      key: 'nombre',
+      type: 'input',
+      className: 'field-form',
+      templateOptions: {
+        label: 'Nombre Comercio',
+        placeholder: '',
+        required: true,
+      },
+    },
+    {
+      key: 'direccion',
+      type: 'input',
+      className: 'field-form',
+      templateOptions: {
+        label: 'Dirección',
+        placeholder: '',
+        required: true,
+      },
+    },
+    {
+      key: 'telefono',
+      type: 'input',
+      className: 'field-form',
+      templateOptions: {
+        label: 'WhatsApp de contacto',
+        placeholder: '',
+        required: true,
+      },
+    },
+    {
+      key: 'provincia',
+      type: 'select',
+      className: 'field-form',
+      defaultValue: 'Buenos Aires',
+      templateOptions: {
+        label: 'Provincia',
+        placeholder: '',
+        required: true,
+        options: [{ label: 'Buenos Aires', value: 'Buenos Aires'}],
+      },
+    },
+    {
+      key: 'ciudad',
+      type: 'select',
+      className: 'field-form',
+      defaultValue: 'Berisso',
+      templateOptions: {
+        label: 'Ciudad',
+        options: [{ label: 'Berisso', value: 'Berisso'}],
+        placeholder: '',
+        required: true,
+      },
+    },
+]
 
 export const fieldsEmail: FormlyFieldConfig[] = [
   {

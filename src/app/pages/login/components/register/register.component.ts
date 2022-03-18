@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserLogin, UserLoginRegister, UserReg } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 import { ComercioService } from 'src/app/services/comercio.service';
-import { fieldsRegister } from '../../models/form-config';
+import { fieldsComercio, fieldsRegister } from '../../models/form-config';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
     terminos: false,
   };
 
+  public comercioConfig = {};
+
   public error: string;
   public errorReg: string;
   public submitReg: string;
@@ -37,11 +39,13 @@ export class RegisterComponent implements OnInit {
 
   public loading: boolean = false;
   public fieldsRegister: FormlyFieldConfig[] = fieldsRegister;
+  public fieldsComercio: FormlyFieldConfig[] = fieldsComercio;
 
   public puedeRecuperar: boolean = true;
   public recuperarTexto: string = 'Enviar Código';
   segundos: number = 30;
   form = new FormGroup({});
+
 
   constructor(private accountService: AccountService,  private router: Router, private comercioService: ComercioService, private toastr: ToastrService) {}
 
@@ -82,12 +86,13 @@ export class RegisterComponent implements OnInit {
         if(res?.err){
           return this.errorReg = res?.err;
         }
-        this.comercioService.crearComercio(user, res._id)
+        this.comercioService.crearComercio(this.comercioConfig, user, res._id)
         .subscribe((res)=>{
           this.loading = false;
-          this.toastr.success('Registrado correctamente', '', {
+          this.router.navigate([''])
+          this.toastr.success('Se ha enviado un email de verificación', '', {
             progressBar: true,
-            timeOut: 2000,
+            timeOut: 5000,
             positionClass: 'toast-bottom-right'
           })
         });

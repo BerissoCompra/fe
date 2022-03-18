@@ -12,14 +12,14 @@
           </div>
         </div>
         <div class="button-container">
-          <button type="submit" class="btn btn-default">{{buttonText}}</button>
-          <button type="button" (click)="confirmacion = true" class="btn btn-default" *ngIf="viewDeleteButton && !confirmacion">Eliminar</button>
+          <button type="submit" class="btn btn-primary">{{buttonText}}</button>
+          <button type="button" (click)="confirmacion = true" class="btn btn-danger" *ngIf="viewDeleteButton && !confirmacion">Eliminar</button>
           <div class="confirmar-eliminar" *ngIf="confirmacion">
-            <button type="button" class="btn btn-default confirmar no" (click)="confirmacion = false" *ngIf="viewDeleteButton">No</button>
-            <button type="button" (click)="deleteProduct()" class="btn btn-default confirmar ok" *ngIf="viewDeleteButton">Si</button>
+            <button type="button"  style="width: 100px;"class="btn btn-danger" (click)="confirmacion = false" *ngIf="viewDeleteButton">No</button>
+            <button type="button"  style="width: 100px; margin-left: 5px;" (click)="deleteProduct()" class="btn btn-success" *ngIf="viewDeleteButton">Si</button>
           </div>
-          <button type="button" (click)="desactivarProducto()" class="btn btn-default" *ngIf="viewDeleteButton && productoModel.activo">Desactivar</button>
-          <button type="button" (click)="activarProducto()" class="btn btn-default" *ngIf="viewDeleteButton && !productoModel.activo">Activar</button>
+          <button type="button" (click)="desactivarProducto()" class="btn btn-primary" *ngIf="viewDeleteButton && productoModel.activo">Desactivar</button>
+          <button type="button" (click)="activarProducto()" class="btn btn-primary" *ngIf="viewDeleteButton && !productoModel.activo">Activar</button>
         </div>
     </form>
   </div>

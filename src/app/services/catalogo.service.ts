@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
@@ -12,9 +9,7 @@ import { GenericService } from './generic.service';
 })
 export class CatalogoService {
 
-  constructor(private firestore: AngularFirestore, private auth: AngularFireAuth,
-     private storage: AngularFireStorage,
-     private genericService: GenericService) { }
+  constructor(private genericService: GenericService) { }
   valor: Observable<any>;
 
 
@@ -80,20 +75,12 @@ export class CatalogoService {
     })
   }
 
-  activarProducto(producto: Product){
-    const body = {
-      id: producto._id,
-      activo: true,
-    }
-    return this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, body)
+  activarProducto(productoId: string){
+    return this.genericService.put(`${environment.urlAPI}/catalogo/productos/${productoId}/activar`, {})
   }
 
-  desactivarProducto(producto: Product){
-    const body = {
-      id: producto._id,
-      activo: false,
-    }
-    return this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, body)
+  desactivarProducto(productoId: string){
+    return this.genericService.put(`${environment.urlAPI}/catalogo/productos/${productoId}/desactivar`, {})
   }
 
 }

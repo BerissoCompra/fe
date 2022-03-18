@@ -4,8 +4,10 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs';
 import { SeguimientoEnum } from 'src/app/models/enums/seguimiento';
 import { Pedido } from 'src/app/models/pedido';
+import { AlertsService } from 'src/app/services/alerts-services.service';
 import { ComercioService } from 'src/app/services/comercio.service';
 import { SocketWebService } from 'src/app/services/socket-web.service';
 
@@ -38,7 +40,7 @@ export class RechazarPedidoComponent implements OnInit {
     },
   ]
 
-  constructor(private socketService: SocketWebService ,private sanitizer: DomSanitizer, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService) { }
+  constructor(private socketService: SocketWebService ,private sanitizer: DomSanitizer, private alertService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService) { }
 
   ngOnInit(): void {
     this.pedido = this.data.pedido;
@@ -47,7 +49,14 @@ export class RechazarPedidoComponent implements OnInit {
   rechazarPedido(model){
     this.pedido.estado = -1;
     this.pedido.motivoRechazo = model.mensajeRechazo;
-    this.comercioService.actualizarPedido(this.pedido).subscribe((res)=>{
+    this.comercioService.actualizarPedido(this.pedido)
+    .pipe(catchError((res)=>{
+      const error = res.error.msg;
+      this.alertService.error(error)
+      throw 'error in source. Details: ' + res;
+    }))
+    .subscribe((res)=>{
+      this.alertService.error("Pedido Rechazado correctamente")
       this.socketService.emitEvent({text: 'actualizado'});
       this.data.dialog.closeAll();
     })

@@ -1,4 +1,4 @@
-<button (click)="viewProduct()" *ngIf="producto">
+<button *ngIf="producto">
 <div class="card" [ngClass]="producto.activo ? '' : 'desactivo'">
   <img src="{{producto.imagen ? producto.imagen : defaultImage}}" alt="" class="background">
   <mat-card-header class="info-container">

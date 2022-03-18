@@ -11,6 +11,8 @@ import { ImagenesService } from 'src/app/services/imagenes.service';
 import { CatalogoComponent } from '../catalogo/catalogo.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { calcularDescuento } from 'src/app/services/utils/calculos';
+import { formConfig } from './models/form-config';
+import { AlertsService } from 'src/app/services/alerts-services.service';
 
 export interface DialogData {
   comercioId: string;
@@ -26,6 +28,7 @@ export interface DialogData {
 })
 export class NuevoComponent implements OnInit {
   form = new FormGroup({});
+  fieldsRegister: FormlyFieldConfig[] = formConfig();
   title: string;
   valor: Observable<any>
   buttonText: string;
@@ -45,7 +48,9 @@ export class NuevoComponent implements OnInit {
   file: File;
   imagenPrevisualizacion: string = 'https://www.directorioindustrialfarmaceutico.com/images/logos/sin-logo.jpg';
   archivo;
-  constructor(private sanitizer: DomSanitizer,
+  constructor(
+    private alertService: AlertsService,
+    private sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private catalogoService: CatalogoService,
     private toastr: ToastrService,
@@ -64,112 +69,18 @@ export class NuevoComponent implements OnInit {
     else if(this.data.action === 'editar'){
       this.title = 'Vista de producto'
       this.productoModel = this.data.content;
-      this.buttonText = 'Actualizar producto';
+      this.buttonText = 'Actualizar';
       this.viewDeleteButton = true;
       this.imagenPrevisualizacion = this.productoModel.imagen;
     }
   }
 
-  fieldsRegister: FormlyFieldConfig[] = [
-    {
-      key: 'nombre',
-      type: 'input',
-      className: 'field-form',
-
-      templateOptions: {
-        label: 'Título',
-        placeholder: 'Ingrese título',
-        required: true,
-
-      },
-    },
-    {
-      key: 'descripcion',
-      type: 'textarea',
-      className: 'field-form',
-      templateOptions: {
-        label: 'Descripción',
-        placeholder: 'Ingrese descripcion breve',
-        required: true,
-        rows: 5,
-      }
-    },
-    {
-      key: 'precio',
-      type: 'input',
-      className: 'field-form',
-      templateOptions: {
-        label: 'Precio',
-        placeholder: 'Ingrese el precio',
-        required: true,
-        type: 'number',
-
-      }
-    },
-    {
-      key: 'descuento',
-      type: 'input',
-      className: 'field-form',
-      templateOptions: {
-        label: 'Descuento %',
-        placeholder: 'Ingrese descuento (sin %)',
-      },
-    },
-    {
-      key: 'categoria',
-      type: 'select',
-      className: 'field-form',
-      templateOptions: {
-        label: 'Seleccione categoria',
-        placeholder: '',
-        options: [
-          {
-            label: 'Restaurante',
-            value: 'restaurante',
-          },
-          {
-            label: 'Café',
-            value: 'cafe'
-          },
-          {
-            label: 'Bebidas',
-            value: 'bebidas'
-          },
-          {
-            label: 'Flores',
-            value: 'flores'
-          },
-          {
-            label: 'Mercado',
-            value: 'mercado'
-          },
-          {
-            label: 'Tienda',
-            value: 'tienda'
-          },
-          {
-            label:  'Kiosco',
-            value: 'kiosco'
-          },
-          {
-            label: 'Mascotas',
-            value: 'mascotas'
-          },
-          {
-            label: 'Farmacia',
-            value: 'farmacia'
-          },
-        ]
-      },
-    },
-  ];
-
   verImagen(event){
     this.imagenesService.comprimirImagen(event.target.files[0])
     .then((res)=>{
       this.productoModel.imagen = res;
-      this.file = event.target.files[0];
-
+      const file = new File([res], event.target.files[0].name);
+      this.file = file;
       this.extraerBase64(this.productoModel.imagen).then((imagen: any)=>{
         this.imagenPrevisualizacion = imagen.base;
       })
@@ -208,15 +119,12 @@ export class NuevoComponent implements OnInit {
       if(product.descuento > 0){
         product.precio = calcularDescuento(product.precio, product.descuento);
       }
+      console.log(product)
       product.imagen = this.file;
       this.catalogoService.addProducto(product, this.data.comercioId)
       .then((res)=>{
         this.loading = false;
-          this.toastr.success('Producto añadido correctamente', '', {
-            progressBar: true,
-            timeOut: 2000,
-            positionClass: 'toast-bottom-right'
-        })
+        this.alertService.ok('Producto Añadido')
         this.data.dialog.closeAll();
       })
     }
@@ -228,11 +136,7 @@ export class NuevoComponent implements OnInit {
       this.catalogoService.actualizarProducto(product)
       .then((res)=>{
         this.loading = false;
-          this.toastr.success('Producto actualizado correctamente', '', {
-            progressBar: true,
-            timeOut: 2000,
-            positionClass: 'toast-bottom-right'
-        })
+        this.alertService.ok('Producto Actualizado')
         this.data.dialog.closeAll();
       })
     }
@@ -245,12 +149,7 @@ export class NuevoComponent implements OnInit {
       .then((res)=>{
         if(res){
           this.loading = false;
-          this.toastr.success('Producto Eliminado correctamente', '', {
-            progressBar: true,
-            timeOut: 2000,
-            positionClass: 'toast-bottom-right'
-        })
-          location.reload();
+          this.alertService.warning('Producto Eliminado')
           this.data.dialog.closeAll();
         }
       })
@@ -258,28 +157,19 @@ export class NuevoComponent implements OnInit {
   }
 
   desactivarProducto(){
-    this.catalogoService.desactivarProducto(this.productoModel)
+    this.catalogoService.desactivarProducto(this.productoModel._id)
     .subscribe((res)=>{
       this.loading = false;
-        this.toastr.success('Producto desactivado correctamente', '', {
-          progressBar: true,
-          timeOut: 2000,
-          positionClass: 'toast-bottom-right'
-      })
-      location.reload();
+      this.alertService.warning('Producto Desactivado')
       this.data.dialog.closeAll();
     })
   }
+
   activarProducto(){
-    this.catalogoService.activarProducto(this.productoModel)
+    this.catalogoService.activarProducto(this.productoModel._id)
     .subscribe((res)=>{
       this.loading = false;
-        this.toastr.success('Producto activado correctamente', '', {
-          progressBar: true,
-          timeOut: 2000,
-          positionClass: 'toast-bottom-right'
-      })
-      location.reload();
+      this.alertService.ok('Producto Activado')
       this.data.dialog.closeAll();
     })
   }

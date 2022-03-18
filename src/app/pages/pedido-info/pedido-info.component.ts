@@ -10,6 +10,8 @@ import { AccountService } from 'src/app/services/account.service';
 import { ComercioService } from 'src/app/services/comercio.service';
 import { RechazarPedidoComponent } from '../rechazar-pedido/rechazar-pedido.component';
 import { SocketWebService } from 'src/app/services/socket-web.service';
+import { AlertsService } from 'src/app/services/alerts-services.service';
+import { catchError } from 'rxjs';
 
 export interface DialogData {
   comercioId: string;
@@ -30,7 +32,7 @@ export class PedidoInfoComponent implements OnInit {
   usuarioPedido: Usuario;
   comercioId: string;
 
-  constructor(private sanitizer: DomSanitizer,  private socketService: SocketWebService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService, public dialog: MatDialog) {
+  constructor(private alertService: AlertsService,  private socketService: SocketWebService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService, public dialog: MatDialog) {
 
   }
 
@@ -50,9 +52,14 @@ export class PedidoInfoComponent implements OnInit {
       this.pedidoSeleccionado.estado = SeguimientoEnum.LISTO_PARA_ABONAR;
     }
     this.comercioService.actualizarPedido(this.pedidoSeleccionado)
+    .pipe(catchError((res)=>{
+      const error = res.error.msg;
+      this.alertService.error(error)
+      throw 'error in source. Details: ' + res;
+    }))
     .subscribe((res)=>{
       this.socketService.emitEvent({text: 'actualizado'});
-      this.toastr.success('Pedido Aceptado')
+      this.alertService.ok('Pedido Aceptado');
       this.data.dialog.closeAll();
 
     })
@@ -74,20 +81,30 @@ export class PedidoInfoComponent implements OnInit {
   pedidoEnviado(){
     this.pedidoSeleccionado.estado = SeguimientoEnum.ENVIADO;
     this.comercioService.actualizarPedido(this.pedidoSeleccionado)
+    .pipe(catchError((res)=>{
+      const error = res.error.msg;
+      this.alertService.error(error)
+      throw 'error in source. Details: ' + res;
+    }))
     .subscribe((res)=>{
       this.socketService.emitEvent({text: 'actualizado'});
       this.data.dialog.closeAll();
-      this.toastr.success('Pedido Enviado')
+      this.alertService.ok('Pedido Enviado');
     })
   }
 
   pedidoFinalizado(){
     this.pedidoSeleccionado.estado = SeguimientoEnum.FINALIZADO;
     this.comercioService.actualizarPedido(this.pedidoSeleccionado)
+    .pipe(catchError((res)=>{
+      const error = res.error.msg;
+      this.alertService.error(error)
+      throw 'error in source. Details: ' + res;
+    }))
     .subscribe((res)=>{
       this.socketService.emitEvent({text: 'actualizado'});
       this.data.dialog.closeAll();
-      this.toastr.success('Pedido Finalizado')
+      this.alertService.ok('Pedido Finalizado');
       this.comercioService.obtenerComercio()
       .subscribe((comercio)=>{
         this.comercioService.registrarVenta(comercio._id, this.pedidoSeleccionado).subscribe()
@@ -98,10 +115,15 @@ export class PedidoInfoComponent implements OnInit {
   pedidoListoParaRetirar(){
     this.pedidoSeleccionado.estado = SeguimientoEnum.LISTO_PARA_RETIRAR;
     this.comercioService.actualizarPedido(this.pedidoSeleccionado)
+    .pipe(catchError((res)=>{
+      const error = res.error.msg;
+      this.alertService.error(error)
+      throw 'error in source. Details: ' + res;
+    }))
     .subscribe((res)=>{
       this.socketService.emitEvent({text: 'actualizado'});
       this.data.dialog.closeAll();
-      this.toastr.success('Pedido Listo para Retirar')
+      this.alertService.ok('Pedido Listo para Retirar');
     })
   }
 

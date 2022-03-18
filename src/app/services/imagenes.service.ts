@@ -14,8 +14,6 @@ export class ImagenesService {
         let resultado;
         const compresor = new Compressor(file, {
           quality: 0.4,
-          // The compression process is asynchronous,
-          // which means you have to access the `result` in the `success` hook function.
           success(result) {
             resultado = result;
             resolve(resultado);

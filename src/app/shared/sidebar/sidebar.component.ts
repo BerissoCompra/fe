@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { Comercio } from 'src/app/models/comercio';
 import { AccountService } from 'src/app/services/account.service';
+import { AlertsService } from 'src/app/services/alerts-services.service';
 import { ComercioService } from 'src/app/services/comercio.service';
 
 @Component({
@@ -14,23 +15,17 @@ import { ComercioService } from 'src/app/services/comercio.service';
 export class SidebarComponent implements OnInit{
 
 
-  constructor(private accountService: AccountService, private cookieService: CookieService, private comercioService: ComercioService ,private router: Router) { }
+  constructor(private accountService: AccountService, private alertService: AlertsService, private comercioService: ComercioService ,private router: Router) { }
 
   comercio: Comercio;
+  comercio$: Observable<Comercio>;
   pedidosCount: number;
   imagenDefault: string = 'https://www.uifrommars.com/wp-content/uploads/2018/08/crear-paleta-colores-diseno-ui.jpg';
 
 
   ngOnInit(): void {
-    this.comercioService.obtenerComercio()
-    .subscribe((res)=>{
-      this.cookieService.set('comercioId', res._id);
-      this.comercioService.changeComercio(res)
-      this.comercioService.customComercio.subscribe((com)=>{
-        this.comercioService.comercio = com;
-        this.comercio = this.comercioService.comercio;
-      })
-    })
+    this.comercio$ = this.comercioService.getComercio$();
+    this.comercio$.subscribe(comercio => this.comercio = comercio);
   }
 
   updateComercio(){
@@ -41,24 +36,36 @@ export class SidebarComponent implements OnInit{
 
   cerrarAbrir(){
     if(this.comercio.abierto){
-      this.comercioService.actualizarComercio({
-        ...this.comercio,
-        abierto: false,
-      }).then((res)=>{
+      this.comercioService.cerrarComercio(this.comercio._id)
+      .pipe(catchError((res)=>{
+        const error = res.error.msg;
+        this.alertService.error(error)
+        throw 'error in source. Details: ' + res;
+      }))
+      .subscribe((ok)=>{
         this.updateComercio();
+        this.alertService.warning('Comercio Cerrado');
       })
     }
     else{
-      this.comercioService.actualizarComercio({
-        ...this.comercio,
-        abierto: true,
-      }).then((res)=>{
+      this.comercioService.abrirComercio(this.comercio._id)
+      .pipe(catchError((res)=>{
+        const error = res.error.msg;
+        this.alertService.error(error)
+        throw 'error in source. Details: ' + res;
+      }))
+      .subscribe((ok)=>{
         this.updateComercio();
+        this.alertService.ok('Comercio Abierto');
       })
     }
   }
 
   cerrarSesion(){
+    if(this.comercio.abierto){
+      const confirma = confirm(' ¡El comercio se encuentra abierto! \n ¿Está seguro que quiere salir del sistema?')
+      if(!confirma) return;
+    }
     this.accountService.cerrarSesion();
   }
 

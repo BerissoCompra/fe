@@ -25,10 +25,10 @@
     <mat-progress-bar mode="determinate" [value]="calcularSeguimiento()"></mat-progress-bar>
   </div>
   <div class="button-container">
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)="aceptarPedido()" class="btn btn-default">Aceptar Pedido</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 3 && pedidoSeleccionado.retira" (click)="pedidoListoParaRetirar()" class="btn btn-default">Listo para retirar</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 3 && !pedidoSeleccionado.retira" (click)="pedidoFinalizado()" class="btn btn-default">Finalizar Pedido</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 4 && !pedidoSeleccionado.retira" (click)="pedidoEnviado()" class="btn btn-default">Confirmar Envío</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)=" rechazarPedido() "class="btn btn-default">Rechazar Pedido</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)="aceptarPedido()" class="btn btn-primary">Aceptar Pedido</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado == 3 && pedidoSeleccionado.retira" (click)="pedidoListoParaRetirar()" class="btn btn-primary">Listo para retirar</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado == 3 && !pedidoSeleccionado.retira" (click)="pedidoFinalizado()" class="btn btn-primary">Finalizar Pedido</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado == 4 && !pedidoSeleccionado.retira" (click)="pedidoEnviado()" class="btn btn-primary">Confirmar Envío</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)=" rechazarPedido() "class="btn btn-primary">Rechazar Pedido</button>
   </div>
 </section>

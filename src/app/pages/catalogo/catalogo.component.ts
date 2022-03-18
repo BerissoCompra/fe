@@ -76,6 +76,7 @@ export class CatalogoComponent implements OnInit {
     this.comercioService.obtenerComercio()
     .subscribe((comercio)=>{
         this.comercioId = comercio._id;
+        this.comercioService.actualizarInfoComercio(comercio)
         this.catalogoService.getProductos(comercio._id)
         .subscribe((productos)=>{
           this.productos = productos;
@@ -114,6 +115,7 @@ export class CatalogoComponent implements OnInit {
   crearNuevo(){
     const openDialog = this.dialog.open(NuevoComponent, {
       id: 'Crear',
+      width: '55%',
       data: {
         comercioId: this.comercioId,
         action: 'nuevo',
@@ -123,8 +125,24 @@ export class CatalogoComponent implements OnInit {
     });
 
     openDialog.afterClosed().subscribe((res)=>{
-        this.refresh();
+      this.refresh();
     })
+  }
+
+  viewProduct(producto){
+    if(producto){
+      const openDialog = this.dialog.open(NuevoComponent, {
+        width: '55%',
+        data: {
+          action: 'editar',
+          dialog: this.dialog,
+          content: producto,
+        },
+      });
+      openDialog.afterClosed().subscribe((res)=>{
+        this.refresh();
+      })
+    }
   }
 
   filtrar(id: number, valor?: string){

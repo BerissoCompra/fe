@@ -1,0 +1,13 @@
+.container{
+  margin: 0;
+  padding: 0;
+  label{
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .btn-toggle{
+    display: flex;
+    align-items: center;
+    height: 38px;
+  }
+}

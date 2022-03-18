@@ -2,17 +2,16 @@
 <app-header title="Configuración" ></app-header>
 <div class="configuraciones-container">
   <form [formGroup]="form" (ngSubmit)="submitFn(comercioModel)" class="form-container">
-    <h1 *ngIf="comercioModel?.nombre">{{comercioModel.nombre}}</h1>
     <div class="contenedor-formularios">
       <div class="forms-container">
         <formly-form class="formNegocio" [form]="form" [fields]="fieldsConfiguracionNegocio" [model]="comercioModel"></formly-form>
       </div>
       <div class="formulario-base">
         <div class="diasSelector">
-          <p>Seleccione días de apertura</p>
+          <!-- <p>Seleccione días de apertura</p>
           <mat-button-toggle-group name="dias" aria-label="Dias" multiple *ngFor="let dia of dias">
             <mat-button-toggle [checked]="checked(dia)" (change)="selectDia(dia)" [value]="dia.nombre">{{dia.nombre}}</mat-button-toggle>
-          </mat-button-toggle-group>
+          </mat-button-toggle-group> -->
         </div>
         <div class="add-image">
           <p>Seleccione el logo</p>
@@ -26,7 +25,7 @@
       </div>
     </div>
     <div class="button-container">
-      <button type="submit" class="btn btn-default">Guardar</button>
+      <button type="submit" class="btn btn-success">Guardar</button>
     </div>
 </form>
 </div>

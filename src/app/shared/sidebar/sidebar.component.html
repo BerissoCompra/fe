@@ -2,7 +2,7 @@
   <mat-drawer-content class="sidebarContainer">
     <div class="header">
       <div class="user">
-        <div class="contenedor-imagen">
+        <div class="contenedor-imagen" matTooltip="Abrir / Cerrar">
           <div class="info-user-container"  (click)="cerrarAbrir()" >
             <div class="info-user-img" [ngClass]="comercio?.abierto ? 'userAbierto' : 'userCerrado' "><img [src]="comercio?.imagen ? comercio?.imagen : imagenDefault" alt=""></div>
           </div>
@@ -34,9 +34,6 @@
       </li>
       <li class="menu-item" [routerLink]="['configuracion']"  routerLinkActive="active">
         <mat-icon class="material-icons-outlined" matTooltip="Configuración" >settings</mat-icon>
-      </li>
-      <li class="menu-item" [routerLink]="['administrador']"  routerLinkActive="active">
-        <mat-icon matTooltip="Administrador" >settings</mat-icon>
       </li>
       <li class="menu-item logout" (click)="cerrarSesion()"  routerLinkActive="active">
         <mat-icon matTooltip="Cerrar Sesión" >logout</mat-icon>

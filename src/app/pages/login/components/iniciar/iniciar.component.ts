@@ -43,7 +43,7 @@ export class IniciarComponent implements OnInit {
     this.accountService.iniciarSesion(user)
     .pipe(
       catchError((err)=>{
-      this.error = err.error.error;
+      this.error = err.error.msg;
       this.loading = false;
       throw 'error in source. Details: ' + err;
     }))

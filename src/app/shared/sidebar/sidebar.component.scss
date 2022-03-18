@@ -25,9 +25,10 @@
           margin-top: 10px;
           text-align: center;
           color: $dark;
-          max-width: 95%;
-          max-height: 30%;
-          overflow: hidden;
+          width: 95%;
+          height: 40%;
+          inline-size: 95%;
+          overflow-wrap: break-word;
         }
         .contenedor-imagen{
           margin-top: 10px;
@@ -35,6 +36,7 @@
           justify-content: center;
           align-items: center;
           width: 100%;
+          cursor: pointer;
           .info-user-container{
             height: 100%;
             .info-user-img{

@@ -64,5 +64,10 @@ export class AccountService {
     return true;
   }
 
+  getToken(){
+    const token = localStorage.getItem('token');
+    return token;
+  }
+
 
 }
