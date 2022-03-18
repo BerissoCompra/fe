@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class AppComponent {
 
-  title: string = '';
+  title: string = 'test';
 
   constructor() {
 
