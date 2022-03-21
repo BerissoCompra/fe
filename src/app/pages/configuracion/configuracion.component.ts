@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { Comercio } from 'src/app/models/comercio';
 import { AccountService } from 'src/app/services/account.service';
 import { ComercioService } from 'src/app/services/comercio.service';
@@ -14,6 +14,8 @@ import { ConfiguracionNegocioFormConfig } from 'src/app/models/configuracion/con
 import { Dias } from 'src/app/models/dias';
 import { catchError } from 'rxjs';
 import { AlertsService } from 'src/app/services/alerts-services.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { TiposCategoriasEnum } from 'src/app/models/enums/tipo-categorias';
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.component.html',
@@ -24,18 +26,18 @@ export class ConfiguracionComponent implements OnInit {
   imagenPrevisualizacion;
   form = new FormGroup({});
   loading: boolean = false;
-  fieldsConfiguracionNegocio: FormlyFieldConfig[] = ConfiguracionNegocioFormConfig();
+  fieldsConfiguracionNegocio: FormlyFieldConfig[] = [];
   dias = Dias;
-  diasSeleccionados: any[] = [];
   file: File;
   @Output() newItemEvent = new EventEmitter<string>();
 
-  constructor(private alertService: AlertsService, private sanitizer: DomSanitizer,private accountService: AccountService,public dialog: MatDialog ,private comercioService: ComercioService, private toastr: ToastrService, private imagenesService: ImagenesService) {
-
+  constructor(private alertService: AlertsService, private categoriasService: CategoriasService, private sanitizer: DomSanitizer,private accountService: AccountService,public dialog: MatDialog ,private comercioService: ComercioService, private toastr: ToastrService, private imagenesService: ImagenesService) {
   }
 
   ngOnInit(): void {
-    console.log(this.comercioService.comercio)
+    this.categoriasService.getCategoriasPorTipo(TiposCategoriasEnum.COMERCIOS).subscribe((res)=>{
+      this.fieldsConfiguracionNegocio = ConfiguracionNegocioFormConfig(res)
+    })
     this.updateComercio()
   }
 

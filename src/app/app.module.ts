@@ -55,8 +55,9 @@ import { IniciarComponent } from './pages/login/components/iniciar/iniciar.compo
 import { EstadisticaCardComponent } from './shared/components/estadistica-card/estadistica-card.component';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { ButtonToggleComponent } from './shared/components/custom/button-toggle/button-toggle.component';
-
-
+import { DropdownInputComponent } from './shared/components/custom/dropdown-input/dropdown-input.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import {MatChipsModule} from '@angular/material/chips';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +72,7 @@ import { ButtonToggleComponent } from './shared/components/custom/button-toggle/
     ProductComponent,
     NuevoComponent,
     FormlyFieldFile,
+    DropdownInputComponent,
     FileValueAccessor,
     LoadingComponent,
     AlertComponent,
@@ -96,6 +98,7 @@ import { ButtonToggleComponent } from './shared/components/custom/button-toggle/
       types: [
         { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
         { name: 'button-toggle', component: ButtonToggleComponent},
+        { name: 'dropdown-input', component: DropdownInputComponent},
       ],
     }),
     BrowserAnimationsModule,
@@ -105,8 +108,10 @@ import { ButtonToggleComponent } from './shared/components/custom/button-toggle/
     MatIconModule,
     MatDividerModule,
     MatSnackBarModule,
+    NgSelectModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
     MatSidenavModule,
     MatDialogModule,
     MatButtonToggleModule,
