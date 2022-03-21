@@ -27,6 +27,12 @@
   }
 }
 
+.mat-chip.mat-standard-chip{
+  background-color: $base_color;
+  color: $white;
+  cursor: pointer;
+}
+
 .catalogo-container{
   display: flex;
   flex-wrap: wrap;

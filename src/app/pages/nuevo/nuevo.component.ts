@@ -5,7 +5,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Product } from 'src/app/models/product';
 import { CatalogoService } from 'src/app/services/catalogo.service';
 import { DomSanitizer }  from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { CatalogoComponent } from '../catalogo/catalogo.component';
@@ -13,12 +13,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { calcularDescuento } from 'src/app/services/utils/calculos';
 import { formConfig } from './models/form-config';
 import { AlertsService } from 'src/app/services/alerts-services.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { TiposCategoriasEnum } from 'src/app/models/enums/tipo-categorias';
 
 export interface DialogData {
   comercioId: string;
   action: 'nuevo' | 'editar';
   dialog: MatDialog;
   content
+  refresh(): void,
 }
 
 @Component({
@@ -28,7 +31,7 @@ export interface DialogData {
 })
 export class NuevoComponent implements OnInit {
   form = new FormGroup({});
-  fieldsRegister: FormlyFieldConfig[] = formConfig();
+  fields: FormlyFieldConfig[] = [];
   title: string;
   valor: Observable<any>
   buttonText: string;
@@ -54,15 +57,27 @@ export class NuevoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private catalogoService: CatalogoService,
     private toastr: ToastrService,
-    private router: Router,
+    private categoriaServices: CategoriasService,
     private imagenesService: ImagenesService) {
     this.valor = catalogoService.valor
   }
 
   ngOnInit(): void {
+    this.categoriaServices.getCategoriasPorTipo(TiposCategoriasEnum.PRODUCTOS)
+    .pipe(
+      catchError((err)=>{
+      const error = err.error.msg;
+      this.loading = false;
+      this.alertService.error(error)
+      throw 'error in source. Details: ' + error;
+    }))
+    .subscribe((res)=>{
+      this.fields = formConfig(res);
+    })
+
     if(this.data.action === 'nuevo'){
       this.title = 'Añade un nuevo producto';
-      this.buttonText = 'Crear producto';
+      this.buttonText = 'Crear';
       this.viewDeleteButton = false;
       return
     }
@@ -161,6 +176,7 @@ export class NuevoComponent implements OnInit {
     .subscribe((res)=>{
       this.loading = false;
       this.alertService.warning('Producto Desactivado')
+      this.data.refresh();
       this.data.dialog.closeAll();
     })
   }
@@ -170,6 +186,7 @@ export class NuevoComponent implements OnInit {
     .subscribe((res)=>{
       this.loading = false;
       this.alertService.ok('Producto Activado')
+      this.data.refresh();
       this.data.dialog.closeAll();
     })
   }

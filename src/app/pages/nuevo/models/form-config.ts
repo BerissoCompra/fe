@@ -1,6 +1,6 @@
 import { FormlyFieldConfig } from "@ngx-formly/core"
 
-export const formConfig = (): FormlyFieldConfig[] =>{
+export const formConfig = (categorias): FormlyFieldConfig[] =>{
   return [
     {
       className: 'col-12',
@@ -20,21 +20,16 @@ export const formConfig = (): FormlyFieldConfig[] =>{
         },
         {
           key: 'categoria',
-          type: 'select',
+          type: 'dropdown-input',
           className: 'field-form col-6',
           templateOptions: {
             label: 'Seleccione categoria',
             placeholder: '',
-            options: [
-              {
-                label: 'Restaurante',
-                value: 'restaurante',
-              },
-              {
-                label: 'Café',
-                value: 'cafe'
-              },
-            ]
+            options: categorias,
+            attributes: {
+              bindLabelOp: 'descripcion',
+              bindValueOp: 'descripcion',
+            }
           },
         },
       ]
