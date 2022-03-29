@@ -58,6 +58,9 @@ import { ButtonToggleComponent } from './shared/components/custom/button-toggle/
 import { DropdownInputComponent } from './shared/components/custom/dropdown-input/dropdown-input.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatTabsModule} from '@angular/material/tabs';
+import { CierreCajaComponent } from './pages/pedidos/cierre-caja/cierre-caja.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +89,7 @@ import {MatChipsModule} from '@angular/material/chips';
     IniciarComponent,
     EstadisticaCardComponent,
     ButtonToggleComponent,
+    CierreCajaComponent,
 
   ],
   imports: [
@@ -109,6 +113,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatSnackBarModule,
     NgSelectModule,
+    MatTabsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatChipsModule,
@@ -126,7 +131,8 @@ import {MatChipsModule} from '@angular/material/chips';
     JwtHelperService,
     ComercioService,
     AccountService,
-    CookieService
+    CookieService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

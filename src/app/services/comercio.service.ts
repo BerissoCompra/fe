@@ -20,9 +20,9 @@ export class ComercioService {
   pedidosCount = new BehaviorSubject<number>(0);
   private comercioObservable$ = new Subject<Comercio>();
   //public customComercio = this.comercioObservable.asObservable();
-
   public customPedidosCount = this.pedidosCount.asObservable();
 
+  private pedidoObservable$ = new Subject<boolean>();
 
   constructor(private http: HttpClient ,private genericService: GenericService) {
 
@@ -38,6 +38,14 @@ export class ComercioService {
 
   getComercio$(): Observable<Comercio> {
     return this.comercioObservable$.asObservable();
+  }
+
+  actualizarPedidoObservable() {
+    this.pedidoObservable$.next(true);
+  }
+
+  getPedido$(): Observable<boolean> {
+    return this.pedidoObservable$.asObservable();
   }
 
   getPedidos(id: string, estado: number): Observable<any>{
@@ -64,8 +72,8 @@ export class ComercioService {
   desactivarComercio(comercioId: string): Observable<any>{
     return this.genericService.put(`${environment.urlAPI}/comercios/${comercioId}/desactivar`, {})
   }
-  actualizarPedido(pedido: any){
-    return this.genericService.put(`${environment.urlAPI}/pedidos/${pedido._id}`, pedido)
+  actualizarPedido(pedidoId: any){
+    return this.genericService.put(`${environment.urlAPI}/pedidos/${pedidoId}`, {})
   }
 
   crearComercio(comercio, usuario: Usuario, usuarioId: string){
@@ -89,6 +97,23 @@ export class ComercioService {
   cerrarComercio(comercioId: string){
     return this.genericService.put(`${environment.urlAPI}/comercios/${comercioId}/cerrar`)
   }
+
+  obtenerCierreCaja(comercioId: string): Observable<any>{
+    return this.genericService.get(`${environment.urlAPI}/comercios/cierrecaja/${comercioId}`)
+  }
+
+  cerrarCaja(comercioId: string): Observable<any>{
+    return this.genericService.get(`${environment.urlAPI}/comercios/cierrecaja/${comercioId}/cerrar`)
+  }
+
+  obtenerTicketCierre(comercioId: string): Observable<any>{
+    return this.genericService.getPdf(`${environment.urlAPI}/comercios/cierrecaja/${comercioId}/ticket`)
+  }
+
+  obtenerTicketPedido(pedidoId: string): Observable<any>{
+    return this.genericService.getPdf(`${environment.urlAPI}/pedidos/${pedidoId}/ticket`)
+  }
+
 
   actualizarComercio(comercio: Comercio){
     return new Promise((resolve, rejeact) =>{

@@ -1,6 +1,81 @@
-<app-header title={{title}}></app-header>
-<section class="pedidos-container" *ngIf="pedidos.length > 0">
-  <ul *ngFor="let pedido of pedidos; index as i">
-    <li><pedido [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
-  </ul>
+<div class="w-100 d-flex justify-content-between align-items-center mb-3">
+  <div class="d-flex align-items-center">
+    <h1 class="m-0 p-0">{{title}}</h1>
+    <div (click)="updateIndex($event)" class="reaload-button d-flex align-items-center h-100" matTooltip="Recargar pedidos">
+      <mat-icon class="">refresh</mat-icon>
+    </div>
+  </div>
+  <div (click)="cerrarCaja()" class="h-100 d-flex align-items-center cerrar-caja">
+    <p class="p-0 m-0">Cerrar Caja Diaria</p>
+  </div>
+</div>
+<section>
+  <mat-tab-group (selectedTabChange)="changeTab($event)" animationDuration="0ms" class="w-100 d-flex justify-content-between">
+    <mat-tab label="Ingresos" class="w-100">
+        <div class="pedidos-container" *ngIf="pedidosIngresados.length > 0">
+          <ul *ngFor="let pedido of pedidosIngresados; index as i">
+            <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+          </ul>
+        </div>
+        <div class="icon-container" *ngIf="pedidosIngresados.length === 0">
+          <p>Al parecer no tiene ningun pedido en este estado...</p>
+          <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+        </div>
+    </mat-tab>
+    <mat-tab label="En Curso" class="w-100">
+      <div class="pedidos-container" *ngIf="pedidosEnCurso.length > 0">
+        <ul *ngFor="let pedido of pedidosEnCurso; index as i">
+          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+        </ul>
+      </div>
+      <div class="icon-container" *ngIf="pedidosEnCurso.length === 0">
+        <p>Al parecer no tiene ningun pedido en este estado...</p>
+        <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+      </div>
+    </mat-tab>
+    <mat-tab label="Finalizados" class="w-100">
+      <div class="pedidos-container" *ngIf="pedidosFinalizados.length > 0">
+        <ul *ngFor="let pedido of pedidosFinalizados; index as i">
+          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+        </ul>
+      </div>
+      <div class="icon-container" *ngIf="pedidosFinalizados.length === 0">
+        <p>Al parecer no tiene ningun pedido en este estado...</p>
+        <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+      </div>
+    </mat-tab>
+    <mat-tab label="Enviados" class="w-100">
+      <div class="pedidos-container" *ngIf="pedidosEnviados.length > 0">
+        <ul *ngFor="let pedido of pedidosEnviados; index as i">
+          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+        </ul>
+      </div>
+      <div class="icon-container" *ngIf="pedidosEnviados.length === 0">
+        <p>Al parecer no tiene ningun pedido en este estado...</p>
+        <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+      </div>
+    </mat-tab>
+    <mat-tab label="Para retirar" class="w-100">
+      <div class="pedidos-container" *ngIf="pedidosParaRetirar.length > 0">
+        <ul *ngFor="let pedido of pedidosParaRetirar; index as i">
+          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+        </ul>
+      </div>
+      <div class="icon-container" *ngIf="pedidosParaRetirar.length === 0">
+        <p>Al parecer no tiene ningun pedido en este estado...</p>
+        <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+      </div>
+    </mat-tab>
+    <mat-tab label="Cerrados" class="w-100">
+      <div class="pedidos-container" *ngIf="pedidosCerrados.length > 0">
+        <ul *ngFor="let pedido of pedidosCerrados; index as i">
+          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+        </ul>
+      </div>
+      <div class="icon-container" *ngIf="pedidosCerrados.length === 0">
+        <p>Al parecer no tiene ningun pedido en este estado...</p>
+        <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </section>

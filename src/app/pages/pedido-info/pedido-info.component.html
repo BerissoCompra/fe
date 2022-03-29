@@ -25,10 +25,8 @@
     <mat-progress-bar mode="determinate" [value]="calcularSeguimiento()"></mat-progress-bar>
   </div>
   <div class="button-container">
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)="aceptarPedido()" class="btn btn-primary">Aceptar Pedido</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 3 && pedidoSeleccionado.retira" (click)="pedidoListoParaRetirar()" class="btn btn-primary">Listo para retirar</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 3 && !pedidoSeleccionado.retira" (click)="pedidoFinalizado()" class="btn btn-primary">Finalizar Pedido</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 4 && !pedidoSeleccionado.retira" (click)="pedidoEnviado()" class="btn btn-primary">Confirmar Envío</button>
+    <button type="button" (click)="submitFn()" class="btn btn-primary">{{getButtonText(pedidoSeleccionado.estado)}}</button>
+    <button type="button" [disabled]="loading" (click)="descargarTicket()" class="btn btn-primary">Descargar Ticket</button>
     <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)=" rechazarPedido() "class="btn btn-primary">Rechazar Pedido</button>
   </div>
 </section>

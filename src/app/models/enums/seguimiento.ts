@@ -8,4 +8,5 @@ export enum SeguimientoEnum {
   ENVIADO = 5,
   LISTO_PARA_RETIRAR = 6,
   ENTREGADO = 7,
+  CERRADO = 8,
 }
