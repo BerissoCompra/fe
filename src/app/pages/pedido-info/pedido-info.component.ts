@@ -34,7 +34,7 @@ export class PedidoInfoComponent implements OnInit {
   usuarioPedido: Usuario;
   comercioId: string;
   loading: boolean = false;
-  constructor(private alertService: AlertsService,  private socketService: SocketWebService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService, public dialog: MatDialog) {
+  constructor(private alertService: AlertsService,  private socketService: SocketWebService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private comercioService: ComercioService, public dialog: MatDialog) {
 
   }
 
