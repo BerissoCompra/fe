@@ -25,8 +25,6 @@ export class ProductPedidoComponent implements OnInit {
   constructor(private catalogoService: CatalogoService, private accountService: AccountService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(this.producto)
-
   }
 
   viewProduct(){

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/models/product';
 import { Pedido } from 'src/app/models/pedido';
@@ -17,6 +17,8 @@ export class PedidoComponent implements OnInit {
   productos: Product[] = [];
   usuario: string;
   total: number = 0;
+  @Output() submitEvent = new EventEmitter<boolean>(false);
+
   constructor(private comercioService: ComercioService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
@@ -39,14 +41,24 @@ export class PedidoComponent implements OnInit {
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} | ${hours}:${min}:${seconds}`;
   }
 
+  submitEventFn() {
+    this.submitEvent.emit(!this.submitEvent);
+  }
+
+
   viewPedido(){
-    this.dialog.open(PedidoInfoComponent, {
+    const dialog = this.dialog.open(PedidoInfoComponent, {
       data: {
         pedido: this.pedido,
         productos: this.pedido.productos,
+        submitEv: this.submitEventFn.bind(this),
         dialog: this.dialog,
       },
     });
+
+    dialog.afterClosed().subscribe((res)=>{
+      this.submitEventFn();
+    })
   }
 
 }

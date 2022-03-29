@@ -26,6 +26,11 @@ button:disabled{
   }
 }
 
+.mat-tab-labels{
+  justify-content: space-between;
+  background-color: #fff;
+}
+
 .button-container{
   display: flex;
   justify-content: space-between;

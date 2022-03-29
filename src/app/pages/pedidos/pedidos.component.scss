@@ -1,8 +1,48 @@
+@import './../../../assets/index.scss';
+
 .pedidos-container{
+  padding-top: 20px;
   display: flex;
   width: 100%;
   flex-wrap: wrap;
   ul{
     list-style: none;
+  }
+}
+.reaload-button{
+  background-color: $base-color;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 5px;
+  border-radius: 50%;
+}
+.cerrar-caja{
+  background-color: $base-color;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  p{
+    margin-right: 10px
+  }
+}
+.icon-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50vh;
+  p{
+    text-align: center;
+    color: $dark-gray;
+  }
+  .icon{
+    font-size: 70px;
+    height: 70px;
+    width: 70px;
+    color: $dark-gray;
   }
 }

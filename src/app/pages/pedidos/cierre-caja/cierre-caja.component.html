@@ -1,0 +1,23 @@
+<section id="htmlData">
+  <div>
+    <h3 class="title">{{comercio.nombre}} | {{fecha | date:'dd/MM HH:mm:ss' : '-0300'}}</h3>
+  </div>
+  <div>
+    <p class="title">Cantidad de pedidos: <span>{{info.cantidadPedidos}}</span></p>
+    <div class="contenedor-pedidos">
+      <div class="pedido-container" *ngFor="let pedido of info.pedidosDelDia">
+        <p class="bold">#{{pedido.pedidoId}}</p>
+        <p>{{pedido.fecha | date:'dd/MM HH:mm' : '-0300'}}</p>
+        <p>Items: x{{pedido.items}}</p>
+        <p>{{pedido.total | currency}}</p>
+        <p>{{pedido.pagoEfectivo ? 'Efectivo' : 'Digital'}}</p>
+        <p>{{pedido.nombreCliente}}</p>
+      </div>
+    </div>
+    <p class="title">Ingreso Total: <span>{{info.totalIngresoDiario | currency}}</span></p>
+  </div>
+</section>
+<div class="btn-container">
+  <button (click)="cerrarCaja()" type="submit" class="btn btn-success">Cerrar caja</button>
+  <button (click)="descargarPdf()" [disabled]="loading" type="submit" class="btn btn-primary">Descargar Informe</button>
+</div>

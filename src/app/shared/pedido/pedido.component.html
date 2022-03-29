@@ -3,17 +3,17 @@
     <div class="info-container">
       <h3 class="visible title">Pedido N° {{posicion}} | #{{pedido.idPedido}}</h3>
       <div class="codigos">
-        <p class="subtitle" *ngIf="pedido.codigoEntrega && !pedido.retira"><b>Cod. Entrega: {{pedido.codigoEntrega}}</b></p>
+        <p class="subtitle" *ngIf="pedido.codigoEntrega && !pedido.configuracion.retira"><b>Cod. Entrega: {{pedido.codigoEntrega}}</b></p>
       </div>
-      <p class="subtitle" [ngClass]="pedido.retira ? 'retira' : 'envio'"><b>Enviar: {{!pedido.retira ? 'Si' : 'No'}}</b></p>
+      <p class="subtitle" [ngClass]="pedido.configuracion.retira ? 'retira' : 'envio'"><b>Enviar: {{!pedido.configuracion.retira ? 'Si' : 'No'}}</b></p>
       <p class="subtitle"><b>{{pedido.createdAt | date:'dd/MM HH:mm:ss' : '-0300'}}</b></p>
     </div>
     <div class="info-body">
       <p class="visible subtitle">ITEMS: {{pedido.items}}</p>
-      <p class="subtitle">Método de pago: {{pedido.pagoDigital ? 'Digital' : 'Efectivo'}}</p>
-      <p *ngIf="pedido.pagoEfectivo" class="subtitle">Abona con: {{pedido.pagaCon | currency}}</p>
-      <p *ngIf="pedido.pagoEfectivo" class="subtitle">Vuelto: {{(pedido.pagaCon - pedido.total) | currency}}</p>
-      <p class="subtitle" *ngIf="!pedido.retira"><b>Dirección: {{pedido.direccion}} {{pedido.numDep}} | {{pedido.direccionInfo}}</b></p>
+      <p class="subtitle">Método de pago: {{pedido.configuracion.pagoDigital ? 'Digital' : 'Efectivo'}}</p>
+      <p *ngIf="pedido.pagoEfectivo" class="subtitle">Abona con: {{pedido.configuracion.pagaCon | currency}}</p>
+      <p *ngIf="pedido.pagoEfectivo" class="subtitle">Vuelto: {{(pedido.configuracion.pagaCon - pedido.total) | currency}}</p>
+      <p class="subtitle" *ngIf="!pedido.retira"><b>Dirección: {{pedido.configuracion.direccion}} {{pedido.numDep}} | {{pedido.direccionInfo}}</b></p>
       <p class="subtitle"><b>Total: {{pedido.total | currency}}</b></p>
     </div>
   </div>
