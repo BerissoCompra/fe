@@ -36,6 +36,9 @@ export class ConfiguracionComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriasService.getCategoriasPorTipo(TiposCategoriasEnum.COMERCIOS).subscribe((res)=>{
+      if(this.comercioModel.dias.length === 1){
+        this.comercioModel.dias = this.comercioModel.dias[0].split(',')
+      }
       this.fieldsConfiguracionNegocio = ConfiguracionNegocioFormConfig(res)
     })
     this.updateComercio()
@@ -61,27 +64,6 @@ export class ConfiguracionComponent implements OnInit {
       })
     }
 
-  }
-
-  selectDia($event){
-    if(!this.comercioModel?.dias) return;
-    const newArray: String[] = this.comercioModel?.dias.filter((element)=> element == $event.nombre)
-    if(newArray.length > 0){
-      this.comercioModel.dias = this.comercioModel?.dias.filter((element)=> element != $event.nombre)
-      return;
-    }
-    this.comercioModel.dias.push($event.nombre)
-  }
-
-  checked(dia): Boolean{
-    if(!this.comercioModel?.dias) return false;
-    let newArray: String[] = this.comercioModel?.dias.filter((d)=> d === dia.nombre)
-    if(newArray.length > 0){
-      return true;
-    }
-    else{
-      return false;
-    }
   }
 
   verImagen(event){
@@ -146,6 +128,7 @@ export class ConfiguracionComponent implements OnInit {
   })
 
   submitFn(configuracion: Comercio){
+    debugger
     if(this.validarForm(configuracion)){
       this.loading = true;
       configuracion.imagen = this.file;
@@ -163,8 +146,6 @@ export class ConfiguracionComponent implements OnInit {
       this.alertService.error('Debe completar todos los campos requeridos')
     }
   }
-
-
 
   validarForm(comercio: Comercio): boolean{
     let valido = true;

@@ -61,6 +61,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CierreCajaComponent } from './pages/pedidos/cierre-caja/cierre-caja.component';
 import { DatePipe } from '@angular/common';
+import { TimeInputComponent } from './shared/components/custom/time-input/time-input.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,6 +91,7 @@ import { DatePipe } from '@angular/common';
     EstadisticaCardComponent,
     ButtonToggleComponent,
     CierreCajaComponent,
+    TimeInputComponent,
 
   ],
   imports: [
@@ -103,6 +105,7 @@ import { DatePipe } from '@angular/common';
         { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
         { name: 'button-toggle', component: ButtonToggleComponent},
         { name: 'dropdown-input', component: DropdownInputComponent},
+        { name: 'time-input', component: TimeInputComponent},
       ],
     }),
     BrowserAnimationsModule,

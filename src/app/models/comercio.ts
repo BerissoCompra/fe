@@ -11,7 +11,7 @@ export interface Comercio {
   dias?: string[];
   categoria: string;
   puntuacion: number;
-  horarios?: string;
+  horarios?: any[];
   envio?: string;
   costoEnvio?:number;
   estrellas?: number;

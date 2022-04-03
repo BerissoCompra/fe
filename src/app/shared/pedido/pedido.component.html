@@ -2,9 +2,9 @@
   <div class="card">
     <div class="info-container">
       <h3 class="visible title">Pedido N° {{posicion}} | #{{pedido.idPedido}}</h3>
-      <div class="codigos">
+      <!-- <div class="codigos">
         <p class="subtitle" *ngIf="pedido.codigoEntrega && !pedido.configuracion.retira"><b>Cod. Entrega: {{pedido.codigoEntrega}}</b></p>
-      </div>
+      </div> -->
       <p class="subtitle" [ngClass]="pedido.configuracion.retira ? 'retira' : 'envio'"><b>Enviar: {{!pedido.configuracion.retira ? 'Si' : 'No'}}</b></p>
       <p class="subtitle"><b>{{pedido.createdAt | date:'dd/MM HH:mm:ss' : '-0300'}}</b></p>
     </div>

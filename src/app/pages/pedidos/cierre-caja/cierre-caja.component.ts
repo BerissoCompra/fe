@@ -3,8 +3,6 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Comercio } from 'src/app/models/comercio';
 import { ComercioService } from 'src/app/services/comercio.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
 import { downloadFile } from 'src/app/services/utils/downloadPDF';
 import { AlertsService } from 'src/app/services/alerts-services.service';

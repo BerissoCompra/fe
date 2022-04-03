@@ -1,0 +1,39 @@
+@import './../../../../../assets/index.scss';
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.button-action{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(141, 141, 141);
+  color: rgb(141, 141, 141);
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  mat-icon{
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &.green:hover{
+    background-color: $green;
+    color: #fff;
+  }
+
+  &.red:hover{
+    background-color: $red;
+    color: #fff;
+  }
+}
+.contenedor-field{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 5px;
+}

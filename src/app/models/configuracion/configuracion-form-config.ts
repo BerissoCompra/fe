@@ -153,13 +153,43 @@ export const ConfiguracionNegocioFormConfig = (categorias): FormlyFieldConfig[] 
       fieldGroup: [
         {
           key: 'horarios',
-          type: 'input',
-          className: 'field-form col-4',
+          type: 'time-input',
+          className: 'field-form col-4 mb-3',
           templateOptions: {
-            label: 'Horario de atención',
-            placeholder: 'Ejemplo: (10:00 a 18:00)',
+            label: 'Horarios de atención',
             required: true,
           },
+          fieldArray: {
+            fieldGroup: [
+              {
+                key: 'horario',
+                className: 'field-form col-12',
+                fieldGroupClassName: 'row',
+                fieldGroup:[
+                  {
+                    key: 'desde',
+                    type: 'input',
+                    className: 'field-form col-6',
+                    templateOptions: {
+                      label: 'Desde',
+                      type: 'time',
+                      required: true,
+                    },
+                  },
+                  {
+                    key: 'hasta',
+                    type: 'input',
+                    className: 'field-form col-6',
+                    templateOptions: {
+                      label: 'Hasta',
+                      type: 'time',
+                      required: true,
+                    },
+                  },
+                ]
+              }
+            ]
+          }
         },
         {
           key: 'dias',
@@ -167,6 +197,7 @@ export const ConfiguracionNegocioFormConfig = (categorias): FormlyFieldConfig[] 
           className: 'field-form col-4',
           templateOptions:{
             label: 'Días abierto',
+            getValue: 'valor',
             options: [
               {descripcion: 'Domingo', valor: 'Domingo'},
               {descripcion: 'Lunes', valor: 'Lunes'},

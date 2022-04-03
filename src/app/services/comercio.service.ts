@@ -117,37 +117,31 @@ export class ComercioService {
 
   actualizarComercio(comercio: Comercio){
     return new Promise((resolve, rejeact) =>{
-      if(comercio.imagen?.name){
-        const {imagen, ...rest} = comercio;
+        const {imagen, cuenta, horarios, ...rest} = comercio;
         const fd = new FormData();
-        // fd.append('file', comercio.imagen);
-        // fd.append('comercio', comercio.nombre);
-        // this.genericService.post(`${environment.urlAPI}/images/upload`, fd)
-        // .subscribe((res: any)=>{
-          // comercio.imagen = environment.beUrl + res.path.replace('\\', '/');
-          // comercio.imagenPath = res.path;
-          // debugger
-          // imagen.forEach((element) => {
-          //   fd.append(element.name, element)
-          // });
 
-          Object.keys(rest).map((key)=>{
-            fd.append(key, rest[key]);
-          })
-
-          this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, fd)
-          .subscribe((res)=>{
-            resolve(true)
-          })
-        //})
-
-      }
-      else{
-        this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, comercio)
-        .subscribe((res)=>{
-          resolve(true)
+        if(imagen?.name){
+          fd.append('imagen', imagen);
+        }
+        Object.keys(rest).map((key)=>{
+          fd.append(key, rest[key]);
         })
-      }
+
+        this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, fd)
+        .subscribe((res)=>{
+          this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/horarios`, {horarios})
+          .subscribe((res)=>{
+            if(cuenta?.alias && cuenta?.cvu && cuenta?.banco && cuenta?.nombreApellido){
+              this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/cuenta`, {cuenta})
+              .subscribe((res)=>{
+                resolve(true)
+              })
+            }
+            else{
+              resolve(true)
+            }
+          })
+        })
     })
   }
 
