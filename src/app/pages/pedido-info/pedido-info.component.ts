@@ -52,7 +52,7 @@ export class PedidoInfoComponent implements OnInit {
       throw 'error in source. Details: ' + res;
     }))
     .subscribe((res)=>{
-      // this.socketService.emitEvent({text: 'actualizado'});
+      this.socketService.emitEvent({text: 'actualizado'});
       this.alertService.ok('Pedido Aceptado');
     })
     this.comercioService.actualizarPedidoObservable();

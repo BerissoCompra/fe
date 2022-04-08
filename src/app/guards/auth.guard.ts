@@ -21,11 +21,12 @@ export class AuthGuard implements CanActivate {
     }
 
     const token = this.getDecodedAccessToken(this.accountService.getToken())
-    console.log(token)
+
     this.comercioService.obtenerComercio()
     .subscribe((res)=>{
       this.comercioService.comercio = res;
     })
+
     return true;
   }
 
