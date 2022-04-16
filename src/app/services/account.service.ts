@@ -24,7 +24,7 @@ export class AccountService {
   }
 
   recuperarClave(email: string){
-    return this.http.post(`${environment.urlAPI}/${this.controller}/codigoverificacion`, {email})
+    return this.http.post(`${environment.urlAPI}/${this.controller}/codigoverificacion`, {email, rol: 'comercio'})
   }
 
   verificarCodigo(email: string, codigo: string){

@@ -13,6 +13,8 @@ import { SocketWebService } from 'src/app/services/socket-web.service';
 import { AlertsService } from 'src/app/services/alerts-services.service';
 import { catchError } from 'rxjs';
 import { downloadFile } from 'src/app/services/utils/downloadPDF';
+import * as io from 'socket.io-client';
+import { environment } from 'src/environments/environment';
 
 export interface DialogData {
   comercioId: string;
@@ -34,7 +36,8 @@ export class PedidoInfoComponent implements OnInit {
   usuarioPedido: Usuario;
   comercioId: string;
   loading: boolean = false;
-  constructor(private alertService: AlertsService,  private socketService: SocketWebService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService, public dialog: MatDialog) {
+  socket: any;
+  constructor(private alertService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private toastr: ToastrService, private comercioService: ComercioService, public dialog: MatDialog) {
 
   }
 
@@ -42,6 +45,18 @@ export class PedidoInfoComponent implements OnInit {
     this.pedidoSeleccionado = this.data.pedido;
     this.productosPedido = this.data.productos;
     this.comercioId = this.data.comercioId;
+    // this.socket = io.io(`${environment.beUrl}`, {
+    //   query:{
+    //     comercioId: this.comercioId,
+    //   },
+    //   transports : ['websocket']
+    // });
+  }
+
+  redirectWsp(cel){
+    const msg = '';
+    const url = `https://wa.me/${cel}?text=${msg}`;
+    window.open(url, "_blank");
   }
 
   submitFn(){
@@ -52,10 +67,10 @@ export class PedidoInfoComponent implements OnInit {
       throw 'error in source. Details: ' + res;
     }))
     .subscribe((res)=>{
-      this.socketService.emitEvent({text: 'actualizado'});
+     // this.socket.emit('comercio', this.comercioId);
       this.alertService.ok('Pedido Aceptado');
     })
-    this.comercioService.actualizarPedidoObservable();
+    //this.comercioService.actualizarPedidoObservable();
     this.data.dialog.closeAll();
   }
 

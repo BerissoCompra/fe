@@ -49,7 +49,7 @@ export class RechazarPedidoComponent implements OnInit {
   rechazarPedido(model){
     this.pedido.estado = -1;
     this.pedido.motivoRechazo = model.mensajeRechazo;
-    this.comercioService.actualizarPedido(this.pedido)
+    this.comercioService.rechazarPedido(this.pedido._id, model.mensajeRechazo)
     .pipe(catchError((res)=>{
       const error = res.error.msg;
       this.alertService.error(error)

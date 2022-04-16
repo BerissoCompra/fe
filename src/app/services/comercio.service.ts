@@ -76,6 +76,10 @@ export class ComercioService {
     return this.genericService.put(`${environment.urlAPI}/pedidos/${pedidoId}`, {})
   }
 
+  rechazarPedido(pedidoId: any, motivo: string){
+    return this.genericService.put(`${environment.urlAPI}/pedidos/${pedidoId}/rechazar`, {motivo})
+  }
+
   crearComercio(comercio, usuario: Usuario, usuarioId: string){
     const nombre = usuario?.nombreElegido  ? usuario.nombreElegido : usuario.nombre
     comercio = {

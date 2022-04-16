@@ -3,6 +3,7 @@
 .container{
   max-height: 80vh;
   max-width: 50vw;
+  position: relative;
   h1{
     font-size: 20px;
   }
@@ -17,6 +18,10 @@
         font-weight: 400;
         color: $dark;
       }
+    }
+    .numeroTelefono{
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
   .productos{

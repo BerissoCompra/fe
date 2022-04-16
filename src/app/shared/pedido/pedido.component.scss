@@ -13,13 +13,13 @@ button{
     flex-direction: column;
     align-items: center;
     width: 200px;
-    height: 200px;
+    min-height: 230px;
     overflow: hidden;
     padding: 0;
     padding-bottom: 15px;
-    background-color: rgba(0, 0, 0, 0.699);
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.699);
+    box-shadow: 2px 2px 2px 1px rgba(131, 131, 131, 0.2);
+    border-radius: 2px;
     cursor: pointer;
     .info-container{
       display: flex;
@@ -34,13 +34,13 @@ button{
         margin-bottom: 5px;
         p{
           z-index: 400;
-          color: $white;
+          color: $dark;
           margin: 0;
         }
       }
       .visible{
         z-index: 400;
-        color: $white;
+        color: $dark;
         margin: 0;
       }
       .title{
@@ -48,35 +48,54 @@ button{
         text-align: center;
         width: 100%;
         margin-top: 10px;
-        color: $white;
+        color: $dark;
       }
       .subtitle{
         font-size: 12px !important;
-        color: $white;
+        color: $dark;
+        b{
+          color: $dark-gray;
+          font-weight: 500;
+        }
       }
       .envio{
         background-color: $green;
         color: $white;
+        b{
+          color: $white;
+          font-weight: 500;
+        }
       }
       .retira{
         background-color: $red;
         color: $white;
+        b{
+          color: $white;
+          font-weight: 500;
+        }
       }
     }
     .info-body{
-      margin-top: 5px;
       .title{
         font-size: 18px;
         z-index: 10;
         width: 100px;
         right: 0;
-        color: $white;
+        color: $dark;
       }
       .subtitle{
-        color: $white;
+        color: $dark;
         font-size: 12px !important;
+        padding-left: 16px;
+        padding-right: 16px;
+        b{
+          color: $base-color;
+          font-weight: 600;
+        }
       }
     }
 
   }
 }
+
+

@@ -14,6 +14,7 @@ export class PedidoComponent implements OnInit {
 
   @Input() pedido: Pedido;
   @Input() posicion: number;
+  @Input() comercioId: string;
   productos: Product[] = [];
   usuario: string;
   total: number = 0;
@@ -45,14 +46,15 @@ export class PedidoComponent implements OnInit {
     this.submitEvent.emit(!this.submitEvent);
   }
 
-
   viewPedido(){
     const dialog = this.dialog.open(PedidoInfoComponent, {
       data: {
+        comercioId: this.comercioId,
         pedido: this.pedido,
         productos: this.pedido.productos,
         submitEv: this.submitEventFn.bind(this),
         dialog: this.dialog,
+
       },
     });
 

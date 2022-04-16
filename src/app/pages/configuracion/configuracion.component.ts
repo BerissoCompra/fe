@@ -128,7 +128,6 @@ export class ConfiguracionComponent implements OnInit {
   })
 
   submitFn(configuracion: Comercio){
-    debugger
     if(this.validarForm(configuracion)){
       this.loading = true;
       configuracion.imagen = this.file;

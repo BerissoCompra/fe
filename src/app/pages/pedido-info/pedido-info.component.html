@@ -1,8 +1,9 @@
 <section class="container">
   <div class="usuario">
     <h1>Solicitante</h1>
-    <p>Nombre y apellido: <span>{{pedidoSeleccionado.nombreUsuario}}</span></p>
-    <p>Dirección: <span>{{pedidoSeleccionado.direccion}} {{pedidoSeleccionado.numDep}} {{pedidoSeleccionado.direccionInfo ? pedidoSeleccionado.direccionInfo : '' }}</span></p>
+    <p>Nombre y apellido: <span>{{pedidoSeleccionado.cliente.nombre}}</span></p>
+    <p>Dirección del pedido: <span>{{pedidoSeleccionado.configuracion.direccion}} {{pedidoSeleccionado.configuracion.numDep}} {{pedidoSeleccionado.configuracion?.direccionInfo ? pedidoSeleccionado.configuracion.direccionInfo : '' }}</span></p>
+    <p>Celular: <span class="numeroTelefono" matTooltip="Haz click para redirigir a WhatsApp" (click)="redirectWsp(pedidoSeleccionado.cliente.telefono)">{{pedidoSeleccionado.cliente.telefono}} </span></p>
   </div>
   <hr>
   <div class="productos">
@@ -25,7 +26,7 @@
     <mat-progress-bar mode="determinate" [value]="calcularSeguimiento()"></mat-progress-bar>
   </div>
   <div class="button-container">
-    <button type="button" (click)="submitFn()" class="btn btn-primary">{{getButtonText(pedidoSeleccionado.estado)}}</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado < 5" (click)="submitFn()" class="btn btn-primary">{{getButtonText(pedidoSeleccionado.estado)}}</button>
     <button type="button" [disabled]="loading" (click)="descargarTicket()" class="btn btn-primary">Descargar Ticket</button>
     <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)=" rechazarPedido() "class="btn btn-primary">Rechazar Pedido</button>
   </div>

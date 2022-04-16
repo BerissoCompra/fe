@@ -7,8 +7,9 @@ import { SeguimientoEnum } from 'src/app/models/enums/seguimiento';
 import { Pedido } from 'src/app/models/pedido';
 import { ComercioService } from 'src/app/services/comercio.service';
 import { SocketWebService } from 'src/app/services/socket-web.service';
-import { downloadFile } from 'src/app/services/utils/downloadPDF';
 import { CierreCajaComponent } from './cierre-caja/cierre-caja.component';
+import * as io from 'socket.io-client';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pedidos',
@@ -28,10 +29,8 @@ export class PedidosComponent implements OnInit {
   public tipoPedido: string;
   public title: string = 'Panel de control | Pedidos';
   public comercio: Comercio;
+  socket: any;
   constructor(public dialog: MatDialog,private comercioService: ComercioService, private cookiesService: CookieService ,private socketService: SocketWebService, private cookiesServices: CookieService, private _activateRouter: ActivatedRoute) {
-    this.socketService.outEven.subscribe((res)=>{
-      this.updateComercio();
-    })
   }
 
   ngOnInit(): void {
@@ -45,8 +44,19 @@ export class PedidosComponent implements OnInit {
     this.comercioService.obtenerComercio()
     .subscribe((res)=>{
       this.comercioService.actualizarInfoComercio(res)
-      this.cookiesService.set('comercioId', res._id);
       this.comercio = res;
+
+      // this.socket = io.io(`${environment.beUrl}`,{
+      //   query:{
+      //     comercioId: this.comercio._id,
+      //   },
+      //   transports : ['websocket']
+      // });
+
+      // this.socket.on('cliente', (res) => {
+      //   this.updateComercio();
+      // });
+
       if(!index){
         this.comercioService.getPedidos(res._id, SeguimientoEnum.ESPERANDO_APROBACION)
         .subscribe((res)=>{
@@ -92,6 +102,7 @@ export class PedidosComponent implements OnInit {
       }
     })
   }
+
   changeTab($event){
     this.updateComercio($event.index)
     this.indexActual = $event.index;

@@ -10,11 +10,11 @@
   </div>
 </div>
 <section>
-  <mat-tab-group (selectedTabChange)="changeTab($event)" animationDuration="0ms" class="w-100 d-flex justify-content-between">
+  <mat-tab-group *ngIf="comercio" (selectedTabChange)="changeTab($event)" animationDuration="0ms" class="w-100 d-flex justify-content-between">
     <mat-tab label="Ingresos" class="w-100">
         <div class="pedidos-container" *ngIf="pedidosIngresados.length > 0">
           <ul *ngFor="let pedido of pedidosIngresados; index as i">
-            <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+            <li><pedido [comercioId]="comercio._id" [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
           </ul>
         </div>
         <div class="icon-container" *ngIf="pedidosIngresados.length === 0">
@@ -25,7 +25,7 @@
     <mat-tab label="En Curso" class="w-100">
       <div class="pedidos-container" *ngIf="pedidosEnCurso.length > 0">
         <ul *ngFor="let pedido of pedidosEnCurso; index as i">
-          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+          <li><pedido [comercioId]="comercio._id" [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
         </ul>
       </div>
       <div class="icon-container" *ngIf="pedidosEnCurso.length === 0">
@@ -36,7 +36,7 @@
     <mat-tab label="Finalizados" class="w-100">
       <div class="pedidos-container" *ngIf="pedidosFinalizados.length > 0">
         <ul *ngFor="let pedido of pedidosFinalizados; index as i">
-          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+          <li><pedido [comercioId]="comercio._id" [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
         </ul>
       </div>
       <div class="icon-container" *ngIf="pedidosFinalizados.length === 0">
@@ -47,7 +47,7 @@
     <mat-tab label="Enviados" class="w-100">
       <div class="pedidos-container" *ngIf="pedidosEnviados.length > 0">
         <ul *ngFor="let pedido of pedidosEnviados; index as i">
-          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+          <li><pedido [comercioId]="comercio._id" [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
         </ul>
       </div>
       <div class="icon-container" *ngIf="pedidosEnviados.length === 0">
@@ -58,7 +58,7 @@
     <mat-tab label="Para retirar" class="w-100">
       <div class="pedidos-container" *ngIf="pedidosParaRetirar.length > 0">
         <ul *ngFor="let pedido of pedidosParaRetirar; index as i">
-          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+          <li><pedido [comercioId]="comercio._id" [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
         </ul>
       </div>
       <div class="icon-container" *ngIf="pedidosParaRetirar.length === 0">
@@ -69,7 +69,7 @@
     <mat-tab label="Cerrados" class="w-100">
       <div class="pedidos-container" *ngIf="pedidosCerrados.length > 0">
         <ul *ngFor="let pedido of pedidosCerrados; index as i">
-          <li><pedido  [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
+          <li><pedido [comercioId]="comercio._id" [pedido]='pedido' posicion='{{i+1}}'></pedido></li>
         </ul>
       </div>
       <div class="icon-container" *ngIf="pedidosCerrados.length === 0">

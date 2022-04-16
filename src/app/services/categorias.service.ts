@@ -12,7 +12,7 @@ export class CategoriasService {
   constructor(private genericService: GenericService) { }
 
   getCategoriasPorTipo(tipo: TiposCategoriasEnum): Observable<any>{
-    return this.genericService.get(`${environment.urlAPI}/categorias/${tipo}`);
+    return this.genericService.get(`${environment.urlAPI}/categorias/filtro/${tipo}`);
   }
 
 }
