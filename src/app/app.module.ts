@@ -42,7 +42,7 @@ import { PedidoComponent } from './shared/pedido/pedido.component';
 import { PedidoInfoComponent } from './pages/pedido-info/pedido-info.component';
 import { RechazarPedidoComponent } from './pages/rechazar-pedido/rechazar-pedido.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import {JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt'
 import { ComercioService } from './services/comercio.service';
 import { AccountService } from './services/account.service';
@@ -62,6 +62,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { CierreCajaComponent } from './pages/pedidos/cierre-caja/cierre-caja.component';
 import { DatePipe } from '@angular/common';
 import { TimeInputComponent } from './shared/components/custom/time-input/time-input.component';
+import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,6 +101,8 @@ import { TimeInputComponent } from './shared/components/custom/time-input/time-i
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     FormlyModule.forRoot({
       types: [
         { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },

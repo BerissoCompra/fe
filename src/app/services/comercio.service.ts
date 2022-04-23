@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, Subject } from 'rxjs';
 import { Comercio } from '../models/comercio';
 import { TipoEnvio } from '../models/enums/tipo-envio';
 import { Pedido } from '../models/pedido';
@@ -8,6 +8,7 @@ import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { GenericService } from './generic.service';
 import { Usuario } from '../models/user';
+import { ImagenesService } from './imagenes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class ComercioService {
 
   private pedidoObservable$ = new Subject<boolean>();
 
-  constructor(private http: HttpClient ,private genericService: GenericService) {
+  constructor(private http: HttpClient ,private genericService: GenericService, private imagenesService: ImagenesService) {
 
   }
 
@@ -119,33 +120,41 @@ export class ComercioService {
   }
 
 
-  actualizarComercio(comercio: Comercio){
-    return new Promise((resolve, rejeact) =>{
-        const {imagen, cuenta, horarios, ...rest} = comercio;
-        const fd = new FormData();
+  async actualizarComercio(comercio: Comercio){
+    return new Promise(async(resolve, rejeact) =>{
+      const {imagen, cuenta, horarios, ...rest} = comercio;
+      const imagenUrl = await this.imagenesService.subirImagen(`comercios`, comercio._id, imagen);
+      this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, {
+        ...comercio,
+        imagen: imagenUrl,
+      }).subscribe((res)=>{
+        resolve(true)
+      })
+        //const {imagen, cuenta, horarios, ...rest} = comercio;
+        // const fd = new FormData();
 
-        if(imagen?.name){
-          fd.append('imagen', imagen);
-        }
-        Object.keys(rest).map((key)=>{
-          fd.append(key, rest[key]);
-        })
+        // if(imagen?.name){
+        //   fd.append('imagen', imagen);
+        // }
+        // Object.keys(rest).map((key)=>{
+        //   fd.append(key, rest[key]);
+        // })
 
-        this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, fd)
-        .subscribe((res)=>{
-          this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/horarios`, {horarios})
-          .subscribe((res)=>{
-            if(cuenta?.alias && cuenta?.cvu && cuenta?.banco && cuenta?.nombreApellido){
-              this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/cuenta`, {cuenta})
-              .subscribe((res)=>{
-                resolve(true)
-              })
-            }
-            else{
-              resolve(true)
-            }
-          })
-        })
+        // this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, fd)
+        // .subscribe((res)=>{
+        //   this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/horarios`, {horarios})
+        //   .subscribe((res)=>{
+        //     if(cuenta?.alias && cuenta?.cvu && cuenta?.banco && cuenta?.nombreApellido){
+        //       this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/cuenta`, {cuenta})
+        //       .subscribe((res)=>{
+        //         resolve(true)
+        //       })
+        //     }
+        //     else{
+        //       resolve(true)
+        //     }
+        //   })
+        // })
     })
   }
 

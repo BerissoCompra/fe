@@ -28,6 +28,6 @@
   <div class="button-container">
     <button type="button" *ngIf="pedidoSeleccionado.estado < 5" (click)="submitFn()" class="btn btn-primary">{{getButtonText(pedidoSeleccionado.estado)}}</button>
     <button type="button" [disabled]="loading" (click)="descargarTicket()" class="btn btn-primary">Descargar Ticket</button>
-    <button type="button" *ngIf="pedidoSeleccionado.estado == 1" (click)=" rechazarPedido() "class="btn btn-primary">Rechazar Pedido</button>
+    <button type="button" *ngIf="pedidoSeleccionado.estado == 1 || pedidoSeleccionado.configuracion.pagoDigital" (click)=" rechazarPedido() "class="btn btn-primary">Rechazar Pedido</button>
   </div>
 </section>

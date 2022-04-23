@@ -38,6 +38,10 @@ export class PedidosComponent implements OnInit {
       this.updateComercio(this.indexActual);
     })
     this.updateComercio();
+
+    setInterval(()=> {
+      this.updateComercio(this.indexActual);
+    },300000)
   }
 
   async updateComercio(index?){
@@ -46,24 +50,12 @@ export class PedidosComponent implements OnInit {
       this.comercioService.actualizarInfoComercio(res)
       this.comercio = res;
 
-      // this.socket = io.io(`${environment.beUrl}`,{
-      //   query:{
-      //     comercioId: this.comercio._id,
-      //   },
-      //   transports : ['websocket']
-      // });
-
-      // this.socket.on('cliente', (res) => {
-      //   this.updateComercio();
-      // });
-
       if(!index){
         this.comercioService.getPedidos(res._id, SeguimientoEnum.ESPERANDO_APROBACION)
         .subscribe((res)=>{
             this.pedidosIngresados = res;
         })
       }
-
       else if(index === 0){
         this.comercioService.getPedidos(res._id, SeguimientoEnum.ESPERANDO_APROBACION)
         .subscribe((res)=>{
