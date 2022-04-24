@@ -16,6 +16,7 @@ import { catchError } from 'rxjs';
 import { AlertsService } from 'src/app/services/alerts-services.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { TiposCategoriasEnum } from 'src/app/models/enums/tipo-categorias';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.component.html',
@@ -31,7 +32,7 @@ export class ConfiguracionComponent implements OnInit {
   file: File;
   @Output() newItemEvent = new EventEmitter<string>();
 
-  constructor(private alertService: AlertsService, private categoriasService: CategoriasService, private sanitizer: DomSanitizer,private accountService: AccountService,public dialog: MatDialog ,private comercioService: ComercioService, private toastr: ToastrService, private imagenesService: ImagenesService) {
+  constructor(private alertService: AlertsService, private categoriasService: CategoriasService, private sanitizer: DomSanitizer,public dialog: MatDialog ,private comercioService: ComercioService, private imagenesService: ImagenesService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -100,7 +101,6 @@ export class ConfiguracionComponent implements OnInit {
       return true;
     }
     else{
-      console.log(imagen.type)
       return false;
     }
 
@@ -134,6 +134,7 @@ export class ConfiguracionComponent implements OnInit {
       this.comercioService.actualizarComercio(configuracion)
       .then((res)=>{
         this.loading = false;
+        this.router.navigate(['dashboard/inicio'])
         this.updateComercio();
         this.alertService.ok('Actualizado Correctamente')
       }).catch((err)=>{

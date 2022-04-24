@@ -3,11 +3,6 @@
 
 .button-container{
   margin-top: 25px;
-  .btn.btn-default{
-    width: 50px;
-    height: 50px;
-
-  }
   .categorias-container{
     .cat-button{
       cursor: pointer;
@@ -25,6 +20,14 @@
       color: $base_color;
     }
   }
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $base_color;
+  color: #fff;
 }
 
 .mat-chip.mat-standard-chip{

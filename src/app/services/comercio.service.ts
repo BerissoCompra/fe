@@ -22,6 +22,7 @@ export class ComercioService {
   private comercioObservable$ = new Subject<Comercio>();
   //public customComercio = this.comercioObservable.asObservable();
   public customPedidosCount = this.pedidosCount.asObservable();
+  public pedidos$ = new Subject<any>();
 
   private pedidoObservable$ = new Subject<boolean>();
 
@@ -33,20 +34,20 @@ export class ComercioService {
     //this.comercioObservable.next(comercio);
   }
 
+  setPedidos(val){
+    this.pedidos$.next(val)
+  }
+
+  getPedidos$(): Observable<any>{
+    return this.pedidos$.asObservable();
+  }
+
   actualizarInfoComercio(comercio: Comercio) {
     this.comercioObservable$.next(comercio);
   }
 
   getComercio$(): Observable<Comercio> {
     return this.comercioObservable$.asObservable();
-  }
-
-  actualizarPedidoObservable() {
-    this.pedidoObservable$.next(true);
-  }
-
-  getPedido$(): Observable<boolean> {
-    return this.pedidoObservable$.asObservable();
   }
 
   getPedidos(id: string, estado: number): Observable<any>{

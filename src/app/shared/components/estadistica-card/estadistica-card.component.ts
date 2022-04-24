@@ -9,6 +9,7 @@ export class EstadisticaCardComponent implements OnInit {
 
   @Input() valor: any;
   @Input() color: string;
+  @Input() finishLoad: boolean = false;
   @Input() descripcion: string;
   @Input() informacion: string;
   constructor() { }

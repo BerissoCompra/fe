@@ -4,6 +4,7 @@
   class="tarjeta"
   [valor]="comercio?.activado ? 'Activo' : 'En revisión'"
   descripcion="Estado"
+  [finishLoad]="loading"
   [color]="comercio?.activado ? 'green': 'red'"
   informacion="Muestra el estado del comercio actualmente, si se encuentra ACTIVO (verde) este será visibile para todos los clientes, de lo contrario el comercio no podrá ser visualizado por usuarios de la aplicación. (Recuerde que si ústed se ha registrado recientemente, tiene un plazo aproximado de 48 horas hábiles para que se confirme la identidad y se proceda a la activación)."
   ></app-estadistica-card>
@@ -12,12 +13,14 @@
   [valor]="comercio?.estrellas ? comercio.estrellas : 0 "
   color="yellow"
   descripcion="Estrellas"
+  [finishLoad]="loading"
   informacion='Puntuacion actual del comercio, basada en el promedio de las "estrellas" que han registrado los clientes en cada pedido.'
   ></app-estadistica-card>
   <app-estadistica-card
     class="tarjeta"
     [valor]="comercio?.estadisticas?.ventas ? comercio?.estadisticas?.ventas : 0"
     descripcion="Ventas"
+    [finishLoad]="loading"
     color=""
     informacion="Cantidad de ventas TOTALES desde que se ha registrado en Ciudad APP"
   ></app-estadistica-card>
@@ -25,6 +28,7 @@
   class="tarjeta w-500"
   [valor]="comercio?.estadisticas?.ingresosTotales ? (comercio?.estadisticas?.ingresosTotales | currency) : 0 | currency"
   descripcion="Total Ingresos"
+  [finishLoad]="loading"
   color=""
   informacion="Cantidad de ingresos TOTALES desde que se ha registrado en Ciudad APP"
   ></app-estadistica-card>
@@ -32,6 +36,7 @@
   class="tarjeta w-500"
   [valor]="comercio?.estadisticas?.deuda ? (comercio?.estadisticas?.deuda | currency) : 0 | currency"
   descripcion="Ingresos desde el último pago"
+  [finishLoad]="loading"
   [color]=""
   informacion="Cantidad de ingresos adquiridos luego del último vencimiento de pago."
   ></app-estadistica-card>
@@ -39,21 +44,24 @@
   class="tarjeta w-300"
   [valor]="comercio?.estadisticas?.ultimoPago ? (comercio?.estadisticas?.ultimoPago  | date:'dd/MM' : '-0300') : '-'"
   descripcion="Último pago"
-  color="green"
+  [finishLoad]="loading"
+  [color]=""
   informacion="Fecha del último pago de comisión."
+  ></app-estadistica-card>
+  <app-estadistica-card
+  class="tarjeta w-500"
+  [valor]="comercio?.estadisticas?.deuda ? (comercio?.estadisticas?.deuda * 0.05 | currency) : 0 | currency"
+  descripcion="Debe abonar"
+  [finishLoad]="loading"
+  [color]="comercio?.estadisticas?.deuda > 0 ? 'red' : 'green' "
+  informacion="Monto (comisión) que deberá abonar en el próximo pago."
   ></app-estadistica-card>
   <app-estadistica-card
   class="tarjeta w-300"
   [valor]="comercio?.estadisticas?.proximoPago ? (comercio?.estadisticas?.proximoPago  | date:'dd/MM' : '-0300') : '-'"
   descripcion="Fecha de vencimiento de pago"
-  [color]="(comercio?.estadisticas?.proximoPago | date:'dd/MM' : '-0300') > (fechaHoy | date:'dd/MM' : '-0300') ? 'red': 'green'"
+  [finishLoad]="loading"
+  [color]=""
   informacion="Fecha de vencimiento de pago."
-  ></app-estadistica-card>
-  <app-estadistica-card
-  class="tarjeta"
-  [valor]="comercio?.estadisticas?.deuda ? (comercio?.estadisticas?.deuda * 0.05 | currency) : 0 | currency"
-  descripcion="Debe abonar"
-  [color]="comercio?.estadisticas?.deuda > 0 ? 'red' : 'green' "
-  informacion="Monto (comisión) que deberá abonar"
   ></app-estadistica-card>
 </section>

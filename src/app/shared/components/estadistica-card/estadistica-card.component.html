@@ -8,4 +8,10 @@
   <div class="body">
     <p class="desc">{{descripcion}}</p>
   </div>
+
+  <div class="loadImagen" *ngIf="!finishLoad">
+    <div class="loadCard">
+      <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+    </div>
+  </div>
 </div>

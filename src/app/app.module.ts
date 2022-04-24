@@ -63,6 +63,7 @@ import { CierreCajaComponent } from './pages/pedidos/cierre-caja/cierre-caja.com
 import { DatePipe } from '@angular/common';
 import { TimeInputComponent } from './shared/components/custom/time-input/time-input.component';
 import { AngularFireModule } from '@angular/fire/compat';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,6 +104,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
+    NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' }),
     FormlyModule.forRoot({
       types: [
         { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },

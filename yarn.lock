@@ -162,7 +162,7 @@
     "symbol-observable" "4.0.0"
     "uuid" "8.3.2"
 
-"@angular/common@^12.0.0", "@angular/common@^12.0.0 || ^13.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@>=12.0.0-0", "@angular/common@>=13.0.0 <14.0.0", "@angular/common@>=9.0.0", "@angular/common@~13.1.0", "@angular/common@13.1.2":
+"@angular/common@^12.0.0", "@angular/common@^12.0.0 || ^13.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@>=12.0.0-0", "@angular/common@>=13.0.0 <14.0.0", "@angular/common@>=8.0.0", "@angular/common@>=9.0.0", "@angular/common@~13.1.0", "@angular/common@13.1.2":
   "integrity" "sha512-/8RWYQkZ1KPNvu2FANJM44wXlOMjMyxZVOEIn3llMRgxV2iiYtmluAOJNafTAbKedAuD6wiSpbi++QbioqCyyA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-13.1.2.tgz"
   "version" "13.1.2"
@@ -193,7 +193,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^12.0.0", "@angular/core@^12.0.0 || ^13.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@>=12.0.0-0", "@angular/core@>=13.0.0 <14.0.0", "@angular/core@~13.1.0", "@angular/core@13.1.2":
+"@angular/core@^12.0.0", "@angular/core@^12.0.0 || ^13.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@>=12.0.0-0", "@angular/core@>=13.0.0 <14.0.0", "@angular/core@>=8.0.0", "@angular/core@~13.1.0", "@angular/core@13.1.2":
   "integrity" "sha512-dsb90lUf8BELzdg7MgSMfPc36xzZKsDggOimfXhIvmctgc+H71Zo07KYTy5JVqsscLdT+A/KBvtU1bKk4P+Rfg=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-13.1.2.tgz"
   "version" "13.1.2"
@@ -2303,9 +2303,9 @@
   "version" "1.0.0"
 
 "async@^2.6.2":
-  "integrity" "sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg=="
-  "resolved" "https://registry.npmjs.org/async/-/async-2.6.3.tgz"
-  "version" "2.6.3"
+  "integrity" "sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA=="
+  "resolved" "https://registry.npmjs.org/async/-/async-2.6.4.tgz"
+  "version" "2.6.4"
   dependencies:
     "lodash" "^4.17.14"
 
@@ -5224,6 +5224,14 @@
   dependencies:
     "tslib" "^2.0.0"
 
+"ngx-skeleton-loader@^5.0.0":
+  "integrity" "sha512-6cz8UAu4WcYnBp/LnU053LCIwjKNZWX8GX1v3bvqQVdDa1ubsEeJm+CZxk5B8W2jP9CcFhvWrBlmmVUyl1Yxug=="
+  "resolved" "https://registry.npmjs.org/ngx-skeleton-loader/-/ngx-skeleton-loader-5.0.0.tgz"
+  "version" "5.0.0"
+  dependencies:
+    "perf-marks" "^1.13.4"
+    "tslib" "^2.0.0"
+
 "ngx-socket-io@^4.1.0":
   "integrity" "sha512-p/IxD/hdpF/3+Xu6FFoo1OMIi9+rbqN55smJKE1RSFHAhS0UmRno2soHd1RTG3QXm6hCntp2vvfPE4tn60P5mw=="
   "resolved" "https://registry.npmjs.org/ngx-socket-io/-/ngx-socket-io-4.1.0.tgz"
@@ -5676,6 +5684,13 @@
   "integrity" "sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw=="
   "resolved" "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   "version" "4.0.0"
+
+"perf-marks@^1.13.4":
+  "integrity" "sha512-N0/bQcuTlETpgox/DsXS1voGjqaoamMoiyhncgeW3rSHy/qw8URVgmPRYfFDQns/+C6yFUHDbeSBGL7ixT6Y4A=="
+  "resolved" "https://registry.npmjs.org/perf-marks/-/perf-marks-1.14.2.tgz"
+  "version" "1.14.2"
+  dependencies:
+    "tslib" "^2.1.0"
 
 "performance-now@^2.1.0":
   "integrity" "sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns="

@@ -34,7 +34,7 @@ export class PedidosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.comercioService.getPedido$().subscribe((res)=>{
+    this.comercioService.getPedidos$().subscribe((res)=>{
       this.updateComercio(this.indexActual);
     })
     this.updateComercio();

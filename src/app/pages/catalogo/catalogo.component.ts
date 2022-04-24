@@ -74,7 +74,9 @@ export class CatalogoComponent implements OnInit {
     await this.productos.map((producto)=>{
       if(this.categoriasComercio.filter((el)=> el?.descripcion === producto.categoria).length == 0){
         const categoriaElemento = this.categorias.find((cat)=> cat?.descripcion === producto.categoria);
-        this.categoriasComercio.push(categoriaElemento);
+        if(categoriaElemento){
+          this.categoriasComercio.push(categoriaElemento);
+        }
       }
     })
   }

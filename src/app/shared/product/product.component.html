@@ -1,11 +1,24 @@
 <button *ngIf="producto">
-<div class="card" [ngClass]="producto.activo ? '' : 'desactivo'">
-  <img src="{{producto.imagen ? producto.imagen : defaultImage}}" alt="" class="background">
-  <mat-card-content class="content">
+<div class="card-cont" [ngClass]="producto.activo ? '' : 'desactivo'">
+  <img (load)="loadImagen()" src="{{producto.imagen ? producto.imagen : defaultImage}}" alt="" class="background">
+  <div class="content-title">
     <h3 class="visible title">{{producto.nombre}}</h3>
+  </div>
+  <div class="content">
     <p *ngIf="producto.precio > 0 && producto.descuento <= 0" class="price">{{producto.precio | currency}}</p>
     <p *ngIf="producto.descuento > 0" class="price m-0">{{producto.precio | currency}}</p>
-    <p *ngIf="producto.descuento > 0" class="descuento m-0">{{producto.descuento}}% <span>{{getPrecioViejo() | currency}}</span> </p>
-  </mat-card-content>
+    <p *ngIf="producto.descuento > 0" class="descuento m-0">{{producto.descuento}}%</p>
+  </div>
+
+  <!-- Skeleton -->
+  <div class="loadImagen" *ngIf="!isLoadImagen">
+    <div class="loadCard" [ngClass]="producto.activo ? '' : 'desactivo'">
+      <ngx-skeleton-loader count="1" appearance="circle"></ngx-skeleton-loader>
+      <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+    </div>
+  </div>
 </div>
 </button>
+
+
+

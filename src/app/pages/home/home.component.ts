@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   constructor(private alertService: AlertsService, private accountService: AccountService, private comercioService: ComercioService ,private router: Router) { }
   comercio: Comercio;
   fechaHoy: Date = new Date();
+  loading: boolean = false;
+
   ngOnInit(): void {
     this.comercioService.obtenerComercio()
     .pipe(catchError((res)=>{
@@ -27,6 +29,7 @@ export class HomeComponent implements OnInit {
       this.comercioService.comercio = res;
       this.comercio = this.comercioService.comercio;
       this.comercioService.actualizarInfoComercio(res)
+      this.loading = true;
     })
   }
 }

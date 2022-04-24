@@ -45,12 +45,6 @@ export class PedidoInfoComponent implements OnInit {
     this.pedidoSeleccionado = this.data.pedido;
     this.productosPedido = this.data.productos;
     this.comercioId = this.data.comercioId;
-    // this.socket = io.io(`${environment.beUrl}`, {
-    //   query:{
-    //     comercioId: this.comercioId,
-    //   },
-    //   transports : ['websocket']
-    // });
   }
 
   redirectWsp(cel){
@@ -67,10 +61,9 @@ export class PedidoInfoComponent implements OnInit {
       throw 'error in source. Details: ' + res;
     }))
     .subscribe((res)=>{
-     // this.socket.emit('comercio', this.comercioId);
       this.alertService.ok('Pedido Aceptado');
+      this.comercioService.setPedidos(res);
     })
-    //this.comercioService.actualizarPedidoObservable();
     this.data.dialog.closeAll();
   }
 

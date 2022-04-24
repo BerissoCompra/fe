@@ -52,11 +52,25 @@ export const formConfig = (categorias): FormlyFieldConfig[] =>{
         },
         {
           key: 'descuento',
-          type: 'input',
+          type: 'dropdown-input',
           className: 'field-form col-6',
+          defaultValue: 0,
           templateOptions: {
             label: '% Descuento',
-            placeholder: 'Ingrese descuento (sin %)',
+            attributes: {
+              bindLabelOp: 'descripcion',
+              bindValueOp: 'valor',
+            },
+            options: [
+              {valor: 0, descripcion: 'Sin descuento'},
+              {valor: 5, descripcion: '5%'},
+              {valor: 10, descripcion: '10%'},
+              {valor: 15, descripcion: '15%'},
+              {valor: 20, descripcion: '20%'},
+              {valor: 25, descripcion: '25%'},
+              {valor: 50, descripcion: '50%'},
+              {valor: 75, descripcion: '75%'},
+            ]
           },
         },
       ]

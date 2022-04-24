@@ -1,11 +1,14 @@
 @import '../../../assets/index.scss';
 
-.container{
+.cont{
   margin: 0px;
   padding: 0px;
   .title-container{
+
+    padding: 0;
     h2{
       width: 100%;
+      padding: 0;
       font-size: 30;
       text-transform: uppercase;
       margin-bottom: 20;
