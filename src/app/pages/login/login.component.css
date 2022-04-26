@@ -12,6 +12,14 @@
   background-position-x: center;
   padding: 0px;
 }
+.title{
+  color: #fff;
+  z-index: 10000;
+  margin: 0 auto;
+}
+h3{
+  font-size: 40px;
+}
 .login-container{
     display: flex;
     flex-direction: column;

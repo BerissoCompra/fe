@@ -134,7 +134,6 @@ export class NuevoComponent implements OnInit {
       if(product.descuento > 0){
         product.precio = calcularDescuento(product.precio, product.descuento);
       }
-      console.log(product)
       product.imagen = this.file;
       this.catalogoService.addProducto(product, this.data.comercioId)
       .then((res)=>{

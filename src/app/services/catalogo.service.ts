@@ -80,19 +80,6 @@ export class CatalogoService {
             resolve(true);
           })
         }
-        // if(producto.imagen?.name){
-        //   const fd = new FormData();
-        //   fd.append('file', producto.imagen)
-        //   this.genericService.post(`${environment.urlAPI}/images/upload`, fd)
-        //   .subscribe((res: any)=>{
-        //     producto.imagenPath = res.path;
-        //     producto.imagen = environment.beUrl + res.path.replace('\\', '/');
-        //     this.genericService.put(`${environment.urlAPI}/catalogo/productos/${producto._id}`, {producto})
-        //       .subscribe((res)=>{
-        //         resolve(true);
-        //     })
-        //   })
-        // }
       }
       catch (error) {
         rejeact(error)
