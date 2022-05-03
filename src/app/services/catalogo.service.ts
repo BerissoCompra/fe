@@ -58,9 +58,7 @@ export class CatalogoService {
   actualizarProducto(producto: Product): Promise<any>{
     return new Promise(async(resolve, rejeact)=>{
       try {
-
         const {_id, imagen} = producto;
-        console.log(imagen)
         if(imagen){
           const imagenUrl = await this.imagenesService.subirImagen(`productos`, _id, imagen).catch((err)=> rejeact(err));
           this.genericService.put(`${environment.urlAPI}/catalogo/productos/${_id}`, {

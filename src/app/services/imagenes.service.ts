@@ -26,8 +26,9 @@ export class ImagenesService {
   }
 
   subirImagen(path: string, id: string, imagen): Promise<any>{
-    return new Promise((resolve, rejeact)=>{
+    return new Promise(async(resolve, rejeact)=>{
       try {
+        const imagenComprimida = await this.comprimirImagen(imagen);
         const storageRef = this.storage.ref(`/uploads/${path}/${id}`);
         const uploadTask = this.storage.upload(`/uploads/${path}/${id}`, imagen);
         uploadTask.snapshotChanges().pipe(

@@ -6,6 +6,7 @@ import { Comercio } from 'src/app/models/comercio';
 import { AccountService } from 'src/app/services/account.service';
 import { AlertsService } from 'src/app/services/alerts-services.service';
 import { ComercioService } from 'src/app/services/comercio.service';
+import { sidebarItems } from './items/sidebar-items';
 
 @Component({
   selector: 'sidebar',
@@ -21,11 +22,21 @@ export class SidebarComponent implements OnInit{
   comercio$: Observable<Comercio>;
   pedidosCount: number;
   imagenDefault: string = 'https://www.uifrommars.com/wp-content/uploads/2018/08/crear-paleta-colores-diseno-ui.jpg';
-
+  items = [];
 
   ngOnInit(): void {
     this.comercio$ = this.comercioService.getComercio$();
     this.comercio$.subscribe(comercio => this.comercio = comercio);
+    this.cargarItems(sidebarItems);
+  }
+
+  cargarItems(itemsSidebar){
+    const rol = this.accountService.getRol().rol;
+    itemsSidebar.map((element)=>{
+      if(element?.roles.length === 0 || element.roles.filter((el)=> el === rol).length > 0){
+        this.items.push(element);
+      }
+    })
   }
 
   updateComercio(){

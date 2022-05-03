@@ -1,0 +1,20 @@
+<h3 class="title">¿Qué servicio desea contratar?</h3>
+<div class="cards-contenedor">
+  <div class="card-servicio" *ngFor="let item of servicios">
+      <p class="card-titulo">{{item.nombre}}</p>
+      <div class="descripcion">
+        <p>- {{item.descripcion}}<span class="resaltar">{{item.categorias}}</span></p>
+        <p *ngFor="let info of item.informacion" [ngClass]="info.disabled ? 'deshabilitar' : ''" >- {{info.texto}} <span *ngIf="info.icon.length > 0" class="resaltar"><mat-icon class="icon">{{info.icon}}</mat-icon></span></p>
+      </div>
+      <div class="buttons-container">
+        <div class="valor-descripcion">
+          <p>{{item.costoMensual === 0 ? 'Costo mensual variable' : (item.costoMensual | currency)}}</p>
+          <span>{{!item.comision ? 'Sin comision costo fijo' : ( 'Comision: ' +item.comision+ '/venta')}}</span>
+        </div>
+        <button (click)="onClick(item?.redirect)" class="btn btn-default">Contratar plan</button>
+        <div class="btn-mas-info">
+          <p>Más información</p>
+        </div>
+      </div>
+  </div>
+</div>

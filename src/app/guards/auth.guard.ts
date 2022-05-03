@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AccountService } from '../services/account.service';
 import { ComercioService } from '../services/comercio.service';
 import jwt_decode from 'jwt-decode';
+import { RolesEnum } from '../models/enums/roles';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,21 @@ export class AuthGuard implements CanActivate {
     }
 
     const token = this.getDecodedAccessToken(this.accountService.getToken())
+    if(token?.rol === RolesEnum.NUEVO){
+      this.router.navigate(['/servicios']);
+      console.log('No tiene rol')
+      return false;
+    }
+    else{
+      this.comercioService.obtenerComercio()
+      .subscribe((res)=>{
+        this.comercioService.comercio = res;
+      })
 
-    this.comercioService.obtenerComercio()
-    .subscribe((res)=>{
-      this.comercioService.comercio = res;
-    })
+      return true;
+    }
 
-    return true;
+
   }
 
   getDecodedAccessToken(token: string): any {

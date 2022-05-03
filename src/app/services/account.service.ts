@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { JwtHelperService} from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { GenericService } from './generic.service';
+import { getDecodedAccessToken } from './utils/token';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,11 +18,15 @@ export class AccountService {
   constructor(private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private router: Router,
-    private cookiesService: CookieService
+    private cookiesService: CookieService,
+    private genericService: GenericService
   ) { }
 
-  get User(): Observable<any>{
-    return null
+  getRol(){
+    const token = getDecodedAccessToken(this.getToken())
+    return {
+      rol: token.rol
+    }
   }
 
   recuperarClave(email: string){
@@ -47,6 +53,11 @@ export class AccountService {
   iniciarSesion(user: UserLogin): Observable<any>{
     const action = 'signin'
     return this.http.post(`${environment.urlAPI}/${this.controller}/${action}`, user)
+  }
+
+  validarUsuario(): Observable<any>{
+    const action = 'validar'
+    return this.genericService.post(`${environment.urlAPI}/${this.controller}/${action}`, {})
   }
 
   cerrarSesion(){

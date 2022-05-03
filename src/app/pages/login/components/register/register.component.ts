@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs';
 import { UserLogin, UserLoginRegister, UserReg } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 import { ComercioService } from 'src/app/services/comercio.service';
@@ -81,21 +82,24 @@ export class RegisterComponent implements OnInit {
     }
     const {repassword, ...rest} = user;
     this.accountService.crearUsuario(rest)
+    .pipe(
+      catchError((err)=>{
+        this.errorReg = 'Se ha producido un error';
+        throw new err;
+      })
+    )
     .subscribe((res)=>{
       if(res){
         if(res?.err){
           return this.errorReg = res?.err;
         }
-        this.comercioService.crearComercio(this.comercioConfig, user, res._id)
-        .subscribe((res)=>{
-          this.loading = false;
-          this.router.navigate([''])
-          this.toastr.success('Se ha enviado un email de verificación', '', {
-            progressBar: true,
-            timeOut: 5000,
-            positionClass: 'toast-bottom-right'
-          })
-        });
+        this.toastr.success('Se ha enviado un email de verificación', '', {
+          progressBar: true,
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right'
+        })
+        this.loading = false;
+        this.router.navigate([''])
       }
     })
 

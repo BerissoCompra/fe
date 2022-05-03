@@ -12,7 +12,7 @@ export class ComercioGuard implements CanActivate {
   constructor(private accountService: AccountService, private router: Router, private comercioService: ComercioService){}
 
   canActivate(): boolean{
-    console.log("Aut c")
+
     if(!this.comercioService.comercio){
       this.comercioService.obtenerComercio()
       .subscribe((res)=>{

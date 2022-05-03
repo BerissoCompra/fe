@@ -1,15 +1,15 @@
 <app-loading *ngIf="loading"></app-loading>
 <div class="container">
-  <h2 class="title">Registro de Comercio | Formulario Responsable</h2>
-  <p class="login-detalle-text">Rellena el formulario con los datos principales del RESPONSABLE. Una vez registrado podrá configurar el comercio desde el panel de control</p>
+  <h2 class="title">Registro de Usuario | Responsable</h2>
+  <p class="login-detalle-text">Rellena el formulario con los datos principales del RESPONSABLE. Una vez registrado podrá iniciar sesión para seleccionar el servicio que desea.</p>
   <p class="info-text">Mas información</p>
   <form [formGroup]="form" (ngSubmit)="registrar(userRegister)" class="form-container">
     <div class="err" *ngIf="errorReg">{{errorReg}}</div>
       <formly-form [form]="form" [fields]="fieldsRegister" [model]="userRegister"></formly-form>
-      <formly-form [form]="form" [fields]="fieldsComercio" [model]="comercioConfig"></formly-form>
+      <!-- <formly-form [form]="form" [fields]="fieldsComercio" [model]="comercioConfig"></formly-form> -->
       <input type="checkbox" (change)="clickTerminos($event)" class="teryCon"/><label class="teryCon-lab">Acepto los <span (click)="openTerminos()">Términos y Condiciones</span></label>
       <div class="button-container">
-        <button type="submit" [disabled]="loading" class="btn btn-primary" style="width: 100%;">Registrarse</button>
+        <button type="submit" [disabled]="loading" class="btn btn-default" style="width: 100%;">Registrarse</button>
       </div>
       <div class="options-container">
         <p>Ya tienes una cuenta? <span [routerLink]="''" class="option-click">Iniciar Sesión</span></p>

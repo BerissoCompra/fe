@@ -53,7 +53,7 @@ export class IniciarComponent implements OnInit {
         if(res.activado === true && res.token){
           this.loading = false;
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/servicios'])
         }
         else{
           this.error = 'Esta cuenta no está verificada'

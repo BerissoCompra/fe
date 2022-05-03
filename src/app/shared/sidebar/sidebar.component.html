@@ -14,29 +14,8 @@
       </div>
     </div>
     <ul class="menu">
-      <li class="menu-item" [routerLink]="['inicio']" routerLinkActive="active">
-        <mat-icon matTooltip="Mi comercio">auto_graph</mat-icon>
-      </li>
-      <li class="menu-item" [routerLink]="['catalogo']" routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Catálogo">view_quilt</mat-icon>
-      </li>
-      <li class="menu-item" [routerLink]="['pedidos']"  routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Pedidos">receipt_long</mat-icon>
-      <!-- </li>
-      <li class="menu-item"  [routerLink]="['curso']" routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Pedidos en curso">hourglass_empty</mat-icon >
-      </li>
-      <li class="menu-item" [routerLink]="['finalizados']" routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Pedidos Finalizados">check_circle</mat-icon>
-      </li>
-      <li class="menu-item" [routerLink]="['enviados']"  routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Pedidos Enviados">local_shipping</mat-icon>
-      </li>
-      <li class="menu-item" [routerLink]="['retiro']"  routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Pedidos listos para retirar">directions_car</mat-icon>
-      </li> -->
-      <li class="menu-item" [routerLink]="['configuracion']"  routerLinkActive="active">
-        <mat-icon class="material-icons-outlined" matTooltip="Configuración" >settings</mat-icon>
+      <li *ngFor="let item of items" class="menu-item" [routerLink]="[item.redirect]" routerLinkActive="active">
+        <mat-icon [matTooltip]="item.nombre">{{item.icon}}</mat-icon>
       </li>
       <li class="menu-item logout" (click)="cerrarSesion()"  routerLinkActive="active">
         <mat-icon matTooltip="Cerrar Sesión" >logout</mat-icon>

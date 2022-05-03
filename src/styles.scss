@@ -37,7 +37,7 @@ button:disabled{
 }
 
 .btn-default{
-  background-color: $base_color;
+  background-color: $secondary;
   outline: none;
   width: 150px;
   height: 30px;
@@ -54,7 +54,8 @@ button:disabled{
 }
 .btn-default:hover{
   cursor: pointer;
-  background-color: $base_color;
+  background-color: $base-color;
+  color: #fff;
 }
 .header-form p{
   text-align: center;

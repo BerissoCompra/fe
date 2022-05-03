@@ -82,14 +82,8 @@ export class ComercioService {
     return this.genericService.put(`${environment.urlAPI}/pedidos/${pedidoId}/rechazar`, {motivo})
   }
 
-  crearComercio(comercio, usuario: Usuario, usuarioId: string){
-    const nombre = usuario?.nombreElegido  ? usuario.nombreElegido : usuario.nombre
-    comercio = {
-      ...comercio,
-      usuarioId,
-      responsable: `${usuario.apellido}, ${usuario.nombre}`,
-    }
-    return this.genericService.post(`${environment.urlAPI}/comercios/new`, comercio)
+  crearComercio(comercio){
+    return this.genericService.post(`${environment.urlAPI}/comercios`, comercio)
   }
 
   obtenerComercio(): Observable<any>{
@@ -122,8 +116,9 @@ export class ComercioService {
 
 
   async actualizarComercio(comercio: Comercio){
+    debugger
     return new Promise(async(resolve, rejeact) =>{
-      const {imagen, cuenta, horarios, ...rest} = comercio;
+      const {imagen, ...rest} = comercio;
       const imagenUrl = await this.imagenesService.subirImagen(`comercios`, comercio._id, imagen);
       this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, {
         ...comercio,
@@ -131,31 +126,6 @@ export class ComercioService {
       }).subscribe((res)=>{
         resolve(true)
       })
-        //const {imagen, cuenta, horarios, ...rest} = comercio;
-        // const fd = new FormData();
-
-        // if(imagen?.name){
-        //   fd.append('imagen', imagen);
-        // }
-        // Object.keys(rest).map((key)=>{
-        //   fd.append(key, rest[key]);
-        // })
-
-        // this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}`, fd)
-        // .subscribe((res)=>{
-        //   this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/horarios`, {horarios})
-        //   .subscribe((res)=>{
-        //     if(cuenta?.alias && cuenta?.cvu && cuenta?.banco && cuenta?.nombreApellido){
-        //       this.genericService.put(`${environment.urlAPI}/comercios/${comercio._id}/cuenta`, {cuenta})
-        //       .subscribe((res)=>{
-        //         resolve(true)
-        //       })
-        //     }
-        //     else{
-        //       resolve(true)
-        //     }
-        //   })
-        // })
     })
   }
 

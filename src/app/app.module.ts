@@ -64,6 +64,9 @@ import { DatePipe } from '@angular/common';
 import { TimeInputComponent } from './shared/components/custom/time-input/time-input.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CrearCuentaComponent } from './pages/crear-cuenta/crear-cuenta.component';
+import { ServiciosAppComponent } from './pages/servicios-app/servicios-app.component';
+import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/registrar-cuenta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,6 +97,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ButtonToggleComponent,
     CierreCajaComponent,
     TimeInputComponent,
+    CrearCuentaComponent,
+    ServiciosAppComponent,
+    RegistrarCuentaComponent,
 
   ],
   imports: [

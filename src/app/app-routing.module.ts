@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { TokenGuard } from './guards/token.guard';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { ConfiguracionComponent } from './pages/configuracion/configuracion.component';
+import { CrearCuentaComponent } from './pages/crear-cuenta/crear-cuenta.component';
+import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/registrar-cuenta.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { IniciarComponent } from './pages/login/components/iniciar/iniciar.component';
@@ -11,6 +14,7 @@ import { RegisterComponent } from './pages/login/components/register/register.co
 import { LoginComponent } from './pages/login/login.component';
 import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
+import { ServiciosAppComponent } from './pages/servicios-app/servicios-app.component';
 import { VerifyComponent } from './pages/verify/verify.component';
 
 const routes: Routes = [
@@ -24,16 +28,25 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'servicios',
+    canActivate: [TokenGuard],
+    component: ServiciosAppComponent,
+    children: [
+      { path: '', component: CrearCuentaComponent},
+      { path: ':comercio', component: RegistrarCuentaComponent},
+    ]
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-      { path: 'inicio', component: HomeComponent},
-      { path: 'catalogo', component: CatalogoComponent},
-      { path: 'nuevo', component: NuevoComponent},
-      { path: 'configuracion', component: ConfiguracionComponent},
-      { path: ':pedido', component: PedidosComponent},
+      { path: 'inicio', canActivate: [AuthGuard], component: HomeComponent},
+      { path: 'catalogo', canActivate: [AuthGuard], component: CatalogoComponent},
+      { path: 'nuevo', canActivate: [AuthGuard], component: NuevoComponent},
+      { path: 'configuracion', canActivate: [AuthGuard], component: ConfiguracionComponent},
+      { path: ':pedido', canActivate: [AuthGuard], component: PedidosComponent},
       // { path: 'finalizados', component: PedidosComponent },
       // { path: 'enviados', component: PedidosComponent },
     ]

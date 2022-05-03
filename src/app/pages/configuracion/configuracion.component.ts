@@ -10,7 +10,7 @@ import { AlertComponent } from 'src/app/shared/components/alert/alert.component'
 import  {  ToastrService  }  from  'ngx-toastr' ;
 import { TipoEnvio } from 'src/app/models/enums/tipo-envio';
 import { ImagenesService } from 'src/app/services/imagenes.service';
-import { ConfiguracionNegocioFormConfig } from 'src/app/models/configuracion/configuracion-form-config';
+import { ConfiguracionNegocioFormConfig } from 'src/app/pages/configuracion/models/configuracion-form-config';
 import { Dias } from 'src/app/models/dias';
 import { catchError } from 'rxjs';
 import { AlertsService } from 'src/app/services/alerts-services.service';
@@ -37,7 +37,7 @@ export class ConfiguracionComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriasService.getCategoriasPorTipo(TiposCategoriasEnum.COMERCIOS).subscribe((res)=>{
-      if(this.comercioModel.dias.length === 1){
+      if(this.comercioModel?.dias.length === 1){
         this.comercioModel.dias = this.comercioModel.dias[0].split(',')
       }
       this.fieldsConfiguracionNegocio = ConfiguracionNegocioFormConfig(res)
@@ -46,47 +46,60 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   async updateComercio(){
-    if(this.comercioService.comercio){
-      this.comercioModel = this.comercioService.comercio;
-      this.comercioService.actualizarInfoComercio(this.comercioModel)
-      if(this.comercioModel?.imagen){
-        this.imagenPrevisualizacion = this.comercioModel?.imagen;
-      }
-      return;
-    }
-    else{
-      this.comercioService.obtenerComercio()
+    // if(this.comercioService.comercio){
+    //   this.comercioModel = this.comercioService.comercio;
+    //   this.comercioService.actualizarInfoComercio(this.comercioModel)
+    //   if(this.comercioModel?.imagen){
+    //     this.imagenPrevisualizacion = this.comercioModel?.imagen;
+    //   }
+    //   return;
+    // }
+    // else{
+    //   this.comercioService.obtenerComercio()
+    //   .subscribe((res: any)=>{
+    //     this.comercioModel = res;
+    //     this.comercioService.actualizarInfoComercio(this.comercioModel)
+    //     if(this.comercioModel?.imagen){
+    //       this.imagenPrevisualizacion = this.comercioModel?.imagen;
+    //     }
+    //   })
+    // }
+    this.comercioService.obtenerComercio()
       .subscribe((res: any)=>{
         this.comercioModel = res;
         this.comercioService.actualizarInfoComercio(this.comercioModel)
         if(this.comercioModel?.imagen){
           this.imagenPrevisualizacion = this.comercioModel?.imagen;
         }
-      })
-    }
+    })
 
   }
 
   verImagen(event){
-    if(this.validarImagen(event.target.files[0])){
-      this.imagenesService.comprimirImagen(event.target.files[0])
-      .then((res)=>{
-        this.comercioModel.imagen = res;
-        this.file = new File([res], event.target.files[0].name);
-        this.extraerBase64(this.comercioModel.imagen).then((imagen: any)=>{
-          this.imagenPrevisualizacion = imagen.base;
-          this.loading = false;
-        })
-      })
-      .catch((error)=>{
-        console.error(error)
-        this.alertService.error('Error al procesar la imágen')
-      })
-    }
-    else{
-      this.alertService.error('El archivo subido no tiene el formato de imagen (.jgp / .jpeg / .png)')
-      this.loading = false;
-    }
+    const file = event.target.files[0];
+    this.comercioModel.imagen = file;
+    this.extraerBase64(file).then((imagen: any)=>{
+      this.imagenPrevisualizacion = imagen?.base;
+    })
+    // if(this.validarImagen(event.target.files[0])){
+    //   this.imagenesService.comprimirImagen(event.target.files[0])
+    //   .then((res)=>{
+    //
+    //     this.file = new File([res], event.target.files[0].name);
+    //     this.extraerBase64(this.comercioModel.imagen).then((imagen: any)=>{
+    //       this.imagenPrevisualizacion = imagen.base;
+    //       this.loading = false;
+    //     })
+    //   })
+    //   .catch((error)=>{
+    //     console.error(error)
+    //     this.alertService.error('Error al procesar la imágen')
+    //   })
+    // }
+    // else{
+    //   this.alertService.error('El archivo subido no tiene el formato de imagen (.jgp / .jpeg / .png)')
+    //   this.loading = false;
+    // }
 
   }
 
@@ -130,11 +143,9 @@ export class ConfiguracionComponent implements OnInit {
   submitFn(configuracion: Comercio){
     if(this.validarForm(configuracion)){
       this.loading = true;
-      configuracion.imagen = this.file;
       this.comercioService.actualizarComercio(configuracion)
       .then((res)=>{
         this.loading = false;
-        this.router.navigate(['dashboard/inicio'])
         this.updateComercio();
         this.alertService.ok('Actualizado Correctamente')
       }).catch((err)=>{

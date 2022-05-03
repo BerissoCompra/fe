@@ -5,7 +5,7 @@
   align-items: center;
   max-width: 100vw;
   height: 100vh;
-  background-image: url('./../../../assets//img/background.jpg');
+  background-image: linear-gradient(to top, #7e6bb3c7 0%, #7e6bb3d2 100%), url('./../../../assets/img/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
