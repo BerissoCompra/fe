@@ -1,7 +1,7 @@
-<h3 class="title">{{this.title}}</h3>
-<div class="contenedor">
+<h3 class="title">{{ this.title }}</h3>
+<form class="contenedor" (ngSubmit)="submit()" [formGroup]="form">
   <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-</div>
-<div class="button-container">
-  <button (click)="submit()" type="submit" class="btn btn-default" >Registrarse</button>
-</div>
+  <div class="button-container">
+    <button type="submit" class="btn btn-default">Registrarse</button>
+  </div>
+</form>

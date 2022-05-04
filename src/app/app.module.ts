@@ -18,12 +18,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -43,7 +42,7 @@ import { PedidoInfoComponent } from './pages/pedido-info/pedido-info.component';
 import { RechazarPedidoComponent } from './pages/rechazar-pedido/rechazar-pedido.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import {JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt'
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ComercioService } from './services/comercio.service';
 import { AccountService } from './services/account.service';
 import { ProductPedidoComponent } from './shared/product-pedido/product-pedido.component';
@@ -57,8 +56,8 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { ButtonToggleComponent } from './shared/components/custom/button-toggle/button-toggle.component';
 import { DropdownInputComponent } from './shared/components/custom/dropdown-input/dropdown-input.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CierreCajaComponent } from './pages/pedidos/cierre-caja/cierre-caja.component';
 import { DatePipe } from '@angular/common';
 import { TimeInputComponent } from './shared/components/custom/time-input/time-input.component';
@@ -100,7 +99,6 @@ import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/
     CrearCuentaComponent,
     ServiciosAppComponent,
     RegistrarCuentaComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -110,13 +108,16 @@ import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' }),
+    NgxSkeletonLoaderModule.forRoot({
+      animation: 'pulse',
+      loadingText: 'This item is actually loading...',
+    }),
     FormlyModule.forRoot({
       types: [
         { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
-        { name: 'button-toggle', component: ButtonToggleComponent},
-        { name: 'dropdown-input', component: DropdownInputComponent},
-        { name: 'time-input', component: TimeInputComponent},
+        { name: 'button-toggle', component: ButtonToggleComponent },
+        { name: 'dropdown-input', component: DropdownInputComponent },
+        { name: 'time-input', component: TimeInputComponent },
       ],
     }),
     BrowserAnimationsModule,
@@ -141,13 +142,13 @@ import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/
     FormlyBootstrapModule,
   ],
   providers: [
-    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     ComercioService,
     AccountService,
     CookieService,
-    DatePipe
+    DatePipe,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
