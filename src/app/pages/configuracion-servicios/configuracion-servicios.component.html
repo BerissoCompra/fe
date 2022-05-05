@@ -1,0 +1,14 @@
+<app-loading *ngIf="loading"></app-loading>
+<app-header title="Configuración" ></app-header>
+<div class="configuraciones-container">
+  <form [formGroup]="form" (ngSubmit)="submitFn(model)" class="form-container">
+    <div class="contenedor-formularios">
+      <div class="forms-container">
+        <formly-form class="formNegocio" [form]="form" [fields]="fields" [model]="model"></formly-form>
+      </div>
+    </div>
+    <div class="button-container">
+      <button type="submit" class="btn btn-success">Guardar</button>
+    </div>
+</form>
+</div>

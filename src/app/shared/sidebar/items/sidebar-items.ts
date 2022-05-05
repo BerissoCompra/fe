@@ -23,6 +23,12 @@ export const sidebarItems = [
     nombre: 'Configuración',
     redirect: 'configuracion',
     icon: 'settings',
-    roles: [RolesEnum.USUARIO, RolesEnum.SERVICIO]
+    roles: [RolesEnum.USUARIO]
+  },
+  {
+    nombre: 'Configuración',
+    redirect: 'configuracion-servicio',
+    icon: 'settings',
+    roles: [RolesEnum.SERVICIO]
   },
 ]

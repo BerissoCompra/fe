@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenGuard } from './guards/token.guard';
+import { RolesEnum } from './models/enums/roles';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
+import { ConfiguracionServiciosComponent } from './pages/configuracion-servicios/configuracion-servicios.component';
 import { ConfiguracionComponent } from './pages/configuracion/configuracion.component';
 import { CrearCuentaComponent } from './pages/crear-cuenta/crear-cuenta.component';
 import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/registrar-cuenta.component';
@@ -42,11 +44,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-      { path: 'inicio', canActivate: [AuthGuard], component: HomeComponent},
-      { path: 'catalogo', canActivate: [AuthGuard], component: CatalogoComponent},
-      { path: 'nuevo', canActivate: [AuthGuard], component: NuevoComponent},
-      { path: 'configuracion', canActivate: [AuthGuard], component: ConfiguracionComponent},
-      { path: ':pedido', canActivate: [AuthGuard], component: PedidosComponent},
+      { path: 'inicio', canActivate: [AuthGuard], data: {rol: RolesEnum.USUARIO, redirect: 'dashboard'} ,component: HomeComponent},
+      { path: 'catalogo', canActivate: [AuthGuard], data: {rol: RolesEnum.USUARIO, redirect: 'dashboard'} ,component: CatalogoComponent},
+      { path: 'nuevo', canActivate: [AuthGuard], data: {rol: RolesEnum.USUARIO, redirect: 'dashboard'} ,component: NuevoComponent},
+      { path: 'configuracion', canActivate: [AuthGuard], data: {rol: RolesEnum.USUARIO, redirect: 'dashboard'} ,component: ConfiguracionComponent},
+      { path: 'configuracion-servicio', canActivate: [AuthGuard], data: {rol: RolesEnum.SERVICIO, redirect: 'dashboard'} ,component: ConfiguracionServiciosComponent},
+      { path: ':pedido', canActivate: [AuthGuard], data: {rol: RolesEnum.USUARIO, redirect: 'dashboard'} ,component: PedidosComponent},
       // { path: 'finalizados', component: PedidosComponent },
       // { path: 'enviados', component: PedidosComponent },
     ]

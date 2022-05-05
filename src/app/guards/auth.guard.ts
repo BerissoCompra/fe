@@ -13,7 +13,9 @@ export class AuthGuard implements CanActivate {
 
   constructor(private accountService: AccountService, private router: Router, private comercioService: ComercioService){}
 
-  canActivate(): boolean{
+  canActivate(params): boolean{
+
+    const data = params.data;
 
     if(!this.accountService.isAuth()){
       console.log('Token no valido / Token expirado');
@@ -22,6 +24,19 @@ export class AuthGuard implements CanActivate {
     }
 
     const token = this.getDecodedAccessToken(this.accountService.getToken())
+
+    if(data?.rol){
+      console.log(data.rol)
+      console.log(token?.rol)
+      if(token?.rol != data?.rol){
+        this.router.navigate(['/dashboard/configuracion-servicio']);
+        return false;
+      }
+    }
+    // if(token?.rol != data?.rol && data.rol) {
+    //
+    // }
+
     if(token?.rol === RolesEnum.NUEVO){
       this.router.navigate(['/servicios']);
       console.log('No tiene rol')

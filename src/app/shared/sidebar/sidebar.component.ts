@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable } from 'rxjs';
 import { Comercio } from 'src/app/models/comercio';
+import { RolesEnum } from 'src/app/models/enums/roles';
 import { AccountService } from 'src/app/services/account.service';
 import { AlertsService } from 'src/app/services/alerts-services.service';
 import { ComercioService } from 'src/app/services/comercio.service';
@@ -25,13 +26,18 @@ export class SidebarComponent implements OnInit{
   items = [];
 
   ngOnInit(): void {
-    this.comercio$ = this.comercioService.getComercio$();
-    this.comercio$.subscribe(comercio => this.comercio = comercio);
-    this.cargarItems(sidebarItems);
+    const rol = this.accountService.getRol().rol;
+    if(rol != RolesEnum.USUARIO){
+      this.updateComercio();
+    }
+    else{
+      this.comercio$ = this.comercioService.getComercio$();
+      this.comercio$.subscribe(comercio => this.comercio = comercio);
+    }
+    this.cargarItems(rol, sidebarItems);
   }
 
-  cargarItems(itemsSidebar){
-    const rol = this.accountService.getRol().rol;
+  cargarItems(rol, itemsSidebar){
     itemsSidebar.map((element)=>{
       if(element?.roles.length === 0 || element.roles.filter((el)=> el === rol).length > 0){
         this.items.push(element);

@@ -66,6 +66,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CrearCuentaComponent } from './pages/crear-cuenta/crear-cuenta.component';
 import { ServiciosAppComponent } from './pages/servicios-app/servicios-app.component';
 import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/registrar-cuenta.component';
+import { ConfiguracionServiciosComponent } from './pages/configuracion-servicios/configuracion-servicios.component';
+import { FileInputComponent } from './shared/components/custom/file-input/file-input.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +101,8 @@ import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/
     CrearCuentaComponent,
     ServiciosAppComponent,
     RegistrarCuentaComponent,
+    ConfiguracionServiciosComponent,
+    FileInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,6 +122,7 @@ import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/
         { name: 'button-toggle', component: ButtonToggleComponent },
         { name: 'dropdown-input', component: DropdownInputComponent },
         { name: 'time-input', component: TimeInputComponent },
+        { name: 'file-input', component: FileInputComponent },
       ],
     }),
     BrowserAnimationsModule,

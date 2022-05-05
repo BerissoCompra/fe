@@ -93,20 +93,28 @@ export class ServiciosService {
 
   actualizarServicio(servicio: Servicio) {
     return new Promise(async (resolve, reject) => {
-      const { imagen, ...rest } = servicio;
-      const imagenUrl = await this.imagenesService.subirImagen(
-        `servicios`,
-        servicio._id,
-        imagen[0]
-      );
-      this.genericService
-        .put(`${environment.urlAPI}/servicios/${servicio._id}`, {
-          ...servicio,
-          imagen: imagenUrl,
-        })
+      if(servicio.imagen?.length == 1){
+        const imagenUrl = await this.imagenesService.subirImagen(
+          `servicios`,
+          servicio._id,
+          servicio.imagen[0]
+        );
+        this.genericService
+          .put(`${environment.urlAPI}/servicios/${servicio._id}`, {
+            ...servicio,
+            imagen: imagenUrl,
+          })
+          .subscribe((res) => {
+            resolve(true);
+        });
+      }
+      else{
+        this.genericService
+        .put(`${environment.urlAPI}/servicios/${servicio._id}`, servicio)
         .subscribe((res) => {
           resolve(true);
         });
+      }
     });
   }
 }

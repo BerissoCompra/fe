@@ -23,6 +23,7 @@ export interface Comercio {
   cuenta?: Cuenta;
   activado: boolean;
   estadisticas?: Estadisticas;
+  nombreClasificado?: string;
 }
 
 export interface Estadisticas {

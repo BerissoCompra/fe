@@ -2,12 +2,18 @@
   <mat-drawer-content class="sidebarContainer">
     <div class="header">
       <div class="user">
-        <div class="contenedor-imagen" matTooltip="Abrir / Cerrar">
+        <div class="contenedor-imagen" matTooltip="Abrir / Cerrar" *ngIf="comercio?.nombre">
           <div class="info-user-container"  (click)="cerrarAbrir()" >
             <div class="info-user-img" [ngClass]="comercio?.abierto ? 'userAbierto' : 'userCerrado' "><img [src]="comercio?.imagen ? comercio?.imagen : imagenDefault" alt=""></div>
           </div>
         </div>
-        <p>{{comercio?.nombre}}</p>
+        <div class="contenedor-imagen" *ngIf="comercio?.nombreClasificado">
+          <div class="info-user-container">
+            <div class="info-user-img"><img [src]="comercio?.imagen ? comercio?.imagen : imagenDefault" alt=""></div>
+          </div>
+        </div>
+        <p *ngIf="comercio?.nombre">{{comercio.nombre}}</p>
+        <p *ngIf="comercio?.nombreClasificado">{{comercio?.nombreClasificado}}</p>
       </div>
       <div class="arrow">
         <mat-icon class="icon">chevron_right</mat-icon>

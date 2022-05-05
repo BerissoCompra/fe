@@ -36,12 +36,7 @@ export class RegistrarCuentaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoriasService
-      .getCategoriasPorTipo(TiposCategoriasEnum.SERVICIOS)
-      .subscribe((res) => {
-        console.log(res);
-      });
-    console.log(this.array);
+
     this.activeRouter.params.subscribe((params: any) => {
       if (params.comercio === 'gastronomicos') {
         this.title = 'Registrar comercio';
@@ -58,23 +53,25 @@ export class RegistrarCuentaComponent implements OnInit {
       } else if (params.comercio === 'clasificados') {
         this.title = 'Registrarse como un servicio';
         this.type = 'servicio';
-        this.fields = fieldsClasificados(this.array);
+        this.fields = fieldsClasificados();
+
       }
     });
   }
 
   submit() {
     if (this.form.valid) {
-      switch (this.type && this.fields) {
-        case 'usuario' && fieldsGastronmico:
+      switch (this.type) {
+        case 'usuario':
           this.comercioService.crearComercio(this.model).subscribe((res) => {
             this.validarUsuario();
           });
           break;
 
-        case 'servicio' && fieldsClasificados:
-          this.serviciosService.crearServicio(this.model);
-          this.validarUsuario();
+        case 'servicio':
+          this.serviciosService.crearServicio(this.model).then((res) => {
+            this.validarUsuario();
+          });
           break;
       }
     }
@@ -82,10 +79,9 @@ export class RegistrarCuentaComponent implements OnInit {
 
   validarUsuario(): void {
     this.accountService.validarUsuario().subscribe((res) => {
-      console.log(res);
       if (res.servicio) {
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard/configuracion']);
       } else {
         this.router.navigate(['/servicios']);
       }
