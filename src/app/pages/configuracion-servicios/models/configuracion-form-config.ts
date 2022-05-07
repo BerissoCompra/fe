@@ -62,7 +62,7 @@ export const formConfig = (categorias): FormlyFieldConfig[] => {
             options: categorias,
             attributes: {
               bindLabelOp: 'descripcion',
-              bindValueOp: 'descripcion'
+              bindValueOp: 'valor'
             }
           },
         },
@@ -206,6 +206,28 @@ export const formConfig = (categorias): FormlyFieldConfig[] => {
         }
       ]
     },
+    {
+      className: 'field-form col-12',
+      fieldGroupClassName: 'row',
+      fieldGroup: [
+        {
+          template: `<h1>Ubicación<hr></h1>`,
+          className: 'col-12 mt-5'
+        },
+        {
+          key: 'ubicacion',
+          type: 'map-input',
+          className: 'field-form col-12',
+          templateOptions: {
+            change:(field, ubicacion) =>{
+              field.formControl.setValue(ubicacion);
+            },
+            label: 'Latitud',
+            required: true,
+          },
+        },
+      ]
+    }
   ])
 }
 

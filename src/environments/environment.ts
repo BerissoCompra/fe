@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   urlAPI: 'http://localhost:3000/api',
   beUrl: 'http://localhost:3000/',
+  googleKey: 'AIzaSyC9LepxvOxHWL-qzw3koMpeVgGJ0olF-qE',
 
 //'http://192.168.0.229:3000/',
   // urlAPI: 'http://ec2-54-90-71-145.compute-1.amazonaws.com:3000/api',

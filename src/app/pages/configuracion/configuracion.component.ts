@@ -12,11 +12,12 @@ import { TipoEnvio } from 'src/app/models/enums/tipo-envio';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { ConfiguracionNegocioFormConfig } from 'src/app/pages/configuracion/models/configuracion-form-config';
 import { Dias } from 'src/app/models/dias';
-import { catchError } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AlertsService } from 'src/app/services/alerts-services.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { TiposCategoriasEnum } from 'src/app/models/enums/tipo-categorias';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.component.html',
@@ -31,6 +32,7 @@ export class ConfiguracionComponent implements OnInit {
   dias = Dias;
   file: File;
   @Output() newItemEvent = new EventEmitter<string>();
+
 
   constructor(private alertService: AlertsService, private categoriasService: CategoriasService, private sanitizer: DomSanitizer,public dialog: MatDialog ,private comercioService: ComercioService, private imagenesService: ImagenesService, private router: Router) {
   }

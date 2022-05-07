@@ -40,7 +40,7 @@ import { AlertComponent } from './shared/components/alert/alert.component';
 import { PedidoComponent } from './shared/pedido/pedido.component';
 import { PedidoInfoComponent } from './pages/pedido-info/pedido-info.component';
 import { RechazarPedidoComponent } from './pages/rechazar-pedido/rechazar-pedido.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ComercioService } from './services/comercio.service';
@@ -68,6 +68,8 @@ import { ServiciosAppComponent } from './pages/servicios-app/servicios-app.compo
 import { RegistrarCuentaComponent } from './pages/crear-cuenta/registrar-cuenta/registrar-cuenta.component';
 import { ConfiguracionServiciosComponent } from './pages/configuracion-servicios/configuracion-servicios.component';
 import { FileInputComponent } from './shared/components/custom/file-input/file-input.component';
+import { GoogleMapsModule} from '@angular/google-maps';
+import { MapInputComponent } from './shared/components/custom/map-input/map-input.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,11 +105,14 @@ import { FileInputComponent } from './shared/components/custom/file-input/file-i
     RegistrarCuentaComponent,
     ConfiguracionServiciosComponent,
     FileInputComponent,
+    MapInputComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    GoogleMapsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     ReactiveFormsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -123,6 +128,7 @@ import { FileInputComponent } from './shared/components/custom/file-input/file-i
         { name: 'dropdown-input', component: DropdownInputComponent },
         { name: 'time-input', component: TimeInputComponent },
         { name: 'file-input', component: FileInputComponent },
+        { name: 'map-input', component: MapInputComponent },
       ],
     }),
     BrowserAnimationsModule,

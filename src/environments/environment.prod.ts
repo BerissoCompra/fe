@@ -4,7 +4,7 @@ export const environment = {
 
   urlAPI: 'http://ec2-54-90-71-145.compute-1.amazonaws.com:3000/api',
   beUrl: 'http://ec2-54-90-71-145.compute-1.amazonaws.com:3000/',
-
+  googleKey: 'AIzaSyC9LepxvOxHWL-qzw3koMpeVgGJ0olF-qE',
   production: true,
   firebase: {
     apiKey: "AIzaSyAl0OAwPbUHopfVYFKhXhg8IoKLFtCIXAA",
