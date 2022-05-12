@@ -38,7 +38,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoriasService.getCategoriasPorTipo(TiposCategoriasEnum.COMERCIOS).subscribe((res)=>{
+    this.categoriasService.getCategoriasPorTipo(TiposCategoriasEnum.GASTRONOMICOS).subscribe((res)=>{
       if(this.comercioModel?.dias.length === 1){
         this.comercioModel.dias = this.comercioModel.dias[0].split(',')
       }

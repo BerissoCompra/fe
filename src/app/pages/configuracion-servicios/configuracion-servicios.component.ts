@@ -51,7 +51,7 @@ export class ConfiguracionServiciosComponent implements OnInit {
     this.comercioService.obtenerComercio().subscribe((servicio)=>{
       this.model = servicio;
       this.comercioService.changeComercio(servicio)
-      this.categoriasService.getCategoriasPorTipo(TiposCategoriasEnum.SERVICIOS).subscribe((categorias)=>{
+      this.categoriasService.getCategoriasPorTipo(servicio.tipo).subscribe((categorias)=>{
         this.fields = formConfig(categorias);
       })
     })

@@ -38,41 +38,42 @@ export class RegistrarCuentaComponent implements OnInit {
   ngOnInit(): void {
 
     this.activeRouter.params.subscribe((params: any) => {
-      if (params.comercio === 'gastronomicos') {
+      if (params.comercio === TiposCategoriasEnum.GASTRONOMICOS) {
         this.title = 'Registrar comercio';
-        this.type = 'usuario';
+        this.type = TiposCategoriasEnum.GASTRONOMICOS;
         this.fields = fieldsGastronmico;
-      } else if (params.comercio === 'profesionales') {
+      } else if (params.comercio === TiposCategoriasEnum.PROFESIONALES) {
         this.title = 'Registrarse como profesional';
-        this.type = 'servicio';
-        this.fields = fieldsProfesionales;
-      } else if (params.comercio === 'comercios') {
-        this.title = 'Registrar comercio';
-        this.type = 'servicio';
-        this.fields = fieldsComercio;
-      } else if (params.comercio === 'clasificados') {
-        this.title = 'Registrarse como un servicio';
-        this.type = 'servicio';
+        this.type = TiposCategoriasEnum.PROFESIONALES;
         this.fields = fieldsClasificados();
-
+      } else if (params.comercio === TiposCategoriasEnum.EMPRENDEDORES) {
+        this.title = 'Registrar comercio';
+        this.type = TiposCategoriasEnum.EMPRENDEDORES;
+        this.fields = fieldsClasificados();
+      } else if (params.comercio === TiposCategoriasEnum.SERVICIOS) {
+        this.title = 'Registrarse en sección Clasificados';
+        this.type = TiposCategoriasEnum.SERVICIOS;
+        this.fields = fieldsClasificados();
       }
     });
   }
 
   submit() {
     if (this.form.valid) {
-      switch (this.type) {
-        case 'usuario':
-          this.comercioService.crearComercio(this.model).subscribe((res) => {
-            this.validarUsuario();
-          });
-          break;
+      if(this.type === TiposCategoriasEnum.GASTRONOMICOS){
+        this.comercioService.crearComercio(this.model).subscribe((res) => {
+          this.validarUsuario();
+        });
+      }
+      else{
+        this.model = {
+          ...this.model,
+          tipo: this.type
+        };
 
-        case 'servicio':
-          this.serviciosService.crearServicio(this.model).then((res) => {
-            this.validarUsuario();
-          });
-          break;
+        this.serviciosService.crearServicio(this.model).then((res) => {
+          this.validarUsuario();
+        });
       }
     }
   }

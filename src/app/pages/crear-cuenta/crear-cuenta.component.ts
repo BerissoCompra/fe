@@ -60,7 +60,7 @@ export class CrearCuentaComponent implements OnInit {
     {
       nombre: 'Comercio y Emprendedores',
       descripcion: 'Plan ideal para ',
-      redirect: 'comercios',
+      redirect: 'emprendedores',
       categorias: 'emprendedores, locales de venta en general, venta de productos',
       informacion: [
         {

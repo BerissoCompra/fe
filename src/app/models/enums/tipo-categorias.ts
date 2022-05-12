@@ -1,15 +1,16 @@
 export enum TiposCategoriasEnum {
-    COMERCIOS = 'comercios',
-    EMPRENDEDORES = 'emprendedores',
-    PROFESIONALES = 'profesionales',
-    SERVICIOS = 'servicios',
-    PRODUCTOS = 'productos',
+  GASTRONOMICOS = 'gastronomicos',
+  EMPRENDEDORES = 'emprendedores',
+  PROFESIONALES = 'profesionales',
+  SERVICIOS = 'servicios',
+  PRODUCTOS = 'productos',
 }
 
 export const tiposCategoria = [
-  {descripcion: 'comercios'},
+  {descripcion: 'gastronomicos'},
   {descripcion: 'emprendedores'},
   {descripcion: 'servicios'},
   {descripcion: 'profesionales'},
   {descripcion: 'productos'},
 ]
+
